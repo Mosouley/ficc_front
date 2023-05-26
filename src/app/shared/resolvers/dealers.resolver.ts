@@ -1,13 +1,13 @@
 import { CurrenciesService } from '../services/currencies.service';
 import {Injectable} from '@angular/core';
 
-import {Resolve} from '@angular/router';
+
 import { DealerService } from '../services/dealer.service';
 
 
 
 @Injectable()
-export class DealersResolver implements Resolve<any> {
+export class DealersResolver  {
 
   constructor(private curr_service: DealerService) {
   }

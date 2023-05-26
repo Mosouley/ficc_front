@@ -1,12 +1,12 @@
 import { TokenStorageService } from './../auth/token-storage.service';
 import { AuthService } from './../auth/auth.service';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAuthGuard implements CanActivate {
+export class AdminAuthGuard  {
 
   constructor(
     private router: Router,

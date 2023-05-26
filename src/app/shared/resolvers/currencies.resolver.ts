@@ -1,11 +1,11 @@
 import { CurrenciesService } from './../services/currencies.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class CurrenciesResolver implements Resolve<any> {
+export class CurrenciesResolver  {
   constructor(private curr_service: CurrenciesService) {}
 
   resolve( ) {

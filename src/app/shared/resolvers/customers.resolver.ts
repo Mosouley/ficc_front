@@ -2,12 +2,12 @@ import { CustomerService } from './../services/customer.service';
 import { CurrenciesService } from '../services/currencies.service';
 import {Injectable} from '@angular/core';
 
-import {Resolve} from '@angular/router';
+
 
 
 
 @Injectable()
-export class CustomerResolver implements Resolve<any> {
+export class CustomerResolver  {
 
   constructor(private cust_service: CustomerService) {
   }
