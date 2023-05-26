@@ -1,0 +1,62 @@
+
+  <mat-card class="form-group form-inline d-flex justify-content-between">
+      <form [formGroup]="invoiceForm" novalidate (ngSubmit)="onSubmit()">
+
+          <!-- "onSubmit(invoiceForm.value, invoiceForm.valid, $event)" -->
+          <mat-card>
+                  <div class="form-group form-inline" >
+
+                    <mat-form-field>
+                      <mat-label>Categorie</mat-label>
+                      <select matNativeControl required formControlName="category">
+                        <option *ngFor="let category of categories" [value]="category!.nameCategory">
+                          {{ category.nameCategory }}</option>
+                      </select>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>Code Produit</mat-label>
+                      <select matNativeControl required formControlName="codeProd">
+                        <option *ngFor="
+                                        let i = index;
+                                        let produit
+                                        of: filteredProduits
+                                      " [value]="produit.codeProd">
+                          {{ produit.codeProd }}</option>
+                      </select>
+                    </mat-form-field>
+                    <mat-form-field class="col-1 " style="text-align: center">
+                      <input matInput placeholder="Quantity" type="number" formControlName="quantite" required />
+                    </mat-form-field>
+                    <mat-form-field class="col-2 " style="text-align: center">
+                      <input matInput placeholder="Prix Unitaire" type="number" formControlName="prixUnit" required />
+                    </mat-form-field>
+                    <mat-form-field class="col-2 " style="text-align: center">
+                      <input matInput placeholder="Somme Totale" formControlName="unitTotalPrice" />
+                    </mat-form-field>
+
+                  <mat-card-actions>
+                      <button
+                      mat-mini-fab
+                      mdbBtn
+                      [disabled]="invoiceForm.invalid"
+                      mdbWavesEffect
+                      color="success">
+                        <!-- <i class="fa fa-database"></i> -->
+                        <mat-icon>done</mat-icon>
+
+                      </button>
+                      <button
+                      mdbBtn
+                      mat-mini-fab
+                      (click)="closeDialog()" mdbWavesEffect color="danger">
+                      <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-card-actions>
+
+                  </div>
+          </mat-card>
+
+
+      </form>
+  </mat-card>
+

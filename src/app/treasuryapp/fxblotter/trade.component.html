@@ -1,0 +1,230 @@
+<!-- <div class="w-full h-full m-0 text-blue-700 border rounded-md shadow-2xl dark:bg-darker rounded-b-xl"> -->
+  <!-- <div class="h-full p-2 m-2 bg-yellow-200">
+    <div class="w-full h-full p-2 bg-green-200 rounded-t-lg">
+      <p mat-dialog-title class="text-sm font-light text-center text-gray-400 border-b border-indigo-600">Trade Capture</p>
+      <div class="grid items-center max-h-full grid-cols-3 ml-1 mr-1 space-x-3 bg-orange-500 -mt-80">
+        <div class="flex items-center justify-center mt-1 space-x-1 ">
+          Customer Name
+        </div>
+        <div class="items-center justify-center mt-1 space-x-1 grid-col">
+          Customer Name
+        </div>
+        <div class="items-center justify-center mt-1 space-x-1 grid-col">
+          Customer Name
+        </div>
+    </div>
+    <div class="flex flex-grow max-h-screen px-2 bg-blue-300 rounded-b-lg lg:px-24">
+
+
+      <form class="mt-1">
+        <mat-dialog-content>
+          <div class="relative">
+            <input
+              class="w-full py-3 pl-12 leading-tight text-gray-600 transition border border-gray-100 rounded-md shadow-sm appearance-none focus:shadow-md focus:placeholder-gray-600 focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+              matInput
+              name="username"
+              placeholder="Email"
+
+            />
+            <div class="absolute inset-y-0 left-0 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="p-1 ml-3 text-gray-400 h-7 w-7"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+
+              >
+                <path
+                  d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+                />
+                <path
+                  d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="relative mt-3">
+            <input
+              class="w-full py-3 pl-12 leading-tight text-gray-600 transition border border-gray-100 rounded-md shadow-sm appearance-none focus:shadow-md focus:placeholder-gray-600 focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+              matInput
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <div class="absolute inset-y-0 left-0 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="p-1 ml-3 text-gray-400 h-7 w-7"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="flex items-center mt-4 text-gray-500">
+            <input type="checkbox" class="mr-3" />
+            <label for="remember">Remember me</label>
+          </div>
+        </mat-dialog-content>
+
+        <div class="flex justify-center mt-4 space-x-4 place-items-end">
+          <mat-dialog-actions>
+            <button
+            class="text-white py-1 px-1  rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+
+            >
+            Cancel
+          </button>
+            <button
+            class="text-white py-1 px-1  rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 invalid"
+
+            >
+            Submit
+          </button>
+          </mat-dialog-actions>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+<!-- trade-form.component.html -->
+<!--  -->
+<!-- bg-col-rgba backdrop-blur place-items-center space-x-2
+shadow-[0 8px 32px 0 rgba( 31, 38, 135, 0.57 )]
+border-[1px solid rgba( 255, 255, 255, 0.18 )] backdrop-opacity-10 -->
+<mat-dialog-content class="bg-white border-white border-opacity-25 rounded-lg shadow-md bg-opacity-10 backdrop-filter backdrop-blur-md h-fit">
+  <form [formGroup]="tradeForm" (ngSubmit)="onSubmit()" >
+    <div class="flex flex-row justify-between space-x-2 " >
+      <mat-form-field fxFlex="45%">
+        <mat-select formControlName="customer" placeholder="Customer">
+          <mat-option *ngFor="let customer of customers" [value]="customer.name">{{ customer.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Trade Id</mat-label>
+        <input matInput readonly  formControlName="trade_id" >
+      </mat-form-field>
+      <mat-form-field fxFlex="45%">
+        <mat-select formControlName="product" placeholder="Product">
+          <mat-option *ngFor="let product of products" [value]="product.name">{{ product.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex flex-row justify-between " >
+      <mat-form-field >
+        <mat-label>Value Date</mat-label>
+        <input matInput readonly [matDatepicker]="value_date" formControlName="value_date" placeholder="Value date">
+        <mat-datepicker-toggle matSuffix  [for]="value_date"></mat-datepicker-toggle>
+        <mat-datepicker #value_date></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Booking date</mat-label>
+        <input matInput readonly  formControlName="booking_date" >
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Trade Date</mat-label>
+        <input matInput readonly [matDatepicker]="deal_date" formControlName="deal_date" placeholder="Deal date">
+        <mat-datepicker-toggle matSuffix  [for]="deal_date"></mat-datepicker-toggle>
+        <mat-datepicker #deal_date></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+    <div class="flex flex-row justify-between space-x-2" >
+
+      <mat-form-field fxFlex="30%">
+        <mat-label>Ccy1</mat-label>
+        <mat-select formControlName="ccy1">
+          <mat-option *ngFor="let currency of currencies" [value]="currency.code">{{ currency.code }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="30%">
+        <mat-label>Ccy2</mat-label>
+        <mat-select formControlName="ccy2">
+          <mat-option *ngFor="let currency of currencies" [value]="currency.code">{{ currency.code }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="30%">
+        <mat-label>CcyPair</mat-label>
+        <mat-select formControlName="ccy_pair">
+          <mat-option *ngFor="let val of ccyPair" [value]="val.viewValue">{{ val.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Buy/Sell</mat-label>
+        <mat-select formControlName="buy_sell">
+          <mat-option *ngFor="let buySell of buySells" [value]="buySell.value">{{ buySell.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="flex flex-row justify-between space-x-2" >
+      <mat-form-field>
+        <mat-label>Deal Rate</mat-label>
+        <input matInput formControlName="deal_rate">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Amount 1</mat-label>
+        <input matInput matInputCommified formControlName="amount1" type="number">
+
+        <mat-error *ngIf="tradeForm.get('amount1')!.invalid">
+          <div *ngIf="tradeForm.get('amount1')!.errors!['required']">This field is required.</div>
+          <div *ngIf="tradeForm.get('amount1')!.errors">Invalid number format.</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Amount 2</mat-label>
+        <input matInput formControlName="amount2">
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Fees Rate</mat-label>
+        <input matInput formControlName="fees_rate">
+      </mat-form-field>
+    </div>
+    <div class="flex flex-row justify-between space-x-1" >
+      <mat-form-field>
+        <mat-label>System Rate</mat-label>
+        <input matInput formControlName="system_rate">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cover Rate</mat-label>
+        <input matInput formControlName="cover_rate">
+      </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Transaction Comments</mat-label>
+      <textarea matInput formControlName="tx_comments"></textarea>
+    </mat-form-field>
+
+    </div>
+
+
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <!-- <button mat-button [ngClass]="{'bg-red-500': color === 'red', 'bg-blue-500': color === 'blue'}">
+    Button
+  </button> -->
+  <!-- <button mat-button [ngClass]="{'opacity-50 cursor-not-allowed': disabled, 'shadow-outline': focused}" (focus)="focused = true" (blur)="focused = false">
+    New
+  </button> -->
+
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="onSubmit()" color="primary"  >Submit</button>
+</mat-dialog-actions>
+<!-- [ngClass]="{'bg-red-500': color === 'red', 'bg-blue-500': color === 'blue'}" -->
+<!-- </div> -->

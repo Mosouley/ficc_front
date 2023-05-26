@@ -1,0 +1,400 @@
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="w-full p-2 mx-1 bg-lime-100">
+  <mat-tab>
+    <ng-template mat-tab-label class="items-center space-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6 text-2xl bg-gray-100 text-sellar-primary">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+      </svg>
+
+      <h5 class="self-center p-1 text-default-primary">Currencies</h5>
+    </ng-template>
+
+    <div class="flex h-full p-4 bg-red-500 pace-y-1 lg:gap-1 lg:space-y-0">
+      <!-- Bar chart card -->
+      <div class="w-full p-2 border rounded-md shadow-2xl rounded-b-xl bg-stone-500">
+        <!-- <canvas id="barChart"></canvas> -->
+        <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start" class="flex w-full h-screen p-4 text-black bg-amber-100">
+          <mat-tab label="Currencies" class="p-4 text-black bg-my_primary ">
+            <!-- <div class="flex flex-col justify-center h-screen p-2 shadow-lg rounded-2xl hover:border-1 hover:border-default-white bg-cyan-800 place-items-center "> -->
+
+              <div class="flex items-end w-full p-2 mx-auto mt-1 space-x-2 bg-green-800 place-content-end">
+                <input type="file" id="fileInput" style="display:none;" (change)="onFileChange($event)">
+                <button
+                  class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700"
+                  (click)="importFile()">
+
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_3098_154395)">
+                      <path
+                        d="M13.3333 13.3332L9.99997 9.9999M9.99997 9.9999L6.66663 13.3332M9.99997 9.9999V17.4999M16.9916 15.3249C17.8044 14.8818 18.4465 14.1806 18.8165 13.3321C19.1866 12.4835 19.2635 11.5359 19.0351 10.6388C18.8068 9.7417 18.2862 8.94616 17.5555 8.37778C16.8248 7.80939 15.9257 7.50052 15 7.4999H13.95C13.6977 6.52427 13.2276 5.61852 12.5749 4.85073C11.9222 4.08295 11.104 3.47311 10.1817 3.06708C9.25943 2.66104 8.25709 2.46937 7.25006 2.50647C6.24304 2.54358 5.25752 2.80849 4.36761 3.28129C3.47771 3.7541 2.70656 4.42249 2.11215 5.23622C1.51774 6.04996 1.11554 6.98785 0.935783 7.9794C0.756025 8.97095 0.803388 9.99035 1.07431 10.961C1.34523 11.9316 1.83267 12.8281 2.49997 13.5832"
+                        stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_3098_154395">
+                        <rect width="20" height="20" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+
+                  <span>Import</span>
+
+                </button>
+
+                <button
+                  class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-400 rounded-lg shrink-0 sm:w-auto gap-x-2 dark:hover:bg-blue-500 dark:bg-blue-600"
+                   [disabled]="false" >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+
+                  <span>Save</span>
+                </button>
+              </div>
+              <!-- <div class="inset-0 flex bg-gradient-to-br from-skin-hue via-skin-hue to-transparent opacity-90">here</div> -->
+              <div class="flex w-full h-full p-2 mx-auto mt-1 space-x-2 bg-yellow-800 ">
+                <!-- <app-data-table *ngIf="data" [data]="data"></app-data-table> -->
+                <app-report
+                [dataEntity]="reportingData"
+                [modelEntity]="model"></app-report>
+              </div>
+            <!-- </div> -->
+          </mat-tab>
+          <mat-tab label="User" class="text-black">autre 2</mat-tab>
+          <mat-tab label="Third" class="text-black">Content 3</mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </div>
+
+
+    <!-- </div> -->
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label class="items-center space-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
+      </svg>
+
+      <h5 class="self-center p-1 text-default-primary">Power Analytics</h5>
+    </ng-template>
+    <div class="grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-4">
+      <!-- Card Two-->
+      <div
+        class="flex w-full h-20 mx-auto overflow-hidden bg-white rounded-lg drop-shadow-md dark:bg-gray-100 hover:border-2 hover:border-gray-400">
+        <div class="flex items-center justify-center w-1 bg-green-500 ">
+
+        </div>
+
+        <div class="px-4 py-2 -mx-3 backdrop-opacity-10 ">
+          <div class="mx-3">
+
+            <div>
+              <h6
+                class="text-xs font-semibold leading-none tracking-wider text-green-500 uppercase dark:text-primary-lighter">
+                Value
+              </h6>
+              <span class="text-xl font-semibold">$30,000</span>
+              <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+                +4.4%
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="absolute right-0 flex items-center justify-center w-12 h-full bg-green-500 rounded-sm">
+          <svg class="w-12 text-xs text-white " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+
+      <div
+        class="flex w-full h-20 mx-auto overflow-hidden bg-white rounded-lg shadow-md backdrop-blur-lg backdrop-opacity-20 dark:bg-gray-100 hover:border-2 hover:border-gray-400">
+        <div class="flex items-center justify-center w-1 bg-yellow-500">
+
+        </div>
+
+        <div class="px-4 py-2 -mx-3 min-h-12 ">
+          <div class="mx-3">
+
+            <div>
+              <h6
+                class="text-xs font-semibold leading-none tracking-wider text-green-500 uppercase dark:text-primary-lighter">
+                Value
+              </h6>
+              <span class="text-xl font-semibold">$30,000</span>
+              <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+                +4.4%
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="absolute right-0 flex items-center justify-center w-12 h-full bg-yellow-500 rounded-md ">
+          <svg class="w-12 text-white dark:text-primary-lighter" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+      <!-- Card three-->
+      <div
+        class="flex w-full h-20 mx-auto overflow-hidden bg-white rounded-lg shadow-md backdrop-blur-lg backdrop-opacity-20 dark:bg-gray-100 hover:border-2 hover:border-gray-400">
+        <div class="flex items-center justify-center w-1 bg-red-400">
+
+        </div>
+
+        <div class="px-4 py-2 -mx-3 min-h-12 ">
+          <div class="mx-3">
+
+            <div>
+              <h6
+                class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
+                Users
+              </h6>
+              <span class="text-xl font-semibold">50,021</span>
+              <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+                +2.6%
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="absolute right-0 flex items-center justify-center w-12 h-full bg-red-400 rounded-md">
+          <svg class="w-12 h-12 text-gray-300 dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Card four -->
+
+      <div
+        class="flex w-full h-20 mx-auto overflow-hidden bg-white rounded-lg shadow-md backdrop-blur-lg backdrop-opacity-20 dark:bg-gray-100 hover:border-2 hover:border-gray-400">
+        <div class="flex items-center justify-center w-1 bg-cyan-400">
+
+        </div>
+
+        <div class="px-4 py-2 -mx-3 min-h-12 ">
+          <div class="mx-3">
+
+            <div>
+              <h6
+                class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light">
+                Orders
+              </h6>
+              <span class="text-xl font-semibold">45,021</span>
+              <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
+                +3.1%
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="absolute right-0 flex items-center justify-center w-12 h-full rounded-md bg-cyan-400 ">
+          <svg class="w-12 h-12 text-gray-300 dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="flex flex-col p-8 space-y-4 ">
+      <div class="flex rounded-lg shadow-lg w-96">
+        <div class="flex items-center px-6 py-4 bg-blue-500 rounded-l-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="text-white fill-current" viewBox="0 0 16 16" width="20"
+            height="20">
+            <path fill-rule="evenodd"
+              d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z">
+            </path>
+          </svg>
+        </div>
+        <div
+          class="flex items-center justify-between w-full px-4 py-6 bg-white border border-gray-200 rounded-r-lg border-l-transparent">
+          <div>Default / info alert</div>
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 fill-current" viewBox="0 0 16 16" width="20"
+              height="20">
+              <path fill-rule="evenodd"
+                d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex rounded-lg shadow-lg w-96">
+        <div class="flex items-center px-6 py-4 bg-green-600 rounded-l-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="text-white fill-current" viewBox="0 0 16 16" width="20"
+            height="20">
+            <path fill-rule="evenodd"
+              d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z">
+            </path>
+          </svg>
+        </div>
+        <div
+          class="flex items-center justify-between w-full px-4 py-6 bg-white border border-gray-200 rounded-r-lg border-l-transparent">
+          <div>Success alert</div>
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 fill-current" viewBox="0 0 16 16" width="20"
+              height="20">
+              <path fill-rule="evenodd"
+                d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="p-8 bg-white rounded shadow-lg">
+        <p class="font-light leading-relaxed text-gray-700"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Tempore repellendus iure rerum ratione aliquam nulla cupiditate amet deleniti ut a laboriosam debitis, vel
+          dicta quisquam consectetur! Consectetur repellendus maiores quis. </p>
+        <div class="flex items-center justify-end mt-4"> <button
+            class="px-4 py-2 mr-4 text-gray-600 bg-white border border-gray-200 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">
+            Cancel </button> <button
+            class="px-4 py-2 text-gray-600 bg-white border border-gray-200 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">
+            Ok </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="grid mt-1 place-items-center">
+      <ul class="flex space-x-2">
+        <li class="relative">
+          <input class="sr-only peer" type="radio" value="no" name="answer" id="answer_no">
+          <label class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-gray-500 peer-checked:ring-2 peer-checked:border-transparent" for="answer_no">Cancel</label>
+        </li>
+        <li class="relative">
+          <input class="sr-only peer" type="radio" value="yes" name="answer" id="answer_yes">
+          <label class="flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-red-500 peer-checked:ring-2 peer-checked:border-transparent" for="answer_yes">Yes</label>
+        </li>
+      </ul>
+    </div> -->
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label class="items-center space-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+      </svg>
+
+
+      <h5 class="self-center p-1 text-default-primary">Data Insights</h5>
+    </ng-template>
+    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+      <!-- Active users chart -->
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker">
+        <!-- Card header -->
+        <div class="p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right now</h4>
+        </div>
+        <p class="p-4">
+          <span class="text-2xl font-medium text-gray-500 dark:text-light" id="usersCount">0</span>
+          <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
+        </p>
+        <!-- Chart -->
+        <div class="relative p-4">
+          <canvas id="activeUsersChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Line chart card -->
+      <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak>
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"></div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <div class="relative p-4 h-72">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid items-center justify-center grid-rows-1 space-x-1 border-b md:grid-rows-3 ">
+      <div
+        class="flex flex-row items-center justify-center text-lg font-black text-white border-b-2 shadow-xl h-80 rounded-2xl shadow-slate-500 bg-gradient-to-t from-slate-100 to-color-main-four">
+
+        <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div #progress>
+              </div>
+            </div>
+          </div>
+          <svg class="text-gray-300 dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" width="160px"
+            height="160px">
+            <defs>
+              <linearGradient id="GradientColor">
+                <stop offset="0%" stop-color="#e91e63"></stop>
+                <stop offset="100%" stop-color="#673ab7"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div #leads>
+              </div>
+            </div>
+          </div>
+          <svg class="text-gray-300 dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" width="160px"
+            height="160px">
+            <defs>
+              <linearGradient id="GradientColor">
+                <stop offset="0%" stop-color="#e91e63"></stop>
+                <stop offset="100%" stop-color="#673ab7"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div #sales>
+              </div>
+            </div>
+          </div>
+          <svg class="text-gray-300 dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" width="160px"
+            height="160px">
+            <defs>
+              <linearGradient id="GradientColor">
+                <stop offset="0%" stop-color="#e91e63"></stop>
+                <stop offset="100%" stop-color="#673ab7"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+          </svg>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </mat-tab>
+</mat-tab-group>

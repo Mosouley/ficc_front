@@ -1,0 +1,21 @@
+import { CurrenciesService } from '../services/currencies.service';
+import {Injectable} from '@angular/core';
+
+import {Resolve} from '@angular/router';
+import { SegmentService } from '../services/segment.service';
+
+
+
+@Injectable()
+export class SegmentsResolver implements Resolve<any> {
+
+  constructor(private curr_service: SegmentService) {
+  }
+
+  resolve() {
+    // this.curr_service.list().subscribe(x => {
+    //   console.log(x);
+    // });
+    return this.curr_service.list();
+  }
+}

@@ -1,0 +1,69 @@
+<mat-card >
+    <mat-card style="justify-content: center">
+
+                    <table class=" table-hover table-striped mat-elevation-z8 "
+                    mat-table matSort [dataSource]="dataStream"
+                    style="min-width: 100%"
+                    >
+
+                        <ng-container matColumnDef="dateTrans">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Fact. </th>
+                            <td mat-cell *matCellDef="let element"> {{element.dateTrans}} </td>
+                          </ng-container>
+
+                        <ng-container matColumnDef="invoiceRef">
+                            <th fxLayout fxFlex="60px" mat-header-cell *matHeaderCellDef mat-sort-header> #Facture No. </th>
+                            <td mat-cell *matCellDef="let element"> {{element.invoiceRef}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="client">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                              <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+                            </ng-container>
+                        <ng-container matColumnDef="paymentMode">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mode Paiement </th>
+                            <td mat-cell *matCellDef="let element"> {{element.paymentMode}} </td>
+                          </ng-container>
+
+                        <ng-container matColumnDef="statut">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+                            <td mat-cell *matCellDef="let element"> {{element.statut}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="totalInvoice">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant </th>
+                              <td mat-cell *matCellDef="let element"> {{element.totalInvoice}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="details">
+                                <th mat-header-cell *matHeaderCellDef> Details </th>
+                                <td mat-cell *matCellDef="let element">
+                                  <button mat-icon-button color="primary" (click)="openForEdit(element)">
+                                      <mat-icon class="mat-18">reorder</mat-icon>
+                                  </button>
+                                </td>
+                              </ng-container>
+
+                                <ng-container matColumnDef="delete">
+                                    <th mat-header-cell *matHeaderCellDef> Supprimer </th>
+                                    <td mat-cell *matCellDef="let element">
+                                      <button *ngIf="auth.isAdmin()" mat-icon-button color="warn" (click)="onInvoiceDelete(element.id)">
+                                          <mat-icon class="mat-18">delete</mat-icon>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                      </table>
+
+                          <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+                          </mat-paginator>
+
+
+                      <button mat-mini-fab mdbBtn color="success"  [routerLink]="['/dashboard/invoice-generate']">
+                        <mat-icon class="mat-18">arrow_back_ios</mat-icon>
+                    </button>
+    </mat-card>
+</mat-card>
+

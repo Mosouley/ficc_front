@@ -1,0 +1,56 @@
+<mat-card>
+<ng-container *ngIf="data">
+
+    <div class="container">
+    <div>
+  <h3>{{title}}</h3>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item " >
+
+        <a class=" nav-link  fa fa-plus"  aria-hidden="true" data-toggle="collapse"
+
+        [ngClass]="{'active': crudType == 'sample'}"
+        (click)="crudType='sample'"></a>
+
+      </li>
+      <li  class="nav-item ">
+        <a class="nav-link fa fa-clone" data-toggle="collapse"
+        [ngClass]="{'active': crudType == 'upload'}"
+        (click)="crudType='upload'">&nbsp;Importer un fichier</a>
+      </li>
+    </ul>
+  </div>
+      <div *ngIf="crudType == 'sample'">
+        <app-sample
+          [title]="title"
+          [data]="data"
+          [service]="service"
+          [initItem]="initItem"
+          [initForm]="initForm"
+          [dataModelList]="dataModelList"
+          [arrayData]="arrayData"
+          [arrayModelList]="arrayModelList"
+          [enumElements]="enumElements"
+          [enumType]="enumType">
+
+        </app-sample>
+      </div>
+
+      <div *ngIf="crudType == 'upload'">
+        <app-upload *ngIf="crudType == 'upload'"
+          [initItem]="initItem"
+          [service]="service"
+          [dataModelList]="dataModelList">
+        </app-upload>
+      </div>
+    </div>
+  </ng-container>
+<!--
+  <ng-template #loading>
+    <mat-card>
+      <h1>Pas de donnees a charger</h1>
+    </mat-card>
+  </ng-template> -->
+
+  </mat-card>

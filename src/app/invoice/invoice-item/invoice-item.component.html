@@ -1,0 +1,140 @@
+<mat-card style="justify-content: center">
+   <div class="align-content-between ">
+                <div *ngIf="!isValid" class="alert alert-danger alert-with-icon " role="alert" style="text-align: center; align-content: center">
+                    Oops, Il y a des champs manquants ou vous n'avez rien facturé!
+                  </div>
+                    <mat-card class="card-body" style="justify-content: center">
+
+                        <form
+                                [formGroup]="invoiceForm"
+
+                                (ngSubmit)="save(invoiceForm.value, invoiceForm.valid, $event)"
+
+                              >
+                            <mat-card>
+
+                              <div class="form-group form-inline ">
+                                <label class="col-md-1 ">Client:</label>
+                                <select
+                                  required
+                                  class="form-control col-md-2"
+                                  formControlName="client"
+                                >
+                                  <option *ngFor="let c of clients" [value]="c.id">
+                                    - <strong> {{ c.nameClient }} </strong> -
+                                  </option>
+                                </select>
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                      <mat-icon>search</mat-icon>
+                                      <button type="button">...</button>
+                                    </div>
+                                  </div>
+
+                                    <label class="col-md-1 ">Mode:</label>
+                                    <select
+                                      required
+                                      class="form-control"
+                                      formControlName="payMode"
+                                    >
+                                      <option  *ngFor="let mode of modes" [value]="mode" [label]="payMode[mode]"></option>
+                                    </select>
+                                    <label type="text">Date: </label>
+                                    <input required class="form-control col-md-2" type="date"  formControlName="dateTrans" />
+
+                                    <div class="input-group-prepend col-md-3">
+                                    <label type="text">Total:</label>
+                                    <div class="input-group-prepend"  >
+                                      <div class="input-group-text">XOF</div>
+                                    </div>
+                                    <input  style="text-align: center" readonly formControlName="totalInvoice" >
+                                        <button
+                                        mat-mini-fab
+                                        mdbBtn
+                                        [disabled]="!isValid"
+                                        mdbWavesEffect
+                                        color="success">
+
+                                          <mat-icon>done</mat-icon>
+
+                                    </button>
+
+                                  </div>
+
+                              </div>
+                            </mat-card>
+                          </form>
+
+                        </mat-card>
+                        <form >
+                          <mat-card class=" container col-8" style="justify-content: center">
+                          <table class="table-hover table-striped mat-elevation-z8" mat-table
+                          [dataSource]="donneesSource"
+                          style="min-width: 100%;"
+                            [tabIndex]=-1
+                          >
+                                          <ng-container matColumnDef="categorie">
+                                              <th mat-header-cell *matHeaderCellDef > Categorie </th>
+                                              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                                            </ng-container>
+
+                                          <ng-container matColumnDef="produit">
+                                              <th fxLayout fxFlex="60px" mat-header-cell *matHeaderCellDef > Produit </th>
+                                              <td mat-cell *matCellDef="let element"> {{element.codeProd}} </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="quantite">
+                                                <th mat-header-cell *matHeaderCellDef > Quantite </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.quantite}} </td>
+                                              </ng-container>
+                                          <ng-container matColumnDef="prixUnit">
+                                              <th mat-header-cell *matHeaderCellDef> Prix. U </th>
+                                              <td mat-cell *matCellDef="let element"> {{element.prixUnit}} </td>
+                                          </ng-container>
+
+                                            <ng-container matColumnDef="totalInvoice">
+                                                <th mat-header-cell *matHeaderCellDef > Montant </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.totalInvoice}} </td>
+                                              </ng-container>
+
+                                              <ng-container matColumnDef="view">
+                                                  <th mat-header-cell *matHeaderCellDef > </th>
+                                                  <td mat-cell *matCellDef="let element;let i = index">
+                                                      <button mat-mini-fab color="accent" (click)="addOrEditItem(i)">
+                                                          <mat-icon class="mat-18">system_update</mat-icon>
+                                                      </button>
+                                                  </td>
+                                                </ng-container>
+                                              <ng-container matColumnDef="action" >
+                                                  <th mat-header-cell *matHeaderCellDef>
+                                                      <button mat-mini-fab color="primary" (click)="addOrEditItem(null)">
+                                                          <mat-icon class="mat-18">add</mat-icon>
+                                                      </button>
+                                                  </th>
+                                                  <td mat-cell *matCellDef="let element; let i = index">
+                                                    <button  mat-icon-button color="warn" (click)="deleteRowData(i)">
+                                                        <mat-icon class="mat-18">delete</mat-icon>
+                                                    </button>
+                                                  </td>
+                                                </ng-container>
+
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                          </table>
+                        <div *ngIf="noData | async" class="no-records">
+                            Aucun produit facturé pour le moment
+                          </div>
+                        </mat-card>
+                        </form>
+                        <mat-card class="col-1">
+                          <button mat-mini-fab mdbBtn color="success" [routerLink]="['/dashboard/invoice-list']">
+                            <mat-icon class="mat-18">format_list_numbered_rtl </mat-icon>
+                        </button>
+                        </mat-card>
+
+  </div>
+</mat-card>
+
+
