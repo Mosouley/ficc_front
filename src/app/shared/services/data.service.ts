@@ -20,8 +20,8 @@ export class DataService implements CrudService {
   }
 
   // Method to retrieve a specific resource by ID
-  get(id: number): Observable<any> {
-    return this.http.get<any>(`${this.url}/${id}`, { headers: this.headers });
+  get(id: any): Observable<any> {
+    return this.http.get<any>(`${this.url}${id}`+'/');
   }
 
   // Method to create a new resource
@@ -36,12 +36,12 @@ export class DataService implements CrudService {
 
   // Method to delete an existing resource by ID
   remove(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}/${id}`);
+    return this.http.delete<any>(`${this.url}${id}`);
   }
 
   // Method to create multiple resources at once
   addMany(resources: any[]): Observable<any[]> {
-    return this.http.post<any[]>(`${this.url + 'All/'}`, resources);
+    return this.http.post<any[]>(`${this.url}`, resources);
   }
 }
 

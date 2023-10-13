@@ -99,7 +99,7 @@ border-[1px solid rgba( 255, 255, 255, 0.18 )] backdrop-opacity-10 -->
 <mat-dialog-content class="bg-white border-white border-opacity-25 rounded-lg shadow-md bg-opacity-10 backdrop-filter backdrop-blur-md h-fit">
   <form [formGroup]="tradeForm" (ngSubmit)="onSubmit()" >
     <div class="flex flex-row justify-between space-x-2 " >
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex="45%" >
         <mat-select formControlName="customer" placeholder="Customer">
           <mat-option *ngFor="let customer of customers" [value]="customer.name">{{ customer.name}}</mat-option>
         </mat-select>
@@ -224,7 +224,7 @@ border-[1px solid rgba( 255, 255, 255, 0.18 )] backdrop-opacity-10 -->
   </button> -->
 
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button (click)="onSubmit()" color="primary"  >Submit</button>
+  <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="tradeForm.invalid"  >Submit</button>
 </mat-dialog-actions>
 <!-- [ngClass]="{'bg-red-500': color === 'red', 'bg-blue-500': color === 'blue'}" -->
 <!-- </div> -->

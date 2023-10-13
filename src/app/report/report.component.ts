@@ -12,6 +12,8 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { map } from 'rxjs/operators';
+import { DailyRate } from '../model/daily_rate';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-report',
@@ -20,49 +22,55 @@ import { map } from 'rxjs/operators';
 })
 export class ReportComponent implements OnInit, AfterViewInit {
   reportType = [
-    { id: 1, name: 'Report 1', dataEntity: [] },
-    { id: 2, name: 'Report 2', dataEntity: [] },
-    { id: 3, name: 'Report 3', dataEntity: [] },
-    { id: 4, name: 'Report4', dataEntity: [] },
-    { id: 5, name: 'Report 5', dataEntity: [] },
-    { id: 6, name: 'Report 6', dataEntity: [] },
-    { id: 7, name: 'Report 7 ', dataEntity: [] },
+    { id: 1, name: 'Daily FX Rates', dataEntity: [] },
+    // { id: 2, name: 'Report 2', dataEntity: [] },
+    // { id: 3, name: 'Report 3', dataEntity: [] },
+    // { id: 4, name: 'Report4', dataEntity: [] },
+    // { id: 5, name: 'Report 5', dataEntity: [] },
+    // { id: 6, name: 'Report 6', dataEntity: [] },
+    // { id: 7, name: 'Report 7 ', dataEntity: [] },
   ];
   reportPeriod = [
     {
       id: 1,
-      name: 'Current Period',
+      name: 'Today ',
       timePeriod: { startDay: new Date(), endDay: new Date() },
     },
     {
       id: 2,
-      name: 'This Month',
+      name: 'Current Period',
       timePeriod: { startDay: new Date(), endDay: new Date() },
     },
     {
       id: 3,
-      name: ' This Quater ',
+      name: 'This Month',
       timePeriod: { startDay: new Date(), endDay: new Date() },
     },
     {
       id: 4,
-      name: 'This Year',
+      name: ' This Quater ',
       timePeriod: { startDay: new Date(), endDay: new Date() },
     },
     {
       id: 5,
+      name: 'This Year',
+      timePeriod: { startDay: new Date(), endDay: new Date() },
+    },
+    {
+      id: 6,
       name: 'Select a Range',
       timePeriod: { startDay: new Date(), endDay: new Date() },
     },
   ];
 
-  @Input() dataEntity!: any[];
+  dataEntity!: any[];
 
   @Input() modelEntity!: DataModel[];
 
   @Input() modelArrayEntity!: DataModel[];
 
   @Input() title!: string;
+  report_name = 'Report of Daily FX Rates on : '
 
   selectedType = 0;
 
@@ -70,7 +78,10 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
   reportingData!: any[];
 
-  data: any;
+  dateForm!: FormGroup;
+  setRange = false;
+
+  @Input() data!: any;
   isEnable = false;
   // utiliser mat-table
   displayedColumns!: string[];
@@ -82,10 +93,10 @@ export class ReportComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
+
   ngAfterViewInit(): void {
     this.doSortAndPaginate();
-    // console.log(this.selectedType);
   }
 
   public doFilter = (value: string) => {
@@ -97,9 +108,22 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.title = 'Select a report and a period';
-  }
+    this.dateForm = this.fb.group({
+      start_date: ['', Validators.required],
+      end_date: ['', Validators.required],
+  });
+  this.dateForm.valueChanges.subscribe(data => {
+    this.enableReport()
+
+  });
+}
   getPeriod(event: any) {
     this.selectedPeriod = event.target.value;
+    this.setRange = false
+    if (this.selectedPeriod == 6) {
+      this.setRange = true
+    }
+
     this.enableReport();
   }
   getReportType(event: any) {
@@ -108,37 +132,39 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
   setPeriodIntervals(choix: number) {
     const today = new Date();
-
     switch (Number(choix)) {
       case 1:
         this.reportPeriod[0].timePeriod.startDay = new Date(
           today.getFullYear(),
           today.getMonth(),
-          today.getDate() - 7
+          today.getDate()
         );
         this.reportPeriod[0].timePeriod.endDay = new Date(
           today.getFullYear(),
           today.getMonth(),
           today.getDate()
         );
-        break;
 
+        break;
       case 2:
         this.reportPeriod[1].timePeriod.startDay = new Date(
           today.getFullYear(),
           today.getMonth(),
-          1
+          today.getDate() - 7
         );
+        console.log(this.reportPeriod[1]);
+
         this.reportPeriod[1].timePeriod.endDay = new Date(
           today.getFullYear(),
-          today.getMonth() + 1,
-          0
+          today.getMonth(),
+          today.getDate()
         );
         break;
+
       case 3:
         this.reportPeriod[2].timePeriod.startDay = new Date(
           today.getFullYear(),
-          today.getMonth() - 2,
+          today.getMonth(),
           1
         );
         this.reportPeriod[2].timePeriod.endDay = new Date(
@@ -150,28 +176,32 @@ export class ReportComponent implements OnInit, AfterViewInit {
       case 4:
         this.reportPeriod[3].timePeriod.startDay = new Date(
           today.getFullYear(),
-          0,
+          today.getMonth() - 2,
           1
         );
         this.reportPeriod[3].timePeriod.endDay = new Date(
+          today.getFullYear(),
+          today.getMonth() + 1,
+          0
+        );
+        break;
+      case 5:
+        this.reportPeriod[4].timePeriod.startDay = new Date(
+          today.getFullYear(),
+          0,
+          1
+        );
+        this.reportPeriod[4].timePeriod.endDay = new Date(
           today.getFullYear(),
           11,
           31
         );
 
         break;
-      case 5:
-        this.reportPeriod[4].timePeriod.startDay = new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDay()
-        );
-        this.reportPeriod[4].timePeriod.endDay = new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDay()
-        );
-
+      case 6:
+        this.setRange = true
+        this.reportPeriod[5].timePeriod.startDay = this.dateForm.controls['start_date'].value
+        this.reportPeriod[5].timePeriod.endDay = this.dateForm.controls['end_date'].value
         break;
 
       default:
@@ -191,37 +221,39 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
 
   enableReport() {
-    if (this.selectedType > 0 && this.selectedPeriod > 0) {
+    this.isEnable = false
+
+    if (this.selectedPeriod > 0 && this.selectedPeriod !== 6 ) {
       this.isEnable = true;
-      this.title =
-        'Report ' +
-        this.reportType[this.selectedType - 1]['name'] +
-        ' sur ' +
-        this.reportPeriod[this.selectedPeriod - 1]['name'];
-      // console.log(this.dataTx);
+      this.title = ''
+      this.title = this.report_name +
+      this.reportPeriod[this.selectedPeriod - 1]['name'];
     } else {
-      this.isEnable = false;
-      this.title = 'You must select a report type and a period ';
-    }
+      if (this.dateForm.valid) {
+        this.isEnable = true;
+
+      } else {
+        this.isEnable = false;
+        this.title = 'You must select a period ';
+      }
   }
+}
 
   populateReport() {
-    this.doSortAndPaginate();
+
+
     this.setPeriodIntervals(this.selectedPeriod);
     this.setReportData(this.selectedType, this.selectedPeriod);
+    this.doSortAndPaginate();
   }
 
   public connectDataSource(model: DataModel[], data: any[]): void {
     this.noData = this.dataSource
       .connect()
       .pipe(map((donnee) => donnee.length === 0));
-    //  this.displayedColumns = model.map(c => c.columnName);
-    console.log(model);
-
-    this.displayedColumns = model
-      .map((c) => c.columnName)
-      .filter((columnName) => columnName !== undefined) as string[];
+    this.displayedColumns = model.map((c) => c.columnName);
     this.dataSource.data = data;
+
     this.doSortAndPaginate();
     this.table.renderRows();
   }
@@ -234,22 +266,23 @@ export class ReportComponent implements OnInit, AfterViewInit {
     const start = this.reportPeriod[intervalSelected - 1].timePeriod.startDay;
     const end = this.reportPeriod[intervalSelected - 1].timePeriod.endDay;
 
-    this.data = this.reportingData; //.filter((tx) => tx.debitAmount === 0)
-    console.log(this.data);
+    this.dataEntity = this.data?.filter((rate: DailyRate) => {
 
-    //   this.dataEntity = this.data.filter((transac: []) => {
-    //   // tslint:disable-next-line:no-unused-expression
-    // return new Date(transac.txDate!).setHours(0, 0 , 0, 0) >= new Date(start).setHours(0, 0 , 0, 0) &&
-    // new Date(transac.txDate!).setHours(0, 0 , 0, 0) <= new Date(end).setHours(0, 0 , 0, 0) ; } );
+      return (
+        new Date(rate.date).setHours(0, 0, 0, 0) >=
+          new Date(start).setHours(0, 0, 0, 0) &&
+        new Date(rate.date).setHours(0, 0, 0, 0) <=
+          new Date(end).setHours(0, 0, 0, 0)
+      );
 
-    // console.log(this.dataEntity);
 
-    this.title =
-      this.title +
+    });
+    this.title = ''
+    this.title = this.report_name  +
       `${formatDate(start, 'mediumDate', 'en-US')}` +
       ' To ' +
       `${formatDate(end, 'mediumDate', 'en-US')}`;
-    // Faire appel a la fonction de mat-table
+    // Fcall the data source function
 
     this.dataSource = new MatTableDataSource<any>();
     this.connectDataSource(this.modelEntity, this.dataEntity);

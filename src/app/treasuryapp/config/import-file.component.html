@@ -1,9 +1,6 @@
 <div class="flex h-full p-0 space-y-1 lg:gap-1 lg:space-y-0">
 
   <div class="flex flex-col w-full p-2 m-2 bg-gray-100 border rounded-md shadow-2xl rounded-b-xl place-content-between">
-
-
-
       <div class="flex items-center w-full h-10 mt-1 border-b gap-x-1">{{title}}</div>
       <div class="flex w-full h-10 gap-2 p-2 border bottom-5 place-content-end place-items-center">
         <input type="file" id="fileInput" class="flex items-center justify-center w-1/2 px-5 py-2 text-sm rounded-lg sm:w-auto gap-x-2" (change)="onFileChange($event)">
@@ -29,14 +26,15 @@
         </button> -->
 
         <button
-          class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 rounded-lg shrink-0 sm:w-auto gap-x-2" [disabled]="disabled"
-          [ngClass]="disabled ? 'bg-gray-300 cursor-not-allowed ': ' bg-green-300 cursor-auto'" (click)="saveData()">
+        (click)="project_data()"
+          class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-white transition-colors duration-200 rounded-lg bg-primary shrink-0 sm:w-auto gap-x-2"
+           [disabled]="disabled">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
 
-          <span>Insert</span>
+          <span>Load</span>
         </button>
       </div>
 

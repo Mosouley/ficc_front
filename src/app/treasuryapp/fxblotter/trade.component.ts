@@ -1,3 +1,4 @@
+import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
 import { MatInputCommifiedDirective } from './../../shared/custom/mat-input-commified.directive';
 import { Currency } from './../../model/currency';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -18,6 +19,7 @@ import { Trade } from 'src/app/model/trade';
 import { Customer } from 'src/app/model/customer';
 import { thousandsValidator } from 'src/app/shared/custom/validators';
 import { DecimalPipe } from '@angular/common';
+import { Pnl_Calculation } from 'src/app/shared/custom/trade-functions';
 
 interface Option {
   value: string;
@@ -43,6 +45,9 @@ export class TradeComponent implements OnInit {
   color = 'blue';
   disabled = false;
   focused = true;
+  private ccy1_rate = 1;
+  private ccy2_rate = 1;
+  private syst_rate = 1;
 
   // private selectedProduit!: Product;
   buySells: any[] = [
@@ -57,7 +62,7 @@ export class TradeComponent implements OnInit {
     private aRoute: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public receiveData: any,
     private dialogRef: MatDialogRef<TradeComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: Trade
+    private rate_service: DailyRateService,
     private decimalPipe: DecimalPipe, private matDir: MatInputCommifiedDirective
   ) {}
 
@@ -78,12 +83,12 @@ export class TradeComponent implements OnInit {
 
     // calculate amount2 based on value in amount1
     this.tradeForm.controls['amount1'].valueChanges.subscribe((amount) => {
-      console.log('test and check amount ' + amount);
+    //   console.log('test and check amount ' + amount);
 
-       // access the formatted value of the form control through the directive's value property
-    console.log('Value with commas:', this.matDir.value);
-    // access the unformatted value of the form control through the form control's value property
-    console.log('Value without commas:', this.tradeForm.get('amount1')?.value);
+    //    // access the formatted value of the form control through the directive's value property
+    // console.log('Value with commas:', this.matDir.value);
+    // // access the unformatted value of the form control through the form control's value property
+    // console.log('Value without commas:', this.tradeForm.get('amount1')?.value);
 
       this.tradeForm.controls['amount2'].setValue(
         amount * this.tradeForm.controls['deal_rate'].value
@@ -96,31 +101,35 @@ export class TradeComponent implements OnInit {
         rate * this.tradeForm.controls['amount1'].value
       );
     });
+    this.tradeForm.controls['ccy1'].valueChanges.subscribe( x => {
+      this.get_Ccy_Rate(this.tradeForm.controls['ccy1'].value).then(rate => {
+        this.ccy1_rate = rate
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+    });
+    this.tradeForm.controls['ccy2'].valueChanges.subscribe( x => {
 
-    // this.tradeForm.valueChanges.subscribe(v => {
-    //   this.tradeForm.controls['trade_id'].setValue ('ID- ' + Date.now())
-    //   }
-    // );
+    this.get_Ccy_Rate(this.tradeForm.controls['ccy2'].value).then(rate => {
+      this.ccy2_rate = rate
 
-    // initialize stream on category to observe
-    // this.myFormCategoryChanges$ = this.invoiceForm.controls['category'].valueChanges;
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+    });
+    this.tradeForm.controls['ccy_pair'].valueChanges.subscribe( x => {
+     this.syst_rate = this.ccy1_rate / this.ccy2_rate;
+     console.log(this.syst_rate);
+     this.tradeForm.controls['system_rate'].setValue(this.syst_rate);
+    });
 
-    // initialize stream on prduct codes to observe
-    // this.myFormProduitChanges$ = this.invoiceForm.controls['codeProd'].valueChanges;
+    this.tradeForm.valueChanges.subscribe(v => {
+      if (this.can_calculate_pnl() == true) {
+        this.calculate_PnL();
+      }
+  });
 
-    // // subscribe to the stream so listen to changes on categry
-    // this.myFormCategoryChanges$.subscribe((categ: string) => {
-    //     this.updateFilteredProduits(categ);
-    // });
 
-    //     // subscribe to the stream so listen to changes on produit
-    // this.myFormProduitChanges$.subscribe((prod: string) => {
-    //         this.updateSelectedProduct(prod);
-    //     });
-    // this.invoiceForm.valueChanges.subscribe(v => {
-    //   this.updateSomme();
-    //   }
-    // );
   }
 
   // Initialiase the form group
@@ -177,6 +186,7 @@ export class TradeComponent implements OnInit {
       { value: 'ccy2/ccy1', viewValue: `${ccy2}/${ccy1}` },
     ];
   };
+  // Function that generates a trade id from a the date
   /* Date */
   date(e: any) {
     var convertDate = new Date(e.target.value).toISOString().substring(0, 10);
@@ -190,17 +200,63 @@ export class TradeComponent implements OnInit {
 
   onSubmit(): void {
     // Handle form submission here
-    console.log(this.tradeForm.value);
+    this.dialogRef.close(this.tradeForm.value)
   }
 
   /*
   Function to calculate the PnL on the trade
   */
-  calculatePnL(ccy1_Amount: number, ccy1: number, ccy2_Amount: number, ccy2:number): number {
+  calculate_PnL(){
 
-    return ccy1_Amount * ccy1 - ccy2_Amount * ccy2
+
+
+
+    let ccy1_amount = this.tradeForm.controls['amount1'].value;
+    let deal_rate = this.tradeForm.controls['deal_rate'].value;
+
+
+
+    // this.tradeForm.controls['ccy2'].setValue(syst_rate)
+    const pnl = Pnl_Calculation.calculate_pnl(this.ccy2_rate, ccy1_amount, deal_rate, this.syst_rate)
+    console.log(pnl);
 
   }
+
+  get_Ccy_Rate(ccy: Currency): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.rate_service.get(ccy).subscribe(
+        rate => {
+          resolve(rate.rateLcy);
+        },
+        error => {
+          console.error('API call error:', error);
+          reject(error);
+        }
+      );
+    });
+  }
+
+
+  get_system_rate (ccy1: Currency, ccy2: Currency): number {
+
+    return 1;
+  }
+
+  can_calculate_pnl(): boolean {
+    if (
+      this.tradeForm.controls['ccy2'].valid &&
+      this.tradeForm.controls['amount1'].valid &&
+      this.tradeForm.controls['deal_rate'].valid
+    ) {
+      return true
+    } else {
+      return false;
+    }
+
+  }
+
+}
+
 
   /*
 
@@ -224,4 +280,3 @@ please trigger that function for every change in
 ccy_pair, Ccy1_rate, ccy_2_rate, Amount CCy1, Amount_Ccy2, buy_sell direction
 
   */
-}

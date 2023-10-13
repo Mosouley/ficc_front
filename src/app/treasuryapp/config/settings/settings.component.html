@@ -1,77 +1,115 @@
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="w-full p-2 mx-1 bg-lime-100">
-  <mat-tab>
-    <ng-template mat-tab-label class="items-center space-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-        class="w-6 h-6 text-2xl bg-gray-100 text-sellar-primary">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
-      </svg>
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="w-full p-2 bg-[#f5f5f0]">
 
-      <h5 class="self-center p-1 text-default-primary">Currencies</h5>
-    </ng-template>
 
-    <div class="flex h-full p-4 bg-red-500 pace-y-1 lg:gap-1 lg:space-y-0">
-      <!-- Bar chart card -->
-      <div class="w-full p-2 border rounded-md shadow-2xl rounded-b-xl bg-stone-500">
-        <!-- <canvas id="barChart"></canvas> -->
-        <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start" class="flex w-full h-screen p-4 text-black bg-amber-100">
-          <mat-tab label="Currencies" class="p-4 text-black bg-my_primary ">
-            <!-- <div class="flex flex-col justify-center h-screen p-2 shadow-lg rounded-2xl hover:border-1 hover:border-default-white bg-cyan-800 place-items-center "> -->
+  <mat-tab label="Currencies" class="p-4 text-black bg-my_primary ">
 
-              <div class="flex items-end w-full p-2 mx-auto mt-1 space-x-2 bg-green-800 place-content-end">
-                <input type="file" id="fileInput" style="display:none;" (change)="onFileChange($event)">
-                <button
-                  class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700"
-                  (click)="importFile()">
+    <div class="flex items-end p-2 m-2 space-x-2 bg-gray-100 border-2 w-fit place-content-end">
+      <input type="file" id="fileInput" style="display:none;" (change)="onFileChange($event)">
+      <button
+        class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700"
+        (click)="importingFile()">
 
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_3098_154395)">
-                      <path
-                        d="M13.3333 13.3332L9.99997 9.9999M9.99997 9.9999L6.66663 13.3332M9.99997 9.9999V17.4999M16.9916 15.3249C17.8044 14.8818 18.4465 14.1806 18.8165 13.3321C19.1866 12.4835 19.2635 11.5359 19.0351 10.6388C18.8068 9.7417 18.2862 8.94616 17.5555 8.37778C16.8248 7.80939 15.9257 7.50052 15 7.4999H13.95C13.6977 6.52427 13.2276 5.61852 12.5749 4.85073C11.9222 4.08295 11.104 3.47311 10.1817 3.06708C9.25943 2.66104 8.25709 2.46937 7.25006 2.50647C6.24304 2.54358 5.25752 2.80849 4.36761 3.28129C3.47771 3.7541 2.70656 4.42249 2.11215 5.23622C1.51774 6.04996 1.11554 6.98785 0.935783 7.9794C0.756025 8.97095 0.803388 9.99035 1.07431 10.961C1.34523 11.9316 1.83267 12.8281 2.49997 13.5832"
-                        stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_3098_154395">
-                        <rect width="20" height="20" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_3098_154395)">
+            <path
+              d="M13.3333 13.3332L9.99997 9.9999M9.99997 9.9999L6.66663 13.3332M9.99997 9.9999V17.4999M16.9916 15.3249C17.8044 14.8818 18.4465 14.1806 18.8165 13.3321C19.1866 12.4835 19.2635 11.5359 19.0351 10.6388C18.8068 9.7417 18.2862 8.94616 17.5555 8.37778C16.8248 7.80939 15.9257 7.50052 15 7.4999H13.95C13.6977 6.52427 13.2276 5.61852 12.5749 4.85073C11.9222 4.08295 11.104 3.47311 10.1817 3.06708C9.25943 2.66104 8.25709 2.46937 7.25006 2.50647C6.24304 2.54358 5.25752 2.80849 4.36761 3.28129C3.47771 3.7541 2.70656 4.42249 2.11215 5.23622C1.51774 6.04996 1.11554 6.98785 0.935783 7.9794C0.756025 8.97095 0.803388 9.99035 1.07431 10.961C1.34523 11.9316 1.83267 12.8281 2.49997 13.5832"
+              stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+          <defs>
+            <clipPath id="clip0_3098_154395">
+              <rect width="20" height="20" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
 
-                  <span>Import</span>
+        <span>Import</span>
 
-                </button>
+      </button>
 
-                <button
-                  class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-400 rounded-lg shrink-0 sm:w-auto gap-x-2 dark:hover:bg-blue-500 dark:bg-blue-600"
-                   [disabled]="false" >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+      <button
+        class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 rounded-lg bg-my_primary shrink-0 sm:w-auto gap-x-2 "
+         [disabled]="newRates.length == 0" (click)="saveData()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
 
-                  <span>Save</span>
-                </button>
-              </div>
-              <!-- <div class="inset-0 flex bg-gradient-to-br from-skin-hue via-skin-hue to-transparent opacity-90">here</div> -->
-              <div class="flex w-full h-full p-2 mx-auto mt-1 space-x-2 bg-yellow-800 ">
-                <!-- <app-data-table *ngIf="data" [data]="data"></app-data-table> -->
-                <app-report
-                [dataEntity]="reportingData"
-                [modelEntity]="model"></app-report>
-              </div>
-            <!-- </div> -->
-          </mat-tab>
-          <mat-tab label="User" class="text-black">autre 2</mat-tab>
-          <mat-tab label="Third" class="text-black">Content 3</mat-tab>
-        </mat-tab-group>
-
-      </div>
+        <span>Save</span>
+      </button>
     </div>
+    <!-- here is where you control the width of the table -->
+
+    <div class="p-4 overflow-hidden bg-white border border-gray-200 rounded shadow-lg">
+
+      <ng-container *ngIf="newRates.length>0">
+        <!-- component -->
+            <div class="flex flex-col">
+              <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                  <div class="overflow-hidden">
+                    <table class="min-w-full">
+                      <thead class="bg-white border-b-2" >
+                        <tr >
+                          <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900 ">
+                            #REF
+                          </th>
+                          <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900 ">
+                            Currency
+                          </th>
+                          <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900 ">
+                            Rates
+                          </th>
+
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let item of newRates.slice(1); let i=index ">
+                        <ng-container *ngIf="i % 2 == 0">
+                          <tr class="bg-white border-b">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">{{i + 1}}</td>
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                              {{item[0]}}
+                            </td>
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                              {{item[1] | number:'1.4-4'}}
+                            </td>
+
+                          </tr>
+                        </ng-container>
+                        <ng-container *ngIf="i % 2 !== 0">
+                          <tr class="bg-gray-100 border-b">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">{{i}}</td>
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                              {{item[0]}}
+                            </td>
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                              {{item[1] | number:'1.4-4'}}
+                            </td>
+
+                          </tr>
+                        </ng-container>
 
 
-    <!-- </div> -->
-  </mat-tab>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </ng-container>
+      <ng-container *ngIf="newRates.length == 0">
+        <app-report
+        [data]="reportingData"
+        [modelEntity]="model"
+        [modelArrayEntity]="modelArrayEntity"></app-report>
+      </ng-container>
+
+
+    </div>
+  <!-- </div> -->
+
+</mat-tab>
+<mat-tab label="User" class="text-black">autre 2</mat-tab>
   <mat-tab>
     <ng-template mat-tab-label class="items-center space-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

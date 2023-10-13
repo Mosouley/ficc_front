@@ -37,6 +37,8 @@ export class FxblotterComponent implements OnInit{
      let dialogRef = this.dialog.open(TradeComponent, dialogConfig);
 
      dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+
 
       this.router.navigate(['.'], {relativeTo: this.route})
      });

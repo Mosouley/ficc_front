@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
 import * as XLSX from 'xlsx';
-import { TradeComponent } from '../../fxblotter/trade.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImportFileComponent } from '../import-file.component';
 import { DailyRate } from 'src/app/model/daily_rate';
@@ -16,8 +15,10 @@ type AOA = any[][];
   templateUrl: './settings.component.html',
 })
 export class SettingsComponent implements OnInit {
-  reportingData!: any[];
+  reportingData: any[] = [];
+  newRates: any[] =[];
   model: DataModel[] = [];
+  modelArrayEntity!: DataModel[];
   data!: AOA;
 
   constructor(
@@ -29,11 +30,16 @@ export class SettingsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.model = [
-      new DataModel('id', 'ID', 'number', true, []),
-      new DataModel('date', 'Date', 'date', false, []),
-      new DataModel('ccy', 'Currency', 'string', false, []),
+      // new DataModel('id', 'ID', 'number', true, []),
+      new DataModel('date', 'Date', 'date', false, [], 'date'),
+      new DataModel('ccy_code', 'Currency', 'string', false, []),
       new DataModel('rateLcy', 'Rate', 'number', false, []),
-      new DataModel('last_update', 'Last. Up', 'date', false, []),
+      new DataModel('last_updated', 'Last. Up', 'date', false, []),
+    ];
+
+    this.modelArrayEntity = [
+      new DataModel('Currency', 'code', 'string', false, [])
+
     ];
     this.retrievRates();
   }
@@ -57,9 +63,11 @@ export class SettingsComponent implements OnInit {
 
         /* save data */
         this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
-        console.log(this.data);
+        // console.log(this.data);
+        this.reportingData = this.data
+       // console.log(this.reportingData);
       };
-      console.log(target.files[0]); //done l'objet File
+     // console.log(target.files[0]); //done l'objet File
 
       reader.readAsBinaryString(target.files[0]);
     } catch (error) {
@@ -72,21 +80,17 @@ export class SettingsComponent implements OnInit {
     document!.getElementById('fileInput')!.click();
   }
   saveData() {
-    this.daily.addMany(this.data.slice(1)).subscribe((resp) => {
-      console.log(resp);
+
+    this.daily.addMany(this.newRates.slice(1)).subscribe((resp) => {
+      this.newRates = []
+
     });
-    // this.http.post('/api/upload', this.data).subscribe(response => {
-    //   console.log(response);
-    // });
+
   }
 
   retrievRates() {
-    // console.log(this.model);
-
     this.daily.list().subscribe((rates) => {
-      // console.log(rates)
       this.reportingData = rates;
-      // console.log(this.reportingData)
     });
   }
 
@@ -95,16 +99,15 @@ export class SettingsComponent implements OnInit {
     // dialogConfig.disableClose = false;
     dialogConfig = {
       height: '300px',
-      width: '500px',
+      width: '500px'
     };
     //  dialogConfig.autoFocus = true;
     let dialogRef = this.dialog.open(ImportFileComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe((data) => {
-      this.data = data;
-      console.log(this.data);
-
-      this.router.navigate(['.'], { relativeTo: this.route });
+    // dialogRef.beforeClosed.
+    dialogRef.afterClosed().subscribe((result) => {
+      this.newRates = result;
+      // this.router.navigate(['.'], { relativeTo: this.route });
     });
+
   }
 }

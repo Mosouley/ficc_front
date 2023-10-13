@@ -61,7 +61,7 @@
           <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
         </table>
         <div *ngIf="noData | async" class="no-records">
-            Aucun enregistrement fait sur cette période
+            No entry is available for the specified period
           </div>
          <!-- </div> -->
         <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
