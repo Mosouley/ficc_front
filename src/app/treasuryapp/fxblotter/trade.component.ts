@@ -1,7 +1,8 @@
 import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
-import { MatInputCommifiedDirective } from './../../shared/custom/mat-input-commified.directive';
+// import { MatInputCommifiedDirective } from './../../shared/custom/mat-input-commified.directive';
 import { Currency } from './../../model/currency';
 import { Component, Inject, OnInit } from '@angular/core';
+
 import {
   FormBuilder,
   FormControl,
@@ -18,8 +19,9 @@ import { Product } from 'src/app/model/product';
 import { Trade } from 'src/app/model/trade';
 import { Customer } from 'src/app/model/customer';
 import { thousandsValidator } from 'src/app/shared/custom/validators';
-import { DecimalPipe } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, formatNumber } from '@angular/common';
 import { Pnl_Calculation } from 'src/app/shared/custom/trade-functions';
+
 
 interface Option {
   value: string;
@@ -48,7 +50,7 @@ export class TradeComponent implements OnInit {
   private ccy1_rate = 1;
   private ccy2_rate = 1;
   private syst_rate = 1;
-
+   amount1Formatted = 0;
   // private selectedProduit!: Product;
   buySells: any[] = [
     { value: 'buy', viewValue: 'Buy' },
@@ -63,7 +65,10 @@ export class TradeComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public receiveData: any,
     private dialogRef: MatDialogRef<TradeComponent>,
     private rate_service: DailyRateService,
-    private decimalPipe: DecimalPipe, private matDir: MatInputCommifiedDirective
+    // private decimalPipe: DecimalPipe, private matDir: MatInputCommifiedDirective,
+
+    private decimalPipe: DecimalPipe,
+    private currencyPipe: CurrencyPipe
   ) {}
 
   ngOnInit() {
@@ -81,17 +86,47 @@ export class TradeComponent implements OnInit {
       this.createCcyPairOptions
     );
 
+
+    this.tradeForm.valueChanges.subscribe((form) => {
+      if (form.amount1 !== null && form.amount1 !== undefined) {
+        // Remove non-numeric characters (including commas and spaces)
+        let numericValue = form.amount1.toString().replace(/[^0-9.]/g, '');
+
+        // Check if the input is not empty and is a valid number
+        if (numericValue !== '' && !isNaN(numericValue)) {
+          // Parse the cleaned numeric value
+          const parsedValue = parseFloat(numericValue);
+
+          // Format the parsed value and store it
+          // this.amount1Formatted = this.currencyPipe.transform(parsedValue, '', '', '1.0-2');
+
+          // Update the form control with the formatted value
+          this.tradeForm.patchValue({ amount1: this.currencyPipe.transform(parsedValue, '', '', '1.0-2')}, { emitEvent: false });
+        }
+      }
+    });
+      // this.tradeForm.valueChanges.subscribe( form => {
+      //   if(form.amount1 !== null && form.amount1 !== undefined){
+
+      //     let numericValue = form.amount1.toString().replace(/,/g, ''); // Remove commas
+      //     numericValue = numericValue.replace(/[^0-9.]/g, ''); // Allow numeric digits and decimal point
+      //     numericValue = numericValue.replace(/^0+/,''); // Remove leading zeros
+      //     numericValue = parseFloat(numericValue)
+      //    // Check if the input is a valid number
+      //    if (!isNaN(numericValue) && numericValue !== '' ) {
+      //     this.amount1Formatted = parseFloat(this.currencyPipe.transform(numericValue, '', '', '1.0-2'));
+
+      //     this.tradeForm.patchValue({ amount1: this.amount1Formatted }, { emitEvent: false });
+      //   }
+      //     // this.tradeForm.patchValue({
+      //     //   amount1: this.currencyPipe.transform(form.amount1.replace(/\D|\./g,'').replace(/^0+/,''), 'USD', 'symbol','1.0-2')
+      //     // }, {emitEvent: false});
+      //   }
+      // });
     // calculate amount2 based on value in amount1
     this.tradeForm.controls['amount1'].valueChanges.subscribe((amount) => {
-    //   console.log('test and check amount ' + amount);
-
-    //    // access the formatted value of the form control through the directive's value property
-    // console.log('Value with commas:', this.matDir.value);
-    // // access the unformatted value of the form control through the form control's value property
-    // console.log('Value without commas:', this.tradeForm.get('amount1')?.value);
-
       this.tradeForm.controls['amount2'].setValue(
-        amount * this.tradeForm.controls['deal_rate'].value
+        this.amount1Formatted * (this.tradeForm.controls['deal_rate'].value)
       );
     });
 
@@ -132,13 +167,24 @@ export class TradeComponent implements OnInit {
 
   }
 
+  // formatAmount() {
+  //   if (this.amount1 !== null) {
+  //     this.amount1 = parseFloat(this.amount1.toFixed(2));
+  //   }
+  // }
+
+  // validate(event:any){
+  //   let t = event?.target.value;
+  //   event.target.value = t.indexOf('.') >= 0 ? t.substring(0, t.indexOf('.')) + t.substring(t.indexOf('.'),2) : t
+
+  // }
   // Initialiase the form group
   initData() {
     this.createForm();
   }
   // create the form if it does not exist
   createForm() {
-    const numberPatern = '^[0-9.,]+$';
+    // const numberPatern = '^[0-9.,]+$';
     this.tradeForm = this.fb.group({
       trade_id: [{ value: 'ID- ' + Date.now(), disabled: true }],
       customer: ['', Validators.required],
@@ -150,7 +196,7 @@ export class TradeComponent implements OnInit {
       ccy2: ['', Validators.required],
       ccy_pair: ['', Validators.required],
       buy_sell: ['', Validators.required],
-      amount1: ['', [Validators.required, thousandsValidator]],
+      amount1: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       amount2: [{ value: '', disabled: true }],
       deal_rate: ['', Validators.required],
       fees_rate: [''],
@@ -160,22 +206,16 @@ export class TradeComponent implements OnInit {
       gross_pnl: [{ value: '', disabled: true }],
       net_pnl: [{ value: '', disabled: true }, Validators.required],
     });
+    // this.tradeForm.get('amount1')?.patchValue(this.decimalPipe.transform(0, '1.0-2'));
   }
 
-  onAmount1Input(event: Event) {
-    const inputValue = this.tradeForm.get('amount1')?.value;
-    const inputElement = event.target as HTMLInputElement;
-    // const amountValue = inputElement.value.replace(/,/g, '');
-    // const formattedValue = this.decimalPipe.transform(amountValue, '1.2-2');
-    // this.tradeForm.get('amount1')?.setValue(formattedValue);
-    // const numericValue = parseFloat(amountValue);
-
-    if (inputValue != null && !isNaN(inputValue)) {
-      const formattedValue = new DecimalPipe('en-US').transform(inputValue, '3.2-2');
-      // do something with formattedValue
-      this.tradeForm.get('amount1')?.setValue(formattedValue);
-    }
-  }
+  // formatInput(event: any) {
+  //   const value = event.target.value.replace(/,/g, '').replace(/ /g, ''); // Remove commas and spaces
+  //   if (!isNaN(value)) {
+  //     this.tradeForm.get('amount1')!.setValue(parseFloat(value));
+  //   }
+  //   this.amount1Formatted = this.currencyPipe.transform(value, '', '', '1.0-2');
+  // }
 
   // Define a function that creates the currency pair options
   createCcyPairOptions = () => {
@@ -199,6 +239,8 @@ export class TradeComponent implements OnInit {
   }
 
   onSubmit(): void {
+
+    console.warn (this.tradeForm.value)
     // Handle form submission here
     this.dialogRef.close(this.tradeForm.value)
   }

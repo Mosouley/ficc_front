@@ -1,9 +1,9 @@
-<div class="rounded-md dark:bg-darker border shadow-2xl rounded-b-xl">
-  <div class="p-0  mx-auto">
-    <div class="bg-white rounded-t-lg p-2">
-      <p mat-dialog-title class="text-center text-sm text-gray-400 font-light border-b border-indigo-600">Sign in with</p>
+<div class="border rounded-md shadow-2xl dark:bg-darker rounded-b-xl">
+  <div class="p-0 mx-auto">
+    <div class="p-2 bg-white rounded-t-lg">
+      <p mat-dialog-title class="text-sm font-light text-center text-gray-400 border-b border-indigo-600">Sign in with</p>
       <div>
-        <div class="flex items-center justify-center space-x-4 mt-3">
+        <div class="flex items-center justify-center mt-3 space-x-4">
           <button
             class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
           >
@@ -49,8 +49,8 @@
         </div>
       </div>
     </div>
-    <div class="bg-gray-100 rounded-b-lg py-6 px-4 lg:px-24">
-      <p class="text-center text-sm text-gray-500 font-light">
+    <div class="px-4 py-6 bg-gray-100 rounded-b-lg lg:px-24">
+      <p class="text-sm font-light text-center text-gray-500">
         Or sign in with credentials
       </p>
 
@@ -58,16 +58,16 @@
         <mat-dialog-content>
           <div class="relative">
             <input
-              class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+              class="w-full py-3 pl-12 leading-tight text-gray-600 transition border border-gray-100 rounded-md shadow-sm appearance-none focus:shadow-md focus:placeholder-gray-600 focus:outline-none focus:ring-gray-600 focus:shadow-outline"
               matInput [(ngModel)]="data.username"
               name="username"
               placeholder="Email"
 
             />
-            <div class="absolute left-0 inset-y-0 flex items-center">
+            <div class="absolute inset-y-0 left-0 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-7 w-7 ml-3 text-gray-400 p-1"
+                class="p-1 ml-3 text-gray-400 h-7 w-7"
                 viewBox="0 0 20 20"
                 fill="currentColor"
 
@@ -83,16 +83,16 @@
           </div>
           <div class="relative mt-3">
             <input
-              class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+              class="w-full py-3 pl-12 leading-tight text-gray-600 transition border border-gray-100 rounded-md shadow-sm appearance-none focus:shadow-md focus:placeholder-gray-600 focus:outline-none focus:ring-gray-600 focus:shadow-outline"
               matInput [(ngModel)]="data.password"
               name="password"
               type="password"
               placeholder="Password"
             />
-            <div class="absolute left-0 inset-y-0 flex items-center">
+            <div class="absolute inset-y-0 left-0 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-7 w-7 ml-3 text-gray-400 p-1"
+                class="p-1 ml-3 text-gray-400 h-7 w-7"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -102,9 +102,9 @@
               </svg>
             </div>
           </div>
-          <div class="mt-4 flex items-center text-gray-500">
+          <div class="flex items-center mt-4 text-gray-500">
             <input type="checkbox" class="mr-3" />
-            <label for="remember">Remember me</label>
+            <label >Remember me</label>
           </div>
         </mat-dialog-content>
 

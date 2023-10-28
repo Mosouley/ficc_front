@@ -10,9 +10,11 @@ import { ProductService } from './services/product.service';
 import { SegmentService } from './services/segment.service';
 import { CustomerService } from './services/customer.service';
 import { CustomformatterPipe } from './custom/customformatter.pipe';
-import { MatInputCommifiedDirective } from './custom/mat-input-commified.directive';
+// import { MatInputCommifiedDirective } from './custom/mat-input-commified.directive';
 import { DailyRateService } from './services/dailyrates.service';
 import { ReportModule } from '../report/report.module';
+import { FormatNumberPipe } from './format-number.pipe';
+import { NumberFormatDirective } from './NumberFormatDirective';
 
 
 
@@ -21,7 +23,8 @@ import { ReportModule } from '../report/report.module';
   declarations: [
     PageNotFoundComponent,
     CustomformatterPipe,
-    MatInputCommifiedDirective
+    // MatInputCommifiedDirective,
+    FormatNumberPipe
   ],
   imports: [
     CommonModule,
@@ -30,11 +33,13 @@ import { ReportModule } from '../report/report.module';
     HttpClientModule,
     ReportModule,
     ReactiveFormsModule,
+
   ],
   exports: [
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+
     ReportModule
   ],
   providers: [
@@ -45,7 +50,7 @@ import { ReportModule } from '../report/report.module';
     DealerService,
     CustomerService,
     DailyRateService,
-    MatInputCommifiedDirective
+    // MatInputCommifiedDirective
   ]
 })
 export class SharedModule { }

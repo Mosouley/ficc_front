@@ -1,4 +1,4 @@
-import { formatNumber } from '@angular/common';
+
 import { Directive, ElementRef, HostListener, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
@@ -35,9 +35,6 @@ export class MatInputCommifiedDirective {
     private formatValue(value: string | null) {
       if(value !== null) {
         this.elementRef.nativeElement.value = numberWithCommas(value)
-        console.log('Question');
-
-        console.log(this.elementRef.nativeElement.value );
 
     } else {
       this.elementRef.nativeElement.value = '';
