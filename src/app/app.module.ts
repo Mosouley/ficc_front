@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from './layout/layout.module';
-
+import { AosModule } from 'ngx-aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 
 // importing for locale under pipe
 import { registerLocaleData } from '@angular/common';
@@ -24,6 +25,7 @@ registerLocaleData(localeIt, 'it')
     BrowserAnimationsModule,
     FormsModule,
     LayoutModule,
+    AosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
