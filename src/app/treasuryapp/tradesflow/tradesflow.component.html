@@ -1,0 +1,1412 @@
+<section class="p-2 pt-1 mb-4 bg-white shadow-xl">
+  <div class="flex flex-col items-center">
+    <h2 class="mt-1 text-xl font-bold tracking-tight">
+      Treasury FX Dashboard
+    </h2>
+    <p class="mt-2 text-sm text-neutral-500">
+      Manage your positions,revenues and risk metrics
+    </p>
+  </div>
+
+  <div
+    class="grid justify-center grid-cols-2 gap-2 p-4 mb-4 overflow-x-auto transition ease-in-out delay-150 border shadow-md md:grid-cols-3 xl:grid-cols-5 border-red-50">
+    <label>
+      <input type="radio" value="1" class="hidden peer" name="framework">
+
+      <div
+        class="flex items-center justify-between px-4 py-2 text-sm border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group peer-checked:border-primary peer-checked:bg-[#A294C7] ">
+        <h2 class="font-medium text-gray-700 peer-checked:text-[#F1E3F0] justify-center uppercase">PnL summmary</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+
+      <!-- Full-width content div -->
+      <div
+        class="justify-center hidden p-4 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow-md bg-gray-50 tab-content col-span-full peer-checked:block peer-checked:w-screen">
+        <table class="w-full space-x-4 overflow-scroll text-sm text-left border-collapse border-purple-500 ">
+          <thead class="flex-col items-center justify-center p-2 rounded-lg">
+            <tr>
+              <th rowspan="2" class="text-center border-2 border-neutral-700">PnL Summary</th>
+              <th colspan="2" class="text-center border-2 border-neutral-700">Open MTD</th>
+              <th colspan="2 " class="text-center border-2 border-neutral-700">Day</th>
+              <th colspan="2 " class="text-center border-2 border-neutral-700">Closing MTD</th>
+              <th colspan="2 " class="text-center border-2 border-neutral-700">Closing YTD</th>
+            </tr>
+            <tr>
+
+              <th class="text-center border-2 border-neutral-700">KES'000</th>
+              <th class="text-center border-2 border-neutral-700">USD'000</th>
+              <th class="text-center border-2 border-neutral-700">KES'000</th>
+              <th class="text-center border-2 border-neutral-700">USD'000</th>
+              <th class="text-center border-2 border-neutral-700">KES'000</th>
+              <th class="text-center border-2 border-neutral-700">USD'000</th>
+              <th class="text-center border-2 border-neutral-700">KES'000</th>
+              <th class="text-center border-2 border-neutral-700">USD'000</th>
+            </tr>
+          </thead>
+          <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+
+            <tr class="hover:bg-gray-50">
+              <td>Position Reeval</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>SPOT PnL</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Forward PnL</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>TOTAL PnL</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </label>
+
+    <label>
+      <input type="radio" value="2" class="hidden peer" name="framework">
+
+      <div
+        class="flex items-center justify-between px-4 py-2 text-sm border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group peer-checked:border-blue-500  peer-checked:bg-[#A294C7]">
+        <h2 class="font-medium text-gray-700 uppercase">Position per ccy</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+
+
+      <!-- Full-width content div -->
+      <div
+        class="justify-center hidden p-4 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow-md bg-gray-50 tab-content col-span-full peer-checked:block peer-checked:w-screen">
+        <table class="w-full space-x-4 overflow-scroll text-sm text-left border-collapse">
+          <thead class="flex-col items-center justify-center p-2 bg-green-600 rounded-lg">
+            <tr>
+              <th>Currencies</th>
+              <th>KES</th>
+              <th>USD</th>
+              <th>EUR</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+            </tr>
+          </thead>
+          <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td>Opening POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Manual Ajustments</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Intra-day</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Closing POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>USD Clos. POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </label>
+
+    <label>
+      <input type="radio" value="3" class="hidden peer" name="framework">
+
+      <div
+        class="flex items-center justify-between px-4 py-2 text-sm border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group peer-checked:border-blue-500  peer-checked:bg-[#A294C7]">
+        <h2 class="font-medium text-gray-700 uppercase">pnl per ccy</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <!-- Full-width content div -->
+      <div
+        class="justify-center hidden p-4 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow-md bg-gray-50 tab-content col-span-full peer-checked:block peer-checked:w-screen">
+        <table class="w-full space-x-4 overflow-scroll text-sm text-left border-collapse border-purple-500 ">
+          <thead class="flex-col items-center justify-center p-2 bg-green-600 rounded-lg">
+            <tr>
+              <th>PnL Summary</th>
+              <th>KES</th>
+              <th>USD</th>
+              <th>EUR</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+            </tr>
+          </thead>
+          <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td>USD Clos. POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Position Reeval</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>SPOT PnL</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Forward PnL</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>TOTAL PnL</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </label>
+
+    <label>
+      <input type="radio" value="4" class="hidden peer" name="framework">
+
+      <div
+        class="flex items-center justify-between px-4 py-2 text-sm border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group peer-checked:border-blue-500  peer-checked:bg-[#A294C7]">
+        <h2 class="font-medium text-gray-700 uppercase">risks metrics</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <!-- Full-width content div -->
+      <div
+        class="justify-center hidden p-4 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow-md bg-gray-50 tab-content col-span-full peer-checked:block peer-checked:w-screen">
+        <table class="w-full space-x-4 overflow-scroll text-sm text-left border-collapse">
+          <thead class="flex-col items-center justify-center p-2 bg-green-600 rounded-lg">
+            <tr>
+              <th>Metrics</th>
+              <th>KES</th>
+              <th>USD</th>
+              <th>EUR</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+            </tr>
+          </thead>
+          <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td>Intern. Short Limits</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Intern. Long Limits</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Regulatory Limits</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Compliance Status</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </label>
+    <label>
+      <input type="radio" value="5" class="hidden peer" name="framework">
+
+      <div
+        class="flex items-center justify-between px-4 py-2 text-sm border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group peer-checked:border-blue-500  peer-checked:bg-[#A294C7]">
+        <h2 class="font-medium text-gray-700">Analytics</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <!-- Full-width content div -->
+      <div
+        class="justify-center hidden p-4 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow-md bg-gray-50 tab-content col-span-full peer-checked:block peer-checked:w-screen">
+        <table class="w-full space-x-4 overflow-scroll text-sm text-left border-collapse">
+          <thead class="flex-col items-center justify-center p-2 bg-green-600 rounded-lg">
+            <tr>
+              <th>Currencies</th>
+              <th>KES</th>
+              <th>USD</th>
+              <th>EUR</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>GBP</th>
+              <th>USD</th>
+              <th>CHF</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+              <th>CAD</th>
+              <th>ZAR</th>
+              <th>AED</th>
+              <th>NGN</th>
+            </tr>
+          </thead>
+          <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td>Opening POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Manual Ajustments</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Intra-day</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>Closing POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td>USD Clos. POS.</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+              <td>7,898.00</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </label>
+  </div>
+
+
+</section>
+
+<section class="p-3">
+  <div
+  class="justify-center p-2 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow bg-gray-50 ">
+  <table class="space-x-4 overflow-scroll text-sm text-left ">
+    <caption class="py-2 text-sm text-gray-600 text-start ">FX Transactions Flows</caption>
+    <thead class="flex-col items-center justify-center p-2 border-b ">
+      <tr class="bg-white border-b divide-x divide-gray-100 rounded-lg odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <th scope="col" class="p-1">Customer</th>
+        <th scope="col" class="p-1">Product</th>
+        <th scope="col" class="p-1">TradeId</th>
+        <th scope="col" class="p-1">ValDate</th>
+        <th scope="col" class="p-1">TxDate</th>
+        <th scope="col" class="p-1">Ccy1</th>
+        <th scope="col" class="p-1">Ccy2</th>
+        <th scope="col" class="p-1">Buy/Sell</th>
+        <th scope="col" class="p-1">Ccy1_Amount</th>
+        <th scope="col" class="p-1">Ccy2_Amount</th>
+        <th scope="col" class="p-1">DealRate</th>
+        <th scope="col" class="p-1">ReevalRate</th>
+        <th scope="col" class="p-1">PnL'000</th>
+        <th scope="col" class="p-1">Others</th>
+        <th scope="col"  class="p-1">Status</th>
+				<th scope="col"  class="p-1 min-w-fit">Action</th>
+
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td class="p-1 whitespace-nowrap">ORYX Energy Limited</td>
+        <td class="p-1 whitespace-nowrap">SPOT</td>
+        <td class="p-1 whitespace-nowrap">#988780</td>
+        <td class="p-1 whitespace-nowrap">25/12/23</td>
+        <td class="p-1 whitespace-nowrap">20/12/23</td>
+        <td class="p-1 whitespace-nowrap">USD</td>
+        <td class="p-1 whitespace-nowrap">KES</td>
+        <td class="p-1 whitespace-nowrap">Buy</td>
+        <td class="p-1 whitespace-nowrap"> 7,898.00</td>
+        <td class="p-1 whitespace-nowrap">7,898.00</td>
+        <td class="p-1 whitespace-nowrap">7,898.00</td>
+        <td class="p-1 whitespace-nowrap">153.5</td>
+        <td class="p-1 whitespace-nowrap">150.25</td>
+        <td class="p-1 whitespace-nowrap">7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+      <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+        <td>ORYX Energy Limited</td>
+        <td>SPOT</td>
+        <td>#988780</td>
+        <td>25/12/23</td>
+        <td>20/12/23</td>
+        <td>USD</td>
+        <td>KES</td>
+        <td>Buy</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>7,898.00</td>
+        <td>153.5</td>
+        <td>150.25</td>
+        <td>7,898.00</td>
+        <td class="p-1 whitespace-nowrap">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-1 whitespace-nowrap">
+          <a href="#" class="mr-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="flex items-center justify-center mt-4 space-x-2">
+  <ul class="flex space-x-2">
+ <li>
+<a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">Previous</a>
+ </li>
+ <li>
+<a class="px-3 py-1 text-blue-500 border border-gray-300 rounded-lg hover:bg-blue-100">1</a>
+ </li>
+ <li>
+<a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">2</a>
+ </li>
+ <li>
+<a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">3</a>
+ </li>
+ <li>
+<span class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg">...</span>
+ </li>
+ <li>
+<a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">10</a>
+ </li>
+ <li>
+<a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">Next</a>
+ </li>
+  </ul>
+</div>
+
+</section>
+
+

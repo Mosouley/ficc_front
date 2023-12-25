@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { MenuNode } from './menu-node';
 
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -87,7 +88,7 @@ export class NavbarComponent implements OnInit  {
     }
 
     ngOnInit(): void {
-
+  
     }
     loginOpen() {
 

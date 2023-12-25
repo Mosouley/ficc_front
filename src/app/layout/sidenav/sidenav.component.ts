@@ -72,6 +72,12 @@ export class SidenavComponent implements OnInit{
       action: false,
       expandable: true,
       children: [
+        {
+          name: 'TradeFlow ',
+          url: 'tradesflow',
+          icon: 'fingerprint',
+          action: false
+        },
 
         {
           name: 'Wallet Sizing',

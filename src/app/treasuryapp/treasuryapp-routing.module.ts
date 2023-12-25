@@ -12,12 +12,23 @@ import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.c
 import { DealersResolver } from '../shared/resolvers/dealers.resolver';
 import { CustomerResolver } from '../shared/resolvers/customers.resolver';
 import { SettingsComponent } from './config/settings/settings.component';
+import { TradesflowComponent } from './tradesflow/tradesflow.component';
 
 const routes: Routes = [
 
   { path: '', component: DashComponent ,
   children: [
      { path: 'fxflows', component: FxflowsComponent },
+     { path: 'tradesflow',
+     component: TradesflowComponent,
+     resolve: {
+      currencies: CurrenciesResolver,
+      products: ProductsResolver,
+      segments: SegmentsResolver,
+      traders: DealersResolver,
+      customers: CustomerResolver
+    }
+  },
      { path: 'fxblotter',
      component: FxblotterComponent,
      resolve: {

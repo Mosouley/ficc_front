@@ -2,6 +2,7 @@ import { TradeComponent } from './trade.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as Aos from 'aos';
 import { Currency } from 'src/app/model/currency';
 import { Customer } from 'src/app/model/customer';
 import { Product } from 'src/app/model/product';
@@ -19,7 +20,10 @@ export class FxblotterComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router
   ){}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    Aos.init();
+  }
 
   tradeCapture() {
 

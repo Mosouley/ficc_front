@@ -15,6 +15,7 @@ import { DataTableComponent } from './config/data-table/data-table.component';
 import { ImportFileComponent } from './config/import-file.component';
 import { FormatNumberPipe } from '../shared/format-number.pipe';
 import { NumberFormatDirective } from '../shared/NumberFormatDirective';
+import { TradesflowComponent } from './tradesflow/tradesflow.component';
 
 
 
@@ -27,7 +28,8 @@ import { NumberFormatDirective } from '../shared/NumberFormatDirective';
     SettingsComponent,
     DataTableComponent,
     ImportFileComponent,
-    NumberFormatDirective
+    NumberFormatDirective,
+    TradesflowComponent
 
   ],
   imports: [
