@@ -34,7 +34,6 @@ import { BannerService } from './services/banner.service';
     HttpClientModule,
     ReportModule,
     ReactiveFormsModule,
-
   ],
   exports: [
     RouterModule,
