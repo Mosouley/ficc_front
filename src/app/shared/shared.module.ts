@@ -15,6 +15,7 @@ import { DailyRateService } from './services/dailyrates.service';
 import { ReportModule } from '../report/report.module';
 import { FormatNumberPipe } from './format-number.pipe';
 import { NumberFormatDirective } from './NumberFormatDirective';
+import { BannerService } from './services/banner.service';
 
 
 
@@ -51,6 +52,7 @@ import { NumberFormatDirective } from './NumberFormatDirective';
     CustomerService,
     DailyRateService,
     // MatInputCommifiedDirective
+    BannerService
   ]
 })
 export class SharedModule { }

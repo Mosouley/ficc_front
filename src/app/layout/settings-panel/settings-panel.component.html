@@ -1,5 +1,5 @@
 <div [ngClass]=" !isSettingsPanelOpen ? 'translate-x-full transform duration-300  w-0' : 'inset-y-0 -translate-x-0 transform duration-300  w-60 right-0'  "
-  class=" fixed inset-y-0 right-0 flex-col bg-white shadow-lg bg-opacity-20 w-60"
+  class=" fixed inset-y-0 right-0 flex-col bg-white shadow-lg bg-opacity-20 w-auto"
   style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
   <div class="flex items-center justify-between flex-shrink-0 p-2">
     <h6 class="p-2 text-lg">Settings</h6>
@@ -27,11 +27,11 @@
     </div>
 
     <div class="flex flex-auto gap-4 items-center mt-2">
-      <div class="rounded-full w-4 h-4 bg-yellow-500">
+      <div class="rounded-full  bg-yellow-500">
 
       </div>
       <div class="rounded-full w-4 h-4 bg-green-500">
-
+        <app-report-html></app-report-html>
       </div>
       <div class="rounded-full w-4 h-4 bg-red-500">
 

@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { BannerComponent } from './dash/banner.component';
 
 
 
@@ -24,7 +25,8 @@ import { LogoutComponent } from './logout/logout.component';
     FooterComponent,
     SettingsPanelComponent,
     UserLoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    BannerComponent
   ],
 
   imports: [
