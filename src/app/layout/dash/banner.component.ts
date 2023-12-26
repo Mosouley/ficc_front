@@ -27,7 +27,6 @@ export class BannerComponent implements OnInit{
   ngOnInit(){
     this.bannerService.bannerState$.subscribe((state) => {
       console.log('I am getting state');
-
       this.bannerState = state;
     });
   }
