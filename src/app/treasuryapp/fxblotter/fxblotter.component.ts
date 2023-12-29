@@ -11,7 +11,7 @@ import { Product } from 'src/app/model/product';
   selector: 'app-fxblotter',
   templateUrl: './fxblotter.component.html'
 })
-export class FxblotterComponent implements OnInit{
+export class FxblotterComponent{
   private customers: Customer[] = [];
   private currencies: Currency[] = [];
   private products: Product[] = [];
@@ -20,11 +20,6 @@ export class FxblotterComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router
   ){}
-  ngOnInit(): void {
-
-
-  }
-
   tradeCapture() {
 
     let dialogConfig = new MatDialogConfig();

@@ -1,8 +1,6 @@
-import { FormsModule } from '@angular/forms';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './../app-routing.module';
 import { MaterialModule } from './../material/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +12,7 @@ import { SettingsPanelComponent } from './settings-panel/settings-panel.componen
 import { UserLoginComponent } from './user-login/user-login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BannerComponent } from './dash/banner.component';
+import { PnlSummaryComponent } from '../report/pnl-summary/pnl-summary.component';
 
 
 
@@ -26,14 +25,16 @@ import { BannerComponent } from './dash/banner.component';
     SettingsPanelComponent,
     UserLoginComponent,
     LogoutComponent,
-    BannerComponent
+    BannerComponent,
+
   ],
 
   imports: [
     CommonModule,
     LayoutRoutingModule,
     MaterialModule,
-    SharedModule,
+    PnlSummaryComponent,
+    SharedModule
   ],
   exports: [
     NavbarComponent,
@@ -41,6 +42,9 @@ import { BannerComponent } from './dash/banner.component';
     RouterModule,
     DashComponent,
     FooterComponent,
+    BannerComponent,
+    PnlSummaryComponent
+
   ]
 })
 export class LayoutModule { }

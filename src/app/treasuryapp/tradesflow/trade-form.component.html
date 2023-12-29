@@ -1,0 +1,19 @@
+<!-- trade-dialog.component.html -->
+
+<form [formGroup]="tradeForm" (ngSubmit)="submitTradeForm()" class="space-y-4">
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label for="customer">Customer:</label>
+      <input type="text" id="customer" formControlName="customer" required>
+    </div>
+    <div>
+      <label for="product">Product:</label>
+      <input type="text" id="product" formControlName="product" required>
+    </div>
+    <!-- Add similar form controls for other trade details -->
+  </div>
+
+  <div class="flex items-center justify-end">
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Book Trade</button>
+  </div>
+</form>

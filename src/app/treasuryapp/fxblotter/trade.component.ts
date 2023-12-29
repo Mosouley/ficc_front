@@ -167,18 +167,6 @@ export class TradeComponent implements OnInit {
 
   }
 
-  // formatAmount() {
-  //   if (this.amount1 !== null) {
-  //     this.amount1 = parseFloat(this.amount1.toFixed(2));
-  //   }
-  // }
-
-  // validate(event:any){
-  //   let t = event?.target.value;
-  //   event.target.value = t.indexOf('.') >= 0 ? t.substring(0, t.indexOf('.')) + t.substring(t.indexOf('.'),2) : t
-
-  // }
-  // Initialiase the form group
   initData() {
     this.createForm();
   }

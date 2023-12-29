@@ -1,24 +1,3 @@
-.tab {
-            overflow: hidden;
-            }
-            .tab-content {
-            max-height: 0;
-            transition: all 0.3s;
-            }
-            input:checked + .tab-label .test {
-                background-color: #37c936;
-            }
-            input:checked + .tab-label .test svg {
-                transform: rotate(180deg);
-                stroke: #fff;
-            }
-            input:checked + .tab-label::after {
-            transform: rotate(90deg);
-            }
-            input:checked ~ .tab-content {
-            max-height: 100vh;
-            }
-
 
             /* Additional styles for the banner */
 .banner {
@@ -35,3 +14,6 @@
 .banner.show {
   right: 0; /* Display the banner from the right */
 }
+
+
+

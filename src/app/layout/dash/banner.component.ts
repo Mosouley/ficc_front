@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Type } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { BannerService } from 'src/app/shared/services/banner.service';
 
@@ -8,41 +8,45 @@ import { BannerService } from 'src/app/shared/services/banner.service';
   styleUrls: ['./banner.component.css'],
   animations: [
     trigger('slideInOut', [
-      state('in', style({
+      state('true', style({
         right: '0',
       })),
-      state('out', style({
+      state('false', style({
         right: '-100%',
       })),
-      transition('in => out', animate('300ms ease-in-out')),
-      transition('out => in', animate('300ms ease-in-out')),
+      transition('true => false', animate('300ms ease-in-out')),
+      transition('false => true', animate('300ms ease-in-out')),
     ]),
   ],
 })
 export class BannerComponent implements OnInit{
   public bannerState = false;
+  dynamicComponentType: Type<any> | null = null;
 
-  constructor(private bannerService: BannerService){}
+
+  constructor(private bannerService: BannerService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+     private elementRef: ElementRef){}
 
   ngOnInit(){
     this.bannerService.bannerState$.subscribe((state) => {
-      console.log('I am getting state');
       this.bannerState = state;
+    });
+
+    this.bannerService.getDynamicComponent().subscribe((componentType) => {
+      this.dynamicComponentType = componentType;
     });
   }
 
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event) {
+    if (this.bannerState ==true && !this.elementRef.nativeElement.contains(event.target)) {
 
-  // toggleBanner() {
-  //   this.bannerService.toggleBanner();
-  //   console.log('Banner State After Toggle:', this.bannerState);
-  // }
+    }
+  }
 
-  // @HostListener('document:click', ['$event'])
-  // clickOutsideBanner(event: Event) {
-  //   // Check if the clicked element is outside the banner
-  //   const bannerElement = document.querySelector('.banner');
-  //   if (bannerElement && !bannerElement.contains(event.target as Node)) {
-  //     // this.bannerState = 'out';
-  //   }
-  // }
+  toggleBanner(){
+    this.bannerService.toggleBanner()
+  }
+
 }

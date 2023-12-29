@@ -1,3 +1,4 @@
+import { TradeFormComponent } from './tradesflow/trade-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
@@ -31,19 +32,19 @@ import { TradesflowComponent } from './tradesflow/tradesflow.component';
     NumberFormatDirective,
     TradesflowComponent
 
+
   ],
   imports: [
     CommonModule,
     TreasuryappRoutingModule,
     MaterialModule,
-    // ReactiveFormsModule,
     SharedModule,
+    TradeFormComponent
 
   ],
 
   exports: [
-    // RouterModule,
-    // FormsModule
+    TradeFormComponent
   ],
   providers: [DecimalPipe, FormatNumberPipe,CurrencyPipe]
 })

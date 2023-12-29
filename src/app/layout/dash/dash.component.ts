@@ -1,5 +1,10 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
+import { AnalyticsComponent } from 'src/app/report/analytics/analytics.component';
+import { PnlCcyComponent } from 'src/app/report/pnl-ccy/pnl-ccy.component';
+import { PnlSummaryComponent } from 'src/app/report/pnl-summary/pnl-summary.component';
+import { PositionCcyComponent } from 'src/app/report/position-ccy/position-ccy.component';
+import { RisksMetricsComponent } from 'src/app/report/risks-metrics/risks-metrics.component';
 import { BannerService } from 'src/app/shared/services/banner.service';
 
 
@@ -40,6 +45,20 @@ export class DashComponent implements OnInit {
   toggleSettingsMenu($event: any) {
     this.isSettingsPanelOpen = $event;
   }
-
+  callPnLSummary() {
+    this.bannerService.setDynamicComponent(PnlSummaryComponent);
+  }
+  callPositionCcy() {
+    this.bannerService.setDynamicComponent(PositionCcyComponent);
+  }
+  callPnLCcy() {
+    this.bannerService.setDynamicComponent(PnlCcyComponent);
+  }
+  callRisksMetrics() {
+    this.bannerService.setDynamicComponent(RisksMetricsComponent);
+  }
+  callAnalytics() {
+    this.bannerService.setDynamicComponent(AnalyticsComponent);
+  }
 
 }
