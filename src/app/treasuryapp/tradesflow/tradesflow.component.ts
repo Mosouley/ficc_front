@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Currency } from 'src/app/model/currency';
 import { Customer } from 'src/app/model/customer';
 import { Product } from 'src/app/model/product';
-import { TradeComponent } from '../fxblotter/trade.component';
 
 @Component({
   selector: 'app-tradesflow',
@@ -31,8 +30,8 @@ export class TradesflowComponent {
     let dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = false;
     dialogConfig = {
-      height: '500px',
-      width: '800px',
+      // height: '500px',
+      // width: '800px',
       data:  {
         currencies: this.route.snapshot.data['currencies'],
         products: this.route.snapshot.data['products'],

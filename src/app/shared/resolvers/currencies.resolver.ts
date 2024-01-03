@@ -10,16 +10,6 @@ export class CurrenciesResolver  {
 
   resolve( ) {
     return this.curr_service.list();
-
-    //  return forkJoin(
-    //   this.curr_service.list(),
-    //   this.curr_service.get(1)
-    //   .pipe(map(data => {
-    //     console.log('data1', data[0]);
-    //     console.log('data2', data[1]);
-    //     return {maListe: data[0], maSeconde: data[1]}
-
-    //   })))
       }
   }
 

@@ -1,7 +1,4 @@
-import { TradeFormComponent } from './tradesflow/trade-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TreasuryappRoutingModule } from './treasuryapp-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
@@ -36,15 +33,11 @@ import { TradesflowComponent } from './tradesflow/tradesflow.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     TreasuryappRoutingModule,
     MaterialModule,
+
     SharedModule,
-    TradeFormComponent
-
-  ],
-
-  exports: [
-    TradeFormComponent
   ],
   providers: [DecimalPipe, FormatNumberPipe,CurrencyPipe]
 })

@@ -154,7 +154,6 @@ export class TradeComponent implements OnInit {
     });
     this.tradeForm.controls['ccy_pair'].valueChanges.subscribe( x => {
      this.syst_rate = this.ccy1_rate / this.ccy2_rate;
-     console.log(this.syst_rate);
      this.tradeForm.controls['system_rate'].setValue(this.syst_rate);
     });
 

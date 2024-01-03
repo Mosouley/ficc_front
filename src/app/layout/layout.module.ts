@@ -13,6 +13,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BannerComponent } from './dash/banner.component';
 import { PnlSummaryComponent } from '../report/pnl-summary/pnl-summary.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -34,6 +35,7 @@ import { PnlSummaryComponent } from '../report/pnl-summary/pnl-summary.component
     LayoutRoutingModule,
     MaterialModule,
     PnlSummaryComponent,
+    ReactiveFormsModule,
     SharedModule
   ],
   exports: [

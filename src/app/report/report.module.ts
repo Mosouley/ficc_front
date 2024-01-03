@@ -22,6 +22,7 @@ import { MaterialModule } from '../material/material.module';
   exports: [
     ReportComponent,
     ReportHtmlComponent,
+    ReactiveFormsModule
 
    ],
   providers: []

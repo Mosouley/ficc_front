@@ -1,4 +1,3 @@
-import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,16 +13,12 @@ import { CustomformatterPipe } from './custom/customformatter.pipe';
 import { DailyRateService } from './services/dailyrates.service';
 import { ReportModule } from '../report/report.module';
 import { FormatNumberPipe } from './format-number.pipe';
-import { NumberFormatDirective } from './NumberFormatDirective';
 import { BannerService } from './services/banner.service';
 import { PnlSummaryComponent } from '../report/pnl-summary/pnl-summary.component';
 import { PositionCcyComponent } from '../report/position-ccy/position-ccy.component';
 import { PnlCcyComponent } from '../report/pnl-ccy/pnl-ccy.component';
 import { RisksMetricsComponent } from '../report/risks-metrics/risks-metrics.component';
 import { AnalyticsComponent } from '../report/analytics/analytics.component';
-import { TradeFormComponent } from '../treasuryapp/tradesflow/trade-form.component';
-
-
 
 
 @NgModule({
@@ -43,7 +38,6 @@ import { TradeFormComponent } from '../treasuryapp/tradesflow/trade-form.compone
     PnlCcyComponent,
     RisksMetricsComponent,
     AnalyticsComponent,
-    TradeFormComponent
 
   ],
   exports: [

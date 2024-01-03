@@ -24,6 +24,11 @@ export class DataService implements CrudService {
     return this.http.get<any>(`${this.url}${id}`+'/');
   }
 
+    // Method to retrieve a specific resource by ID
+    getByName(name: string): Observable<any> {
+      return this.http.get<any>(`${this.url}${name}`+'/');
+    }
+
   // Method to create a new resource
   add(resource: any): Observable<any> {
     return this.http.post<any>(this.url, resource);
