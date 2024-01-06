@@ -10,7 +10,7 @@
     <div class="flex flex-row justify-between " >
       <mat-form-field class="w-44 max-h-24 text-xs font-medium ">
         <mat-select formControlName="product" placeholder="Product">
-          <mat-option *ngFor="let product of products" [value]="product.name">{{ product.name }}</mat-option>
+          <mat-option *ngFor="let product of products" [value]="product">{{ product.name }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="w-44 max-h-24 m-0 text-xs font-medium ">
@@ -29,7 +29,7 @@
             placeholder="Type or select a customer"
           />
           <datalist id="customerOptions">
-            <option *ngFor="let customer of customers" [value]="customer.name"></option>
+            <option *ngFor="let customer of customers" [value]="customer"></option>
           </datalist>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <!-- You can add an icon or other visual elements here if needed -->
@@ -51,7 +51,7 @@
       <mat-form-field class="w-40 max-h-24 m-0 text-xs font-medium">
         <mat-label for="ccy2">Ccy2</mat-label>
         <mat-select formControlName="ccy2">
-          <mat-option *ngFor="let currency of up_currencies" [value]="currency">{{ currency.code }}</mat-option>
+          <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency.code }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="w-40 max-h-24 m-0 text-xs font-medium">
@@ -62,14 +62,14 @@
       </mat-form-field>
       <mat-form-field  class="w-40 max-h-24 m-0 text-xs font-medium ">
         <mat-label>Value Date</mat-label>
-        <input matInput readonly [matDatepicker]="value_date" formControlName="value_date" placeholder="Value date">
+        <input matInput readonly [matDatepicker]="value_date" formControlName="val_date" placeholder="Value date">
         <mat-datepicker-toggle matSuffix  [for]="value_date"></mat-datepicker-toggle>
         <mat-datepicker #value_date></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="w-40  max-h-24 m-0 text-xs font-medium">
         <mat-label>Trade Date</mat-label>
-        <input matInput readonly [matDatepicker]="deal_date" formControlName="deal_date" placeholder="Deal date">
+        <input matInput readonly [matDatepicker]="deal_date" formControlName="tx_date" placeholder="Deal date">
         <mat-datepicker-toggle matSuffix  [for]="deal_date"></mat-datepicker-toggle>
         <mat-datepicker #deal_date></mat-datepicker>
       </mat-form-field>
@@ -81,15 +81,15 @@
     <div class="flex flex-row justify-between  " >
       <div class="w-full md:w-1/4 px-2 mb-4 ">
         <label for="amount1" class="block text-sm font-medium text-gray-700">Traded Amount</label>
-        <input currencyMask id="amount1" formControlName="amount1" class="form-input border-b-2
+        <input  id="amount1" formControlName="amount1" class="form-input border-b-2
         bg-[#f6f4f4]" placeholder="Traded Amount"
-        [options]="{ prefix: ' ', thousands: ',', decimal: '.' }">
+       >
         <div *ngIf="shouldShowError('amount1')" class="text-red-500 text-xs mt-1">CCY1 Amount is required</div>
       </div>
       <div class="w-full md:w-1/4 px-2 mb-4 ">
         <label for="deal_rate" class="block text-sm font-medium text-gray-700">Deal Rate</label>
-        <input currencyMask id="deal_rate" formControlName="deal_rate"
-        [options]="{ prefix: ' ', thousands: ',', decimal: '.' }"
+        <input  id="deal_rate" formControlName="deal_rate"
+
         class="form-input border-b-2 bg-[#f6f4f4]" placeholder="Deal Rate">
         <div *ngIf="shouldShowError('deal_rate')" class="text-red-500 text-xs mt-1">Deal Rate is required</div>
       </div>
@@ -97,8 +97,8 @@
       <div class="w-full md:w-1/4 px-2 mb-4 ">
         <label for="amount2" class="block text-sm font-medium text-gray-700">Other Amt </label>
         <input  id="amount2" formControlName="amount2"
-        currencyMask
-        [options]="{ prefix: ' ', thousands: ',', decimal: '.' }"
+
+
         class="form-input border-b-2 bg-[#f6f4f4]" placeholder="Other Amt" readonly>
         <!-- <div *ngIf="shouldShowError('deal_rate')" class="text-red-500 text-xs mt-1">Deal Rate is required</div> -->
       </div>

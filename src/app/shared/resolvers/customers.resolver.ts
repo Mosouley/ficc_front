@@ -1,10 +1,5 @@
-import { CustomerService } from './../services/customer.service';
-import { CurrenciesService } from '../services/currencies.service';
+import { CustomerService } from '../services/customer.service';
 import {Injectable} from '@angular/core';
-
-
-
-
 
 @Injectable()
 export class CustomerResolver  {
@@ -13,9 +8,6 @@ export class CustomerResolver  {
   }
 
   resolve() {
-    // this.cust_service.list().subscribe(x => {
-    //   console.log(x);
-    // });
     return this.cust_service.list();
   }
 }

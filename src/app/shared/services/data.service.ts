@@ -31,6 +31,9 @@ export class DataService implements CrudService {
 
   // Method to create a new resource
   add(resource: any): Observable<any> {
+    console.log(resource);
+    console.log(this.url);
+
     return this.http.post<any>(this.url, resource);
   }
 

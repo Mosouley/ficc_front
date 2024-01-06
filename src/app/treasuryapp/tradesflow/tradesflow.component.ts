@@ -1,5 +1,5 @@
 import { Trade } from './../../model/trade';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TradeFormComponent } from './trade-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,11 +12,14 @@ import { Product } from 'src/app/model/product';
   templateUrl: './tradesflow.component.html',
   styleUrls: ['./tradesflow.component.css']
 })
-export class TradesflowComponent {
-
+export class TradesflowComponent implements OnInit{
   trades = []; // to hold the list of trades
+  ngOnInit(){
+    this.trades = this.route.snapshot.data['trades']
+    console.log(this.trades);
 
-  newTrade!:  Trade;
+  }
+
   private customers: Customer[] = [];
   private currencies: Currency[] = [];
   private products: Product[] = [];
@@ -35,7 +38,7 @@ export class TradesflowComponent {
       data:  {
         currencies: this.route.snapshot.data['currencies'],
         products: this.route.snapshot.data['products'],
-        customers: this.route.snapshot.data['customers'],
+        customers: this.route.snapshot.data['customers']
       }};
     //  dialogConfig.autoFocus = true;
      let dialogRef = this.dialog.open(TradeFormComponent, dialogConfig);
@@ -53,9 +56,11 @@ export class TradesflowComponent {
       width: '400px', // Set the width as needed
     });
 
-    dialogRef.afterClosed().subscribe((newTrade) => {
-      if (newTrade) {
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
         // Add the new trade to the existing trades
+        console.log(data);
+
         // this.trades.unshift(this.newTrade);
       }
     });

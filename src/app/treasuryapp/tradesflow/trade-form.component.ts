@@ -20,6 +20,8 @@ import { DailyRate } from 'src/app/model/daily_rate';
 import { CurrenciesService } from 'src/app/shared/services/currencies.service';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { Pnl_Calculation } from 'src/app/shared/custom/trade-functions';
+import { TradeService } from 'src/app/shared/services/trade.service';
+import { Trade } from 'src/app/model/trade';
 
 @Component({
   selector: 'app-trade-form',
@@ -62,8 +64,8 @@ export class TradeFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public receiveData: any,
     private dialogRef: MatDialogRef<TradeComponent>,
     private rate_service: DailyRateService,
-    private ccy_service: CurrenciesService,
-    private currencyPipe: CurrencyPipe
+    private currencyPipe: CurrencyPipe,
+    private tradeServ: TradeService
   ) {}
   ngOnInit() {
     this.currencies = this.receiveData['currencies']; //
@@ -206,9 +208,9 @@ export class TradeFormComponent implements OnInit {
       trade_id: [{ value: 'Trade Id - ' + Date.now(), disabled: true }],
       customer: ['', Validators.required],
       product: ['', Validators.required],
-      value_date: ['', Validators.required],
-      deal_date: ['', Validators.required],
-      booking_date: [{ value: this.currentDate, disabled: true }],
+      val_date: ['', Validators.required],
+      tx_date: ['', Validators.required],
+      // booking_date: [{ value: this.currentDate, disabled: true }],
       ccy1: ['', Validators.required],
       ccy2: ['', Validators.required],
       ccy_pair: ['', Validators.required],
@@ -216,10 +218,9 @@ export class TradeFormComponent implements OnInit {
       amount1: ['', [Validators.required]],
       amount2: [ '',Validators.required],
       deal_rate: ['', Validators.required],
-      fees_rate: [''],
+      fees_rate: [0],
       tx_comments: [''],
       system_rate: [ '', Validators.required],
-      cover_rate: [ ''],
       deal_pnl: [ '']
     });
   }
@@ -229,12 +230,32 @@ export class TradeFormComponent implements OnInit {
 
       let traded_amount = this.tradeForm.controls['amount1'].value;
       let deal_rate = this.tradeForm.controls['deal_rate'].value;
-
-      // this.tradeForm.controls['ccy2'].setValue(syst_rate)
       const pnl = Pnl_Calculation.calculate_pnl( traded_amount, deal_rate, this.syst_rate,this.ccy2_rate)
       this.tradeForm.controls['deal_pnl'].patchValue(pnl);
-      const newTrade = this.tradeForm.value;
-      console.log(pnl);
+
+    let   newTrade = new Trade()
+    newTrade.tx_date = this.tradeForm.controls['tx_date'].value
+    newTrade.val_date = this.tradeForm.controls['val_date'].value
+    newTrade.ccy1 = this.tradeForm.controls['ccy1'].value
+    newTrade.ccy2 = this.tradeForm.controls['ccy2'].value
+    newTrade.buy_sell = this.tradeForm.controls['buy_sell'].value
+    newTrade.amount1 = this.tradeForm.controls['amount1'].value
+    newTrade.amount2 = this.tradeForm.controls['amount2'].value
+    newTrade.deal_rate = this.tradeForm.controls['deal_rate'].value
+    newTrade.fees_rate = this.tradeForm.controls['fees_rate'].value
+    newTrade.system_rate = this.tradeForm.controls['system_rate'].value
+    newTrade.deal_pnl = this.tradeForm.controls['deal_pnl'].value
+    newTrade.tx_comments = this.tradeForm.controls['tx_comments'].value
+    newTrade.customer = this.tradeForm.controls['customer'].value
+    newTrade.product = this.tradeForm.controls['product'].value
+    newTrade.trader = 'Kevin'
+
+      this.tradeServ.add(newTrade).subscribe(data => {
+        console.log(data);
+
+      });
+      console.log(newTrade);
+
       // Close the dialog and pass the new trade data to the parent component
       this.dialogRef.close(newTrade);
     } else {

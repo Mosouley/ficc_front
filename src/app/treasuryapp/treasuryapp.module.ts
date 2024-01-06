@@ -14,6 +14,7 @@ import { ImportFileComponent } from './config/import-file.component';
 import { FormatNumberPipe } from '../shared/format-number.pipe';
 import { NumberFormatDirective } from '../shared/NumberFormatDirective';
 import { TradesflowComponent } from './tradesflow/tradesflow.component';
+import { TradeService } from '../shared/services/trade.service';
 
 
 
@@ -39,6 +40,6 @@ import { TradesflowComponent } from './tradesflow/tradesflow.component';
 
     SharedModule,
   ],
-  providers: [DecimalPipe, FormatNumberPipe,CurrencyPipe]
+  providers: [DecimalPipe, FormatNumberPipe,CurrencyPipe, TradeService]
 })
 export class TreasuryappModule { }

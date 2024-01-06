@@ -10,25 +10,26 @@ export enum BuySell {
 }
 
 export interface Trade {
-     tradeId: number;
-     customer: Customer;
-     product: Product;
-     value_date: Date;
-     booking_date: Date;
-     deal_date: Date;
-     system_rate: number;
-     cover_rate: number;
+     trade_id: number;
+     tx_date: Date;
+     val_date: Date;
      ccy1: Currency;
      ccy2: Currency;
-     ccypair: string;
-     buysell: BuySell;
+     buy_sell: BuySell;
      amount1: number ;
      amount2: number;
-     dealrate: number;
-     feesrate: number;
-     gross_pnl: number;
-     net_pnl: number;
+     deal_rate: number;
+     fees_rate: number;
+     system_rate: number;
+     deal_pnl: number;
      tx_comments: string;
+     customer: Customer;
+     product: Product;
+     trader: string;
+  }
+
+  export class Trade {
+    constructor(){};
 
   }
 

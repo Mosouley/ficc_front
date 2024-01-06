@@ -13,6 +13,7 @@ import { DealersResolver } from '../shared/resolvers/dealers.resolver';
 import { CustomerResolver } from '../shared/resolvers/customers.resolver';
 import { SettingsComponent } from './config/settings/settings.component';
 import { TradesflowComponent } from './tradesflow/tradesflow.component';
+import { TradesResolver } from '../shared/resolvers/trades.resolver';
 
 const routes: Routes = [
 
@@ -26,7 +27,8 @@ const routes: Routes = [
       products: ProductsResolver,
       segments: SegmentsResolver,
       traders: DealersResolver,
-      customers: CustomerResolver
+      customers: CustomerResolver,
+      trades: TradesResolver
     }
   },
      { path: 'fxblotter',
@@ -66,6 +68,7 @@ const routes: Routes = [
     SegmentsResolver,
     DealersResolver,
     DealersResolver,
+    TradesResolver
 
   ]
 })
