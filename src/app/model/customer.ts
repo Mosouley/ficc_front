@@ -2,7 +2,7 @@ import { BaseEntity } from "./base-entity";
 
 export class Customer {
     constructor(
-                 public customerId ?: number,
+                 public id ?: number,
                  public cif ?: number,
                  public name?: string,
                  public user?: BaseEntity,

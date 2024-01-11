@@ -2,6 +2,7 @@ import { Currency } from './currency';
 import { Product } from './product';
 
 import { Customer } from './customer';
+import { Dealer } from './dealer';
 
 
 export enum BuySell {
@@ -10,6 +11,7 @@ export enum BuySell {
 }
 
 export interface Trade {
+      id: number,
      trade_id: number;
      tx_date: Date;
      val_date: Date;
@@ -25,13 +27,10 @@ export interface Trade {
      tx_comments: string;
      customer: Customer;
      product: Product;
-     trader: string;
+     trader: Dealer;
   }
 
-  export class Trade {
-    constructor(){};
 
-  }
 
 
 

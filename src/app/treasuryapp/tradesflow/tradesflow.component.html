@@ -88,27 +88,29 @@
           <th scope="col" class="p-1">ReevalRate</th>
           <th scope="col" class="p-1">Other Fees</th>
           <th scope="col" class="p-1">PnL'000</th>
+          <th scope="col" class="p-1">Dealer</th>
           <th scope="col" class="p-1">Status</th>
           <th scope="col" class="p-1 min-w-fit">Action</th>
 
         </tr>
       </thead>
       <tbody class="text-sm font-medium text-gray-500 divide-y divide-gray-100">
-        <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100" *ngFor="let elm of trades  ">
-          <td class="p-1 whitespace-nowrap">{{elm['customer']}}</td>
-          <td class="p-1 whitespace-nowrap">{{elm['product']}}</td>
-          <td class="p-1 whitespace-nowrap">#{{elm['trade_id']}}</td>
-          <td class="p-1 whitespace-nowrap">{{elm['val_date']| date:'shortDate'}}</td>
-          <td class="p-1 whitespace-nowrap">{{elm['tx_date']| date:'shortDate'}}</td>
-          <td class="p-1 whitespace-nowrap">{{elm['ccy1']}}</td>
-          <td class="p-1 whitespace-nowrap">{{elm['ccy2']}}</td>
-          <td class="p-1 whitespace-nowrap">{{elm['buy_sell']}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{elm['amount1']| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{elm['amount2']| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{elm['deal_rate']| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{elm['system_rate']| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{elm['fees']| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{elm['deal_pnl']| currency:'':'':'1.2-2'}}</td>
+        <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100" *ngFor="let trade of trades ">
+          <td class="p-1 whitespace-nowrap">{{trade.customer.name}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade.product.name}}</td>
+          <td class="p-1 whitespace-nowrap">#{{trade.id }}</td>
+          <td class="p-1 whitespace-nowrap">{{trade.val_date| date:'shortDate'}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade.tx_date| date:'shortDate'}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade.ccy1.code}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade.ccy2.code}}</td>
+          <td class="p-1 whitespace-nowrap text-center">{{trade.buy_sell}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.amount1| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.amount2| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.deal_rate| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.system_rate| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.fees_rate| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.deal_pnl| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade.trader.name}}</td>
           <td class="p-1 whitespace-nowrap">
             <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
           </td>
@@ -125,126 +127,7 @@
           </td>
 
         </tr>
-        <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-          <td>ORYX Energy Limited</td>
-          <td>SPOT</td>
-          <td>#988780</td>
-          <td>25/12/23</td>
-          <td>20/12/23</td>
-          <td>USD</td>
-          <td>KES</td>
-          <td>Buy</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>153.5</td>
-          <td>150.25</td>
-          <td>7,898.00</td>
-          <td class="p-1 whitespace-nowrap">
-            <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
-          </td>
-          <td class="p-1 whitespace-nowrap">
-            <a href="#" class="mr-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">visibility</i>
-            </a>
-            <a href="#" class="mx-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">edit</i>
-            </a>
-            <a href="#" class="ml-2 hover:text-gray-100">
-              <i class="text-base material-icons-round">delete_outline</i>
-            </a>
-          </td>
-        </tr>
-        <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-          <td>ORYX Energy Limited</td>
-          <td>SPOT</td>
-          <td>#988780</td>
-          <td>25/12/23</td>
-          <td>20/12/23</td>
-          <td>USD</td>
-          <td>KES</td>
-          <td>Buy</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>153.5</td>
-          <td>150.25</td>
-          <td>7,898.00</td>
-          <td class="p-1 whitespace-nowrap">
-            <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
-          </td>
-          <td class="p-1 whitespace-nowrap">
-            <a href="#" class="mr-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">visibility</i>
-            </a>
-            <a href="#" class="mx-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">edit</i>
-            </a>
-            <a href="#" class="ml-2 hover:text-gray-100">
-              <i class="text-base material-icons-round">delete_outline</i>
-            </a>
-          </td>
-        </tr>
-        <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-          <td>ORYX Energy Limited</td>
-          <td>SPOT</td>
-          <td>#988780</td>
-          <td>25/12/23</td>
-          <td>20/12/23</td>
-          <td>USD</td>
-          <td>KES</td>
-          <td>Buy</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>153.5</td>
-          <td>150.25</td>
-          <td>7,898.00</td>
-          <td class="p-1 whitespace-nowrap">
-            <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
-          </td>
-          <td class="p-1 whitespace-nowrap">
-            <a href="#" class="mr-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">visibility</i>
-            </a>
-            <a href="#" class="mx-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">edit</i>
-            </a>
-            <a href="#" class="ml-2 hover:text-gray-100">
-              <i class="text-base material-icons-round">delete_outline</i>
-            </a>
-          </td>
-        </tr>
-        <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-          <td>ORYX Energy Limited</td>
-          <td>SPOT</td>
-          <td>#988780</td>
-          <td>25/12/23</td>
-          <td>20/12/23</td>
-          <td>USD</td>
-          <td>KES</td>
-          <td>Buy</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>7,898.00</td>
-          <td>153.5</td>
-          <td>150.25</td>
-          <td>7,898.00</td>
-          <td class="p-1 whitespace-nowrap">
-            <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
-          </td>
-          <td class="p-1 whitespace-nowrap">
-            <a href="#" class="mr-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">visibility</i>
-            </a>
-            <a href="#" class="mx-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">edit</i>
-            </a>
-            <a href="#" class="ml-2 hover:text-gray-100">
-              <i class="text-base material-icons-round">delete_outline</i>
-            </a>
-          </td>
-        </tr>
+
         <!-- <tr class="bg-white border-b odd:bg-white even:bg-gray-100 hover:bg-gray-100">
           <td>ORYX Energy Limited</td>
           <td>SPOT</td>
@@ -280,7 +163,7 @@
       </tbody>
     </table>
   </div>
-  <div class="flex items-center justify-center mt-4 space-x-2">
+  <!-- <div class="flex items-center justify-center mt-4 space-x-2">
     <ul class="flex space-x-2">
       <li>
         <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">Previous</a>
@@ -304,6 +187,6 @@
         <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">Next</a>
       </li>
     </ul>
-  </div>
+  </div> -->
 
 </section>

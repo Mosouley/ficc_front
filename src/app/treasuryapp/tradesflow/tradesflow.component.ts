@@ -13,10 +13,9 @@ import { Product } from 'src/app/model/product';
   styleUrls: ['./tradesflow.component.css']
 })
 export class TradesflowComponent implements OnInit{
-  trades = []; // to hold the list of trades
+  trades: Trade[] = []; // to hold the list of trades
   ngOnInit(){
     this.trades = this.route.snapshot.data['trades']
-    console.log(this.trades);
 
   }
 

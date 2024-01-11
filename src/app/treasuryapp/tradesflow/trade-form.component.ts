@@ -22,6 +22,9 @@ import { NgxCurrencyDirective } from 'ngx-currency';
 import { Pnl_Calculation } from 'src/app/shared/custom/trade-functions';
 import { TradeService } from 'src/app/shared/services/trade.service';
 import { Trade } from 'src/app/model/trade';
+import { DealerService } from 'src/app/shared/services/dealer.service';
+import { Dealer } from 'src/app/model/dealer';
+import { LogoutComponent } from 'src/app/layout/logout/logout.component';
 
 @Component({
   selector: 'app-trade-form',
@@ -35,21 +38,23 @@ export class TradeFormComponent implements OnInit {
   products: Product[] = [];
   filteredProduits: Product[] = [];
   customers: Customer[] = [];
+  selectedCustomer!: Customer;
+  selectedProduct!: Product;
   currencies: Currency[] = [];
   up_currencies: Currency[] = [];
   totalSum = 0;
   tradeFormValueChanges$!: Observable<any>;
   myFormProduitChanges$!: Observable<any>;
   selectedRowData: any;
-  color = 'blue';
+  dealer!: Dealer;
   disabled = false;
   focused = true;
-  private ccy_rate = 2;
+  private ccy_rate = 1;
   private ccy2_rate = 1;
   private ccy1_rate = 1;
   private syst_rate = 1;
   amount1Formatted = 0;
-  // private selectedProduit!: Product;
+
   buySells: any[] = [
     { value: 'buy', viewValue: 'Buy' },
     { value: 'sell', viewValue: 'Sell' },
@@ -65,7 +70,8 @@ export class TradeFormComponent implements OnInit {
     private dialogRef: MatDialogRef<TradeComponent>,
     private rate_service: DailyRateService,
     private currencyPipe: CurrencyPipe,
-    private tradeServ: TradeService
+    private tradeServ: TradeService,
+    private dealerServ: DealerService
   ) {}
   ngOnInit() {
     this.currencies = this.receiveData['currencies']; //
@@ -104,45 +110,36 @@ export class TradeFormComponent implements OnInit {
 
     // calculate amount2 based on value in amount1
     this.tradeForm.controls['amount1'].valueChanges.subscribe((amount) => {
-    //formatting for thousands separators and decimals
-      // if (amount) {
-      //   this.tradeForm.controls['amount1'].patchValue(
-      //     // 🔥 Remove non-digits; remove leading zeros; convert to new currency format; disable event emission to avoid infinite loop.
-      //     this.currencyPipe.transform(
-      //       amount.replace(/\D|\.(?=.*\.)/g, '').replace(/^0+/, ''),
-      //       '',
-      //       '',
-      //       '1.0-2'
-      //     ),
-      //     { emitEvent: false }
-      //     );
-      //   }
-          // this.currencyPipe.transform(amount.replace(/[^\d.]|(?<=\.\d*)\./g, '').replace(/^0+/, ''), '', '', '1.0-2'), {emitEvent: false}
-
-        // Remove non-digits; remove leading zeros; allow only one dot.
-        // const sanitizedAmount = amount.replace(/[^\d.]|(?<=\.\d*)\./g, '').replace(/^0+/, '');
-
-        // // Set the sanitized amount without formatting.
-        // this.tradeForm.controls['amount1'].patchValue(sanitizedAmount, { emitEvent: false });
-        // console.info('sanitized amount: ' + sanitizedAmount);
-        // console.info('initial amount: ' + amount);
-
-
       this.tradeForm.controls['amount2'].setValue(
         parseFloat(amount) * this.tradeForm.controls['deal_rate'].value
       );
     });
+    this.tradeForm.controls['customer'].valueChanges.subscribe((customer) => {
+      this.selectedCustomer = this.customers.find((elm) => elm.name === customer.name) as Customer;
+    });
+    this.tradeForm.controls['product'].valueChanges.subscribe((product) => {
+      if (product) {
+        this.selectedProduct = this.products.find((elm) => elm.name === product.name) as Product;
+      }
+    });
 
     // calculate amount2 based on value in amount1
     this.tradeForm.controls['deal_rate'].valueChanges.subscribe((rate) => {
+     const amount2 = rate * parseFloat(this.tradeForm.controls['amount1'].value)
       this.tradeForm.controls['amount2'].patchValue(
-        rate * parseFloat(this.tradeForm.controls['amount1'].value)
+        Number(amount2.toFixed(4))
       );
     });
 
     this.tradeForm.controls['ccy_pair'].valueChanges.subscribe((x) => {
       this.get_system_rate(this.tradeForm.controls['ccy_pair'].value);
     });
+
+    this.dealerServ.get(1).subscribe((dealer) => {
+      this.dealer = dealer;
+    });
+
+
   }
 
   // Function to update the currencies list for ccy2 based on the selected ccy1 value
@@ -210,7 +207,6 @@ export class TradeFormComponent implements OnInit {
       product: ['', Validators.required],
       val_date: ['', Validators.required],
       tx_date: ['', Validators.required],
-      // booking_date: [{ value: this.currentDate, disabled: true }],
       ccy1: ['', Validators.required],
       ccy2: ['', Validators.required],
       ccy_pair: ['', Validators.required],
@@ -232,29 +228,37 @@ export class TradeFormComponent implements OnInit {
       let deal_rate = this.tradeForm.controls['deal_rate'].value;
       const pnl = Pnl_Calculation.calculate_pnl( traded_amount, deal_rate, this.syst_rate,this.ccy2_rate)
       this.tradeForm.controls['deal_pnl'].patchValue(pnl);
+     let  newTrade = {
+        tx_date: this.tradeForm.controls['tx_date'].value,
+        val_date: this.tradeForm.controls['val_date'].value,
+        ccy1: this.tradeForm.controls['ccy1'].value,
+        ccy2: this.tradeForm.controls['ccy2'].value,
+        buy_sell: this.tradeForm.controls['buy_sell'].value,
+        amount1: this.tradeForm.controls['amount1'].value,
+        amount2: this.tradeForm.controls['amount2'].value,
+        deal_rate: this.tradeForm.controls['deal_rate'].value,
+        fees_rate: this.tradeForm.controls['fees_rate'].value,
+        system_rate: Number(this.tradeForm.controls['system_rate'].value.toFixed(4)),
 
-    let   newTrade = new Trade()
-    newTrade.tx_date = this.tradeForm.controls['tx_date'].value
-    newTrade.val_date = this.tradeForm.controls['val_date'].value
-    newTrade.ccy1 = this.tradeForm.controls['ccy1'].value
-    newTrade.ccy2 = this.tradeForm.controls['ccy2'].value
-    newTrade.buy_sell = this.tradeForm.controls['buy_sell'].value
-    newTrade.amount1 = this.tradeForm.controls['amount1'].value
-    newTrade.amount2 = this.tradeForm.controls['amount2'].value
-    newTrade.deal_rate = this.tradeForm.controls['deal_rate'].value
-    newTrade.fees_rate = this.tradeForm.controls['fees_rate'].value
-    newTrade.system_rate = this.tradeForm.controls['system_rate'].value
-    newTrade.deal_pnl = this.tradeForm.controls['deal_pnl'].value
-    newTrade.tx_comments = this.tradeForm.controls['tx_comments'].value
-    newTrade.customer = this.tradeForm.controls['customer'].value
-    newTrade.product = this.tradeForm.controls['product'].value
-    newTrade.trader = 'Kevin'
+        deal_pnl: this.tradeForm.controls['deal_pnl'].value,
 
-      this.tradeServ.add(newTrade).subscribe(data => {
-        console.log(data);
+        tx_comments: this.tradeForm.controls['tx_comments'].value,
 
-      });
-      console.log(newTrade);
+        customer: this.selectedCustomer,
+
+        product: this.selectedProduct,
+
+        trader: this.dealer
+
+      };
+
+
+      this.tradeServ.add(newTrade).subscribe({
+        next: data => console.log('Success:', data),
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      }
+      );
 
       // Close the dialog and pass the new trade data to the parent component
       this.dialogRef.close(newTrade);
@@ -275,18 +279,22 @@ export class TradeFormComponent implements OnInit {
     return control && control.invalid && (control.dirty || control.touched);
   }
 
+  displayCustomer(customer: any): string {
+    return customer ? customer.name : '';
+  }
+
   /*Function to calculate the PnL on the trade
   */
-  calculate_PnL(){
+  // calculate_PnL(){
 
-    let traded_amount = this.tradeForm.controls['amount1'].value;
-    let deal_rate = this.tradeForm.controls['deal_rate'].value;
+  //   let traded_amount = this.tradeForm.controls['amount1'].value;
+  //   let deal_rate = this.tradeForm.controls['deal_rate'].value;
 
-    // this.tradeForm.controls['ccy2'].setValue(syst_rate)
-    const pnl = Pnl_Calculation.calculate_pnl(this.ccy2_rate, traded_amount, deal_rate, this.syst_rate)
-    console.log(pnl);
+  //   // this.tradeForm.controls['ccy2'].setValue(syst_rate)
+  //   const pnl = Pnl_Calculation.calculate_pnl(this.ccy2_rate, traded_amount, deal_rate, this.syst_rate)
+  //   console.log(pnl);
 
-  }
+  // }
 
 }
 

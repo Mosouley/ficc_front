@@ -28,7 +28,7 @@ export const API_URLS = {
     DAILY_RATES_LOAD_URL:  PATH + '/daily-rates-loading/',
     DEALERS_URL:   PATH + '/dealers/',
     TRADES_URL:  PATH + '/trades/',
-    INVOICE_URL:  PATH + '/invoice',
+    INVOICE_URL:  PATH + '/invoice/',
     TRANSALINE_URL:  PATH + '/transactionLine/',
     USER_URL:  PATH + '/auth/all',
     SPENDINGS_URL:  PATH + '/spending',

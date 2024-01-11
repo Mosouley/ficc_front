@@ -3,7 +3,7 @@
   <form [formGroup]="tradeForm" (ngSubmit)="submitTradeForm()" >
     <div class="flex flex-row justify-between space-x-1 border-b-2  pb-1 bg-blue-50 text-xs font-medium h-fit p-1" >
       <label class="border-r-2 justify-center space-x-1 w-fit p-1"> {{currentDate}}</label>
-      <input class="border-r-2 justify-center space-x-1 w-fit p-1 " matInput readonly  formControlName="trade_id" >
+      <input class="border-r-2 justify-center space-x-1 w-fit p-1 text-center" matInput readonly  formControlName="trade_id" >
       <label class="border-r-2 justify-center space-x-1 w-fit p-1">Trade Status:</label>
 
     </div>
@@ -20,7 +20,7 @@
         </mat-select>
       </mat-form-field>
 
-      <div >
+      <!-- <div >
         <label for="customer" class="block text-sm font-medium text-gray-700">Customer</label>
         <div class="relative">
 
@@ -29,15 +29,30 @@
             placeholder="Type or select a customer"
           />
           <datalist id="customerOptions">
-            <option *ngFor="let customer of customers" [value]="customer"></option>
+            <option *ngFor="let customer of customers" [value]="customer.name">{{customer.name}}</option>
           </datalist>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <!-- You can add an icon or other visual elements here if needed -->
+
           </div>
         </div>
         <div *ngIf="shouldShowError('customer')" class="text-red-500 text-xs mt-1">Customer is required</div>
-      </div>
+      </div> -->
 
+      <div>
+        <label for="customer" class="block text-sm font-medium text-gray-700">Customer</label>
+        <mat-form-field appearance="outline">
+          <input matInput
+                 placeholder="Type or select a customer"
+                 formControlName="customer"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCustomer">
+            <mat-option *ngFor="let customer of customers" [value]="customer">
+              {{ customer.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <div *ngIf="shouldShowError('customer')" class="text-red-500 text-xs mt-1">Customer is required</div>
+      </div>
 
     </div>
 
