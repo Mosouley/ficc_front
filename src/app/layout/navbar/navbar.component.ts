@@ -15,7 +15,7 @@ import { MenuNode } from './menu-node';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit  {
-    isSidebarOpen = true;
+    isSidebarOpen = false;
     routeQueryParams$: Subscription | undefined;
 
     username!: string;
@@ -88,7 +88,7 @@ export class NavbarComponent implements OnInit  {
     }
 
     ngOnInit(): void {
-  
+      this.isSidebarOpen = false;
     }
     loginOpen() {
 

@@ -1,5 +1,5 @@
 import { Trade } from './../../model/trade';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { TradeFormComponent } from './trade-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,12 +16,18 @@ export class TradesflowComponent implements OnInit{
   trades: Trade[] = []; // to hold the list of trades
   ngOnInit(){
     this.trades = this.route.snapshot.data['trades']
+    this.eventSource =  new EventSource('ws://localhost:8000/update/')
+    this.eventSource.addEventListener('message', (event: MessageEvent ) => {
+      console.log('received message:', event.data);
 
+    })
   }
 
   private customers: Customer[] = [];
   private currencies: Currency[] = [];
   private products: Product[] = [];
+  private eventSource!: EventSource;
+
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -43,8 +49,6 @@ export class TradesflowComponent implements OnInit{
      let dialogRef = this.dialog.open(TradeFormComponent, dialogConfig);
 
      dialogRef.afterClosed().subscribe( result => {
-      console.log(result);
-
 
       this.router.navigate(['.'], {relativeTo: this.route})
      });
@@ -58,9 +62,8 @@ export class TradesflowComponent implements OnInit{
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         // Add the new trade to the existing trades
-        console.log(data);
+        this.trades.push(data);
 
-        // this.trades.unshift(this.newTrade);
       }
     });
 }

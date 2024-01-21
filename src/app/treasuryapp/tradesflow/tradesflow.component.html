@@ -1,6 +1,6 @@
 <section class="p-2 pt-1 mb-4 bg-white shadow-xl">
   <div class="flex flex-col items-center">
-    <h2 class="mt-1 text-xl font-bold tracking-tight">
+    <h2 class="mt-1 font-extrabold tracking-tight text-[#4946d7] text-xl">
       Treasury FX Dashboard
     </h2>
     <p class="mt-2 text-sm text-neutral-500">
@@ -69,11 +69,11 @@
 
     <table class="w-full space-x-4 overflow-scroll text-sm text-left ">
 
-      <caption class="justify-center py-2 text-sm gray-600 text-start">FX Transactions Flows</caption>
+      <caption class="justify-center py-2 text-sm font-bold text-start text-[#4946d7] ">FX Transactions Flows</caption>
 
-      <thead class="flex-col items-center justify-center p-2 border-b ">
+      <thead class="flex-col items-center justify-center p-1 border-b  ">
         <tr
-          class="bg-white border-b divide-x divide-gray-100 rounded-lg odd:bg-white even:bg-gray-100 hover:bg-gray-100">
+          class="border-b   rounded-lg bg-[#6867be] text-white text-xs">
           <th scope="col" class="p-1">Customer</th>
           <th scope="col" class="p-1">Product</th>
           <th scope="col" class="p-1">TradeId</th>
@@ -87,15 +87,15 @@
           <th scope="col" class="p-1">DealRate</th>
           <th scope="col" class="p-1">ReevalRate</th>
           <th scope="col" class="p-1">Other Fees</th>
-          <th scope="col" class="p-1">PnL'000</th>
+          <th scope="col" class="p-1 text-center">PnL'000</th>
           <th scope="col" class="p-1">Dealer</th>
           <th scope="col" class="p-1">Status</th>
           <th scope="col" class="p-1 min-w-fit">Action</th>
 
         </tr>
       </thead>
-      <tbody class="text-sm font-medium text-gray-500 divide-y divide-gray-100">
-        <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100" *ngFor="let trade of trades ">
+      <tbody class="text-sm font-medium ">
+        <tr class="odd:bg-white even:bg-gray-100  hover:border-[#6867be] hover:border-2" *ngFor="let trade of trades ">
           <td class="p-1 whitespace-nowrap">{{trade.customer.name}}</td>
           <td class="p-1 whitespace-nowrap">{{trade.product.name}}</td>
           <td class="p-1 whitespace-nowrap">#{{trade.id }}</td>
@@ -112,17 +112,17 @@
           <td class="p-1 whitespace-nowrap text-end">{{trade.deal_pnl| currency:'':'':'1.2-2'}}</td>
           <td class="p-1 whitespace-nowrap text-end">{{trade.trader.name}}</td>
           <td class="p-1 whitespace-nowrap">
-            <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+            <span class="px-2 bg-green-400 rounded-md text-gray-50">{{trade.status}}</span>
           </td>
           <td class="p-1 whitespace-nowrap">
             <a href="#" class="mr-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">visibility</i>
+              <i class="text-base material-icons-outlined text-green-600">visibility</i>
             </a>
             <a href="#" class="mx-2 hover:text-gray-100">
-              <i class="text-base material-icons-outlined">edit</i>
+              <i class="text-base material-icons-outlined text-yellow-600">edit</i>
             </a>
             <a href="#" class="ml-2 hover:text-gray-100">
-              <i class="text-base material-icons-round">delete_outline</i>
+              <i class="text-base material-icons-round text-red-600">delete_outline</i>
             </a>
           </td>
 

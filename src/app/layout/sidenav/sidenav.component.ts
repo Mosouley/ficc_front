@@ -16,11 +16,11 @@ export class SidenavComponent implements OnInit{
   // cards template to display the  dashboard on cards
   numCards = Array.from(Array(5).keys());
   // creating input and output variable for sidebar reduction
-  @Input() isSidebarReduced = false;
+  @Input() isSidebarReduced = true;
   @Output () toggleSidebarReduce: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // creating input variable to toglle sidebar close/open
-  @Input() isSidebarOpen = true;
+  @Input() isSidebarOpen = false;
 
   // variable sidebar links
   links: MenuNode[] = [
@@ -150,7 +150,8 @@ export class SidenavComponent implements OnInit{
   constructor(private localRouter: ActivatedRoute) {}
 
   ngOnInit(): void {
-
+    // this.isSidebarOpen = false
+    this.isSidebarReduced = true
   }
   // component property to check if a menu has children
    hasChild = ( menu:MenuNode) => !!menu.children && menu.children.length > 0;

@@ -10,6 +10,13 @@ export enum BuySell {
   Sell
 }
 
+export enum Status {
+  Amended,
+  Verified,
+  Matured,
+  Cancelled
+}
+
 export interface Trade {
       id: number,
      trade_id: number;
@@ -28,6 +35,7 @@ export interface Trade {
      customer: Customer;
      product: Product;
      trader: Dealer;
+     status: Status;
   }
 
 

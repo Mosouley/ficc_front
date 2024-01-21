@@ -32,20 +32,20 @@
 
   </div>
 
-  <nav class="h-full px-2 pt-10 space-y-2 overflow-y-scroll bg-transparent shadow-2xl "
+  <nav class="h-full px-2 pt-10 space-y-2 overflow-y-scroll bg-[#6867be] text-white shadow-2xl "
     [ngClass]="isSidebarReduced ? 'w-12 transform place-items-center justify-center ml-1 mt-10 transition-all duration-300 ease-out': 'transition-all duration-300 ease-in h-full w-60 '">
 
     <!-- <div class="absolute inset-0 bg-gradient-to-br from-slate-400 via-teal-100 to-transparent opacity-90"></div> -->
-    <ul *ngFor=" let link of links;let i=index" class=" hover:bg-slate-200 focus-within:border-l-4 focus-within:border-l-red-600 focus-within:shadow-sm">
+    <ul *ngFor=" let link of links;let i=index" class=" hover:bg-[#c0bff4] hover:rounded-md  focus-within:border-l-4 focus-within:border-l-red-600 focus-within:shadow-sm">
       <a (click)="link.action = !link.action" matTooltip={{link.name}}
-        class="flex items-center p-1 pr-2 mr-1 text-sm text-center text-gray-500 align-middle transition-colors rounded-t-sm cursor-pointer align-center "
+        class="flex items-center p-1 pr-2 mr-1 text-sm text-center  align-middle transition-colors rounded-t-sm cursor-pointer align-center "
         role="button"
        >
        <!--  [routerLink]=[link.url] no need to put routing up there-->
       <!-- icon de chaque lien du sidebar -->
         <span aria-hidden="true"
           [ngClass]="isSidebarReduced ? ' items-center justify-center': 'translate-x-0 text-sm '">
-          <mat-icon class="text-gray-500 scale-75 hover:text-white ">{{link.icon}}</mat-icon>
+          <mat-icon class=" scale-75 hover:text-white ">{{link.icon}}</mat-icon>
         </span>
         <!-- Nom de chaque menu du lien sidebar -->
         <span [ngClass]="isSidebarReduced ? 'hidden ': 'translate-x-0 pl-2'"
@@ -113,12 +113,17 @@
     </div>
   </div> -->
   <!-- Sidebar footer -->
-  <div class="absolute bottom-0 flex p-0 bg-white border-t max-h-10 w-60">
+  <div class="absolute bottom-0 flex p-0  text-white border-t max-h-10 w-60">
     <button
-      class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider bg-gray-100 border rounded-md border-sellar-primary focus:outline-none focus:ring">
-      <span>
-        <mat-icon class="scale-75 text-sellar-primary">logout</mat-icon>
+      class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider bg-[#6267c0] border rounded-md border-sellar-primary focus:outline-none focus:ring">
+      <span
+      [ngClass]="isSidebarReduced ? ' items-center place-items-start left-0 ': 'translate-x-0 text-sm  text-white'"
+        >
+        <mat-icon class="scale-75 text-white bg-transparent ">logout</mat-icon>
       </span>
+      <!-- <span>
+        <mat-icon class="scale-75 text-sellar-primary ">logout</mat-icon>
+      </span> -->
       <span [ngClass]="{'sm:hidden': isSidebarReduced }"> Logout </span>
     </button>
   </div>
