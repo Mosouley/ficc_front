@@ -16,7 +16,7 @@ export class TradesflowComponent implements OnInit{
   trades: Trade[] = []; // to hold the list of trades
   ngOnInit(){
     this.trades = this.route.snapshot.data['trades']
-    this.eventSource =  new EventSource('ws://localhost:8000/update/')
+    this.eventSource =  new EventSource('ws://localhost:8000/ws/update/')
     this.eventSource.addEventListener('message', (event: MessageEvent ) => {
       console.log('received message:', event.data);
 
