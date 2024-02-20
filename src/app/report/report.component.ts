@@ -81,7 +81,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
   dateForm!: FormGroup;
   setRange = false;
 
-  @Input() data!: any;
+  @Input() data!: DailyRate[];
   isEnable = false;
   // utiliser mat-table
   displayedColumns!: string[];
@@ -248,6 +248,9 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
 
   public connectDataSource(model: DataModel[], data: any[]): void {
+
+
+
     this.noData = this.dataSource
       .connect()
       .pipe(map((donnee) => donnee.length === 0));
@@ -265,18 +268,16 @@ export class ReportComponent implements OnInit, AfterViewInit {
   setReportData(type: number, intervalSelected: number) {
     const start = this.reportPeriod[intervalSelected - 1].timePeriod.startDay;
     const end = this.reportPeriod[intervalSelected - 1].timePeriod.endDay;
-
-    this.dataEntity = this.data?.filter((rate: DailyRate) => {
-
+   
+    this.dataEntity = this.data.filter((rate: DailyRate) => {
       return (
         new Date(rate.date).setHours(0, 0, 0, 0) >=
           new Date(start).setHours(0, 0, 0, 0) &&
         new Date(rate.date).setHours(0, 0, 0, 0) <=
           new Date(end).setHours(0, 0, 0, 0)
       );
-
-
     });
+
     this.title = ''
     this.title = this.report_name  +
       `${formatDate(start, 'mediumDate', 'en-US')}` +
@@ -285,6 +286,9 @@ export class ReportComponent implements OnInit, AfterViewInit {
     // Fcall the data source function
 
     this.dataSource = new MatTableDataSource<any>();
+
+
+
     this.connectDataSource(this.modelEntity, this.dataEntity);
   }
 }

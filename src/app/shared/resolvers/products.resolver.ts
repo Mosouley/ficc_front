@@ -16,6 +16,6 @@ export class ProductsResolver  {
     // this.prod_service.list().subscribe(x => {
     //   console.log(x);
     // });
-    return this.prod_service.list();
+    return this.prod_service.listAll();
   }
 }

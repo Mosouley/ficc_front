@@ -1,5 +1,5 @@
 import { CrudService } from './crud.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 
 export class DataService implements CrudService {
@@ -11,14 +11,24 @@ export class DataService implements CrudService {
   constructor(private readonly url: string, private readonly http: HttpClient) {}
 
   // Method to retrieve all resources
-  list(): Observable<any[]> {
+  list(pageSize: number): Observable<any[]> {
+    // Create a new HttpParams object and set the 'page_size' parameter
+    const params = new HttpParams().set('pageSize', pageSize.toString());
+    return this.http.get<any[]>(this.url, { params}).pipe(
+      catchError(error => {
+        return of(error.resp);
+      })
+    );
+  }
+  listAll(): Observable<any[]> {
+    // Create a new HttpParams object and set the 'page_size' parameter
+
     return this.http.get<any[]>(this.url).pipe(
       catchError(error => {
         return of(error.resp);
       })
     );
   }
-
   // Method to retrieve a specific resource by ID
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.url}${id}`+'/');

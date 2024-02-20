@@ -89,8 +89,11 @@ export class SettingsComponent implements OnInit {
   }
 
   retrievRates() {
-    this.daily.list().subscribe((rates) => {
-      this.reportingData = rates;
+    this.daily.listAll().subscribe((rates: any) => {
+      this.reportingData = rates['results'];
+      
+
+
     });
   }
 

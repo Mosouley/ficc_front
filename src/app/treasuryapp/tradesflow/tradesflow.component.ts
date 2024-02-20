@@ -1,5 +1,6 @@
+import { WebsocketService } from './../../shared/services/websocket.service';
 import { Trade } from './../../model/trade';
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { TradeFormComponent } from './trade-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,62 +11,65 @@ import { Product } from 'src/app/model/product';
 @Component({
   selector: 'app-tradesflow',
   templateUrl: './tradesflow.component.html',
-  styleUrls: ['./tradesflow.component.css']
+  styleUrls: ['./tradesflow.component.css'],
 })
-export class TradesflowComponent implements OnInit{
+export class TradesflowComponent implements OnInit {
   trades: Trade[] = []; // to hold the list of trades
-  ngOnInit(){
-    this.trades = this.route.snapshot.data['trades']
-    this.eventSource =  new EventSource('ws://localhost:8000/ws/update/')
-    this.eventSource.addEventListener('message', (event: MessageEvent ) => {
-      console.log('received message:', event.data);
 
-    })
-  }
+  title = 'app';
+  URL = 'ws://localhost:8000/ws/api/fx/trade_update/';
 
   private customers: Customer[] = [];
   private currencies: Currency[] = [];
   private products: Product[] = [];
   private eventSource!: EventSource;
-
+  messages: any[] = [];
+  showNumber = 10;
+  selectedPageSize: number = 5; // Default selected page size
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
-  ){}
-  tradeCapture() {
+    private router: Router,
+    private wsService: WebsocketService,
+    private zone: NgZone
+  ) { }
 
+  ngOnInit() {
+
+    this.wsService.connect(this.URL).subscribe({
+      next: (data: any) => {
+        if(data['trade_list']){
+          this.trades = [...data['trade_list']].reverse()
+        }else if (data['trade_updated']) {
+          this.trades.push(data['trade_updated'])
+          this.trades.reverse()
+        } else {
+          console.log('Other data', data);
+        }
+       },
+
+      error: (e) => console.error(e),
+      complete:() => console.info('completed')
+    })
+  }
+
+  tradeCapture() {
     let dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = false;
     dialogConfig = {
-      // height: '500px',
-      // width: '800px',
-      data:  {
+      maxWidth: '800px',
+      data: {
         currencies: this.route.snapshot.data['currencies'],
         products: this.route.snapshot.data['products'],
-        customers: this.route.snapshot.data['customers']
-      }};
+        customers: this.route.snapshot.data['customers'],
+      },
+    };
     //  dialogConfig.autoFocus = true;
-     let dialogRef = this.dialog.open(TradeFormComponent, dialogConfig);
+    let dialogRef = this.dialog.open(TradeFormComponent, dialogConfig);
 
-     dialogRef.afterClosed().subscribe( result => {
-
-      this.router.navigate(['.'], {relativeTo: this.route})
-     });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.router.navigate(['.'], { relativeTo: this.route });
+    });
   }
-
-  openTradeDialog() {
-    const dialogRef = this.dialog.open(TradeFormComponent, {
-      width: '400px', // Set the width as needed
-    });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
-        // Add the new trade to the existing trades
-        this.trades.push(data);
-
-      }
-    });
-}
 
 }

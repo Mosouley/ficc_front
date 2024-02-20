@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
 export interface CrudService {
-  
-  list(): Observable<any>;
+
+  list(page: number): Observable<any>;
   get(id: number): Observable<any>;
 
   add(resource: any): Observable<any>;

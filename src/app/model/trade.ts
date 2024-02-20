@@ -16,6 +16,10 @@ export enum Status {
   Matured,
   Cancelled
 }
+export interface TradeStatus {
+  value: string;
+  label: string;
+}
 
 export interface Trade {
       id: number,
@@ -35,7 +39,8 @@ export interface Trade {
      customer: Customer;
      product: Product;
      trader: Dealer;
-     status: Status;
+     status: TradeStatus;
+     last_updated: Date
   }
 
 

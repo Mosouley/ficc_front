@@ -28,7 +28,7 @@ const routes: Routes = [
       segments: SegmentsResolver,
       traders: DealersResolver,
       customers: CustomerResolver,
-      trades: TradesResolver
+      // trades: TradesResolver
     }
   },
      { path: 'fxblotter',

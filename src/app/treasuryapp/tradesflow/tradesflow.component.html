@@ -14,6 +14,14 @@
   <div
     class="justify-center p-2 m-4 mx-auto space-x-4 overflow-x-auto border border-gray-200 rounded-lg shadow bg-gray-50 ">
     <div class="flex flex-wrap items-center justify-between p-2 space-y-4 flex-column sm:flex-row sm:space-y-0">
+      <select  [(ngModel)]="showNumber" name="showNumber"
+        class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 ">
+        <option value="5">Show 5</option>
+        <option value="10">Show 10</option>
+        <option value="20">Show 20</option>
+        <option value="50">Show 50</option>
+
+      </select>
       <select
         class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 ">
 
@@ -43,7 +51,7 @@
           </svg>This year</option>
       </select>
       <button class="flex justify-end w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-[#1fa774] rounded-lg items- shrink-0 sm:w-auto gap-x-2 hover:bg-[#5f419b] "
- (click)="tradeCapture()"
+        (click)="tradeCapture()"
       >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -52,7 +60,6 @@
           <span>Trade</span>
       </button>
 
-      <!-- Search button -->
       <button class="relative">
         <input title="Search Bar" aria-label="search bar" role="search"
           class="w-4 py-2 pl-4 pr-8 placeholder-transparent transition-all duration-300 ease-in-out bg-transparent rounded-md cursor-pointer focus:border-black focus:cursor-text focus:w-64 focus:placeholder-gray-500 text-default-primary "
@@ -65,13 +72,15 @@
         </svg>
 
       </button>
+
+
     </div>
 
     <table class="w-full space-x-4 overflow-scroll text-sm text-left ">
 
       <caption class="justify-center py-2 text-sm font-bold text-start text-[#4946d7] ">FX Transactions Flows</caption>
 
-      <thead class="flex-col items-center justify-center p-1 border-b  ">
+      <thead class="flex-col items-center justify-center p-1 border-b sticky  ">
         <tr
           class="border-b   rounded-lg bg-[#6867be] text-white text-xs">
           <th scope="col" class="p-1">Customer</th>
@@ -90,29 +99,31 @@
           <th scope="col" class="p-1 text-center">PnL'000</th>
           <th scope="col" class="p-1">Dealer</th>
           <th scope="col" class="p-1">Status</th>
-          <th scope="col" class="p-1 min-w-fit">Action</th>
+          <th scope="col-span-3" class="p-1 min-w-fit">Action</th>
+          <th scope="col" class="p-1 min-w-fit">Update_On</th>
 
         </tr>
       </thead>
-      <tbody class="text-sm font-medium ">
-        <tr class="odd:bg-white even:bg-gray-100  hover:border-[#6867be] hover:border-2" *ngFor="let trade of trades ">
-          <td class="p-1 whitespace-nowrap">{{trade.customer.name}}</td>
-          <td class="p-1 whitespace-nowrap">{{trade.product.name}}</td>
-          <td class="p-1 whitespace-nowrap">#{{trade.id }}</td>
-          <td class="p-1 whitespace-nowrap">{{trade.val_date| date:'shortDate'}}</td>
-          <td class="p-1 whitespace-nowrap">{{trade.tx_date| date:'shortDate'}}</td>
-          <td class="p-1 whitespace-nowrap">{{trade.ccy1.code}}</td>
-          <td class="p-1 whitespace-nowrap">{{trade.ccy2.code}}</td>
-          <td class="p-1 whitespace-nowrap text-center">{{trade.buy_sell}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.amount1| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.amount2| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.deal_rate| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.system_rate| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.fees_rate| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.deal_pnl| currency:'':'':'1.2-2'}}</td>
-          <td class="p-1 whitespace-nowrap text-end">{{trade.trader.name}}</td>
+      <tbody class="text-xs font-medium ">
+        <tr class="odd:bg-white even:bg-gray-100  hover:border-[#6867be] hover:border-2" *ngFor="let trade of trades.slice(0,showNumber)">
+          <td class="p-1 whitespace-nowrap">{{trade?.customer?.name}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade?.product?.name}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade?.id}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade?.val_date| date:'shortDate'}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade?.tx_date| date:'shortDate'}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade?.ccy1?.code}}</td>
+          <td class="p-1 whitespace-nowrap">{{trade?.ccy2?.code}}</td>
+          <td class="p-1 whitespace-nowrap text-center">{{trade?.buy_sell}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.amount1| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.amount2| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.deal_rate| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.system_rate| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.fees_rate| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.deal_pnl| currency:'':'':'1.2-2'}}</td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.trader?.name}}</td>
+
           <td class="p-1 whitespace-nowrap">
-            <span class="px-2 bg-green-400 rounded-md text-gray-50">{{trade.status}}</span>
+            <span class="px-2 bg-green-400 rounded-md text-gray-50">{{trade?.status}}</span>
           </td>
           <td class="p-1 whitespace-nowrap">
             <a href="#" class="mr-2 hover:text-gray-100">
@@ -125,6 +136,7 @@
               <i class="text-base material-icons-round text-red-600">delete_outline</i>
             </a>
           </td>
+          <td class="p-1 whitespace-nowrap text-end">{{trade?.last_updated|date:'h:mm a'}}</td>
 
         </tr>
 
@@ -163,10 +175,10 @@
       </tbody>
     </table>
   </div>
-  <!-- <div class="flex items-center justify-center mt-4 space-x-2">
+  <div class="flex items-center justify-center mt-4 space-x-1 text-xs">
     <ul class="flex space-x-2">
       <li>
-        <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">Previous</a>
+        <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200"><<</a>
       </li>
       <li>
         <a class="px-3 py-1 text-blue-500 border border-gray-300 rounded-lg hover:bg-blue-100">1</a>
@@ -184,9 +196,9 @@
         <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">10</a>
       </li>
       <li>
-        <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">Next</a>
+        <a class="px-3 py-1 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-200">>></a>
       </li>
     </ul>
-  </div> -->
+  </div>
 
 </section>

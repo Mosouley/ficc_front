@@ -16,6 +16,6 @@ export class DealersResolver  {
     // this.curr_service.list().subscribe(x => {
     //   console.log(x);
     // });
-    return this.curr_service.list();
+    return this.curr_service.listAll();
   }
 }

@@ -8,6 +8,6 @@ export class CustomerResolver  {
   }
 
   resolve() {
-    return this.cust_service.list();
+    return this.cust_service.listAll();
   }
 }

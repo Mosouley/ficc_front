@@ -9,7 +9,7 @@ export class CurrenciesResolver  {
   constructor(private curr_service: CurrenciesService) {}
 
   resolve( ) {
-    return this.curr_service.list();
+    return this.curr_service.listAll();
       }
   }
 

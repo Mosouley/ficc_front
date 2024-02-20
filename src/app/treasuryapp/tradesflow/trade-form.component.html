@@ -77,16 +77,16 @@
       </mat-form-field>
       <mat-form-field  class="w-40 max-h-24 m-0 text-xs font-medium ">
         <mat-label>Value Date</mat-label>
-        <input matInput readonly [matDatepicker]="value_date" formControlName="val_date" placeholder="Value date">
-        <mat-datepicker-toggle matSuffix  [for]="value_date"></mat-datepicker-toggle>
-        <mat-datepicker #value_date></mat-datepicker>
+        <input matInput readonly [matDatepicker]="val_date" formControlName="val_date" placeholder="Value date">
+        <mat-datepicker-toggle matSuffix  [for]="val_date"></mat-datepicker-toggle>
+        <mat-datepicker #val_date></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="w-40  max-h-24 m-0 text-xs font-medium">
         <mat-label>Trade Date</mat-label>
-        <input matInput readonly [matDatepicker]="deal_date" formControlName="tx_date" placeholder="Deal date">
-        <mat-datepicker-toggle matSuffix  [for]="deal_date"></mat-datepicker-toggle>
-        <mat-datepicker #deal_date></mat-datepicker>
+        <input matInput readonly [matDatepicker]="tx_date" formControlName="tx_date" placeholder="Deal date">
+        <mat-datepicker-toggle matSuffix  [for]="tx_date"></mat-datepicker-toggle>
+        <mat-datepicker #tx_date></mat-datepicker>
       </mat-form-field>
 
     </div>
