@@ -6,7 +6,7 @@
       <span class="p-1 text-xl font-semibold tracking-wider lg:hidden">Yasin</span>
       <!-- Toggle sidebar button -->
       <button (click)="isSidebarOpen = !isSidebarOpen; toggleSideNav.emit(isSidebarOpen)"
-        class="p-0 rounded shadow-sm focus:outline-none ">
+        class="p-0 rounded shadow-sm focus:outline-none  text-violet-600">
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6 text-default-primary">
@@ -23,10 +23,9 @@
         cursor-pointer  items-center p-1  text-sm transition-colors rounded-t-sm mr-0  align-center
           pb-1 text-primary-100 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-600 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100
         ">
-          <button class="flex items-center text-red-500 dropdown-menu-button hover:text-blue-500">
+          <button class="flex items-center text-blue-500 dropdown-menu-button hover:text-blue-500">
             <svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6 text-sellar-primary"
-             fill="none">
+              class="w-6 h-6 text-sellar-primary" fill="none">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
               <g id="SVGRepo_iconCarrier">
@@ -40,7 +39,7 @@
               </g>
             </svg>
 
-            <span *ngIf="link.children && link.children.length >0" class="ml-auto hover:text-blue-500"
+            <span *ngIf="link.children && link.children.length >0" class="ml-auto hover:text-blue-200"
               routerLink={{link.url}}>
               <!-- csmall chevron svg -->
               <svg
@@ -60,33 +59,123 @@
             <div
               class="invisible transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 opacity-0 group-hover:visible group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
               <div
-                class="absolute left-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none w-44"
+                class="absolute left-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none w-fit"
                 role="menu">
                 <div class="px-4 py-3">
                   <p class="text-sm leading-5">Menu X</p>
                   <p class="text-sm font-medium leading-5 text-gray-900 truncate">....</p>
                 </div>
 
-                <div class="py-1">
-                  <a href="javascript:void(0);"
-                    class="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus-visible:outline-1 focus-visible:outline-blue-500"
-                    role="menuitem">{{link.name}}</a>
-                  <a href="javascript:void(0);"
-                    class="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus-visible:outline-1 focus-visible:outline-blue-500"
-                    role="menuitem">Support</a>
-                  <span role="menuitem" tabindex="-1"
-                    class="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 opacity-50 cursor-not-allowed"
-                    aria-disabled="true">New feature (soon)</span>
-
-                  <a href="javascript:void(0);"
-                    class="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus-visible:outline-1 focus-visible:outline-blue-500"
-                    role="menuitem">License</a>
-                </div>
-
-                <div class="py-1">
-                  <a href=""
-                    class="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 focus-visible:outline-1 focus-visible:outline-blue-500"
-                    role="menuitem">Sign out</a>
+                <div class="bg-white flex flex-col">
+                  <div class="w-[401px] max-w-full ml-8 mt-9 px-5 self-start max-md:ml-2.5">
+                    <div class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
+                      <div class="flex flex-col items-stretch w-6/12 max-md:w-full max-md:ml-0">
+                        <div class="flex grow flex-col max-md:mt-10">
+                          <div class="items-start self-stretch flex justify-between gap-2.5">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Support Center
+                            </div>
+                          </div>
+                          <div class="items-start self-stretch flex justify-between gap-2.5 mt-4">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Support Plans
+                            </div>
+                          </div>
+                          <div class="items-start self-stretch flex justify-between gap-2.5 mt-4">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Guides
+                            </div>
+                          </div>
+                          <div class="items-start self-stretch flex justify-between gap-2.5 mt-4">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Customer Stories
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex flex-col items-stretch w-6/12 ml-5 max-md:w-full max-md:ml-0">
+                        <div class="flex flex-col max-md:mt-10">
+                          <div class="self-stretch flex items-start justify-between gap-2.5">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Blog
+                            </div>
+                          </div>
+                          <div class="items-start self-stretch flex justify-between gap-2.5 mt-4">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Annual Conference
+                            </div>
+                          </div>
+                          <div class="items-start self-stretch flex justify-between gap-2.5 mt-4">
+                            <img loading="lazy" src=""
+                              class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                            <div
+                              class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                              Contact Sales
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="items-start rounded bg-slate-100 flex w-[604px] max-w-full flex-col mt-7 mb-1 pl-7 pr-20 py-7 self-start max-md:px-5">
+                    <div
+                      class="items-start flex w-[470px] max-w-full justify-between gap-5 pr-20 py-0.5 self-start max-md:flex-wrap max-md:pr-5">
+                      <div class="items-start flex flex-col self-start">
+                        <div class="self-stretch flex items-start justify-between gap-2.5">
+                          <img loading="lazy" src=""
+                            class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                          <div class="text-sky-950 text-sm font-medium leading-5 tracking-wide self-start">
+                            Jobs
+                          </div>
+                        </div>
+                        <div class="items-start self-stretch flex justify-between gap-2.5 mt-1.5">
+                          <img loading="lazy" src=""
+                            class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                          <div
+                            class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                            Newsroom
+                          </div>
+                        </div>
+                      </div>
+                      <div class="items-start flex flex-col self-start">
+                        <div class="items-start self-stretch flex justify-between gap-2.5">
+                          <img loading="lazy" src=""
+                            class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                          <div
+                            class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                            Stripe Press
+                          </div>
+                        </div>
+                        <div class="items-start self-stretch flex justify-between gap-2.5 mt-4">
+                          <img loading="lazy" src=""
+                            class="aspect-square object-contain object-center w-4 overflow-hidden max-w-full self-start" />
+                          <div
+                            class="text-sky-950 text-sm font-medium leading-5 tracking-wide whitespace-nowrap self-start">
+                            Become a Partner
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

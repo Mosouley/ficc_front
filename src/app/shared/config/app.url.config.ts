@@ -39,7 +39,8 @@ export const API_URLS = {
     SINGNUP_URL:  PATH + '/auth/signup',
     FILE_UPLOAD_URL: PATH + '/storage/upload',
     FILE_LOADING_URL: PATH + '/storage/files',
-    FILE_LOADING_ALL: PATH + '/storage/getallfiles'
+    FILE_LOADING_ALL: PATH + '/storage/getallfiles',
+    WEBSOCKETS_TRADEFLOWS : 'ws://localhost:8000/ws/api/fx/trade_update/'
 };
 
 export const url_api ="https://api.apilayer.com/exchangerates_data/timeseries?start_date={2022-03-01}&end_date={2023-03-01}"

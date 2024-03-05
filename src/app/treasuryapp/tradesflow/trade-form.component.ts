@@ -79,12 +79,9 @@ export class TradeFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private aRoute: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public receiveData: any,
     private dialogRef: MatDialogRef<TradeComponent>,
     private rate_service: DailyRateService,
-    private currencyPipe: CurrencyPipe,
-    private tradeServ: TradeService,
     private dealerServ: DealerService,
     private ws: WebsocketService
   ) {}
@@ -122,27 +119,6 @@ export class TradeFormComponent implements OnInit {
       error: (e)  => console.error(e),
       complete: () => console.info('Done', this.ccy2_rate)})
 
-    // this.tradeForm.controls['ccy1'].valueChanges.subscribe((ccy) => {
-    //   this.updateCurrenciesList(ccy);
-    //   this.retrieve_Ccy_Rate(ccy)
-    //     .then((rate) => {
-    //       this.ccy1_rate = rate;
-
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error retrieving rate:', error);
-    //     });
-    // });
-    // this.tradeForm.controls['ccy2'].valueChanges.subscribe((ccy) => {
-    //   // this.createCcyPairOptions
-    //   this.retrieve_Ccy_Rate(ccy)
-    //     .then((rate) => {
-    //       this.ccy2_rate = rate;
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error retrieving rate:', error);
-    //     });
-    // });
 
     this.tradeForm.controls['ccy2'].valueChanges.subscribe(
       this.createCcyPairOptions
@@ -179,7 +155,7 @@ export class TradeFormComponent implements OnInit {
 
     });
 
-    this.tradeForm.controls['ccy_pair'].valueChanges.subscribe((x) => {
+    this.tradeForm.controls['ccy_pair'].valueChanges.subscribe(() => {
       this.syst_rate = this.get_system_rate(
         this.tradeForm.controls['ccy_pair'].value
       );
@@ -279,7 +255,8 @@ export class TradeFormComponent implements OnInit {
       //   product: this.selectedProduct,
     if (this.tradeForm.valid) {
       this.tradeForm.controls['status'].patchValue(this.statusOptions[0].value)
-      this.ws.connect(this.URL).next({
+      this.ws.connect(this.URL)
+      .next({
         action: 'newTrade',
         data: JSON.stringify(this.tradeForm.value)
       })

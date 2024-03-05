@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LogoutComponent } from './../logout/logout.component';
 import { UserLoginComponent } from './../user-login/user-login.component';
 
@@ -6,12 +6,23 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { MenuNode } from './menu-node';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material/material.module';
+import { LayoutRoutingModule } from '../layout-routing.module';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    SidenavComponent,
+  ],
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit  {
@@ -22,7 +33,7 @@ export class NavbarComponent implements OnInit  {
     password!: string;
     remember = false;
 
-    @Output () toggleSideNav: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() toggleSideNav: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     links: MenuNode[] = [
       {
@@ -73,8 +84,6 @@ export class NavbarComponent implements OnInit  {
 
     ];
 
-
-
     constructor(
       public dialog: MatDialog,
       private route: ActivatedRoute,
@@ -122,7 +131,6 @@ export class NavbarComponent implements OnInit  {
       dialogConfig = {
         height: '600px',
         width: '500px',
-
 
       }
       dialogConfig.autoFocus = true;

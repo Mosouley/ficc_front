@@ -40,7 +40,7 @@
     </div>
     <!-- here is where you control the width of the table -->
 
-    <div class="p-4 overflow-hidden bg-white border border-gray-200 rounded shadow-lg">
+    <div class="p-4 overflow-hidden bg-white border border-gray-200 rounded shadow-lg w-full space-x-4 text-sm text-left ">
 
       <ng-container *ngIf="newRates.length>0">
         <!-- component -->
@@ -99,9 +99,9 @@
       </ng-container>
       <ng-container *ngIf="newRates.length == 0">
         <app-report
-        [data]="reportingData"
+        [dataValues]="reportingData"
         [modelEntity]="model"
-        [modelArrayEntity]="modelArrayEntity"></app-report>
+        ></app-report>
       </ng-container>
 
 

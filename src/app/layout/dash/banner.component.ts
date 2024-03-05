@@ -1,11 +1,22 @@
 import { Component, ComponentFactoryResolver, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Type } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { BannerService } from 'src/app/shared/services/banner.service';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material/material.module';
+import { LayoutRoutingModule } from '../layout-routing.module';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MaterialModule,
+    SidenavComponent
+  ],
   animations: [
     trigger('slideInOut', [
       state('true', style({

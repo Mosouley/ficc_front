@@ -25,7 +25,6 @@ import { WebsocketService } from '../shared/services/websocket.service';
     FxflowsComponent,
     WalletsizingComponent,
     TradeComponent,
-    SettingsComponent,
     DataTableComponent,
     ImportFileComponent,
     NumberFormatDirective,

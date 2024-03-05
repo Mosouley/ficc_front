@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 export interface CrudService {
 
-  list(page: number): Observable<any>;
+  list(limit: number, offset: number): Observable<any>;
   get(id: number): Observable<any>;
 
   add(resource: any): Observable<any>;

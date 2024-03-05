@@ -11,9 +11,9 @@ export class DataService implements CrudService {
   constructor(private readonly url: string, private readonly http: HttpClient) {}
 
   // Method to retrieve all resources
-  list(pageSize: number): Observable<any[]> {
+  list(limit: number, offset: number): Observable<any[]> {
     // Create a new HttpParams object and set the 'page_size' parameter
-    const params = new HttpParams().set('pageSize', pageSize.toString());
+    const params = new HttpParams().set('offset', limit.toString());
     return this.http.get<any[]>(this.url, { params}).pipe(
       catchError(error => {
         return of(error.resp);

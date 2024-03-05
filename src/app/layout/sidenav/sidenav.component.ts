@@ -2,13 +2,26 @@ import { MenuNode } from './../../shared/menu-node';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material/material.module';
+import { LayoutRoutingModule } from '../layout-routing.module';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    NavbarComponent,
+    RouterModule
+  ],
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit{
@@ -113,9 +126,26 @@ export class SidenavComponent implements OnInit{
           icon: 'contact_page',
           action: false
         },
+
+      ]
+    },
+
+    {
+      name: 'Reporting',
+      url: 'reporting',
+      icon: 'admin_panel_settings',
+      action: false,
+      expandable: true,
+      children: [
         {
-          name: 'Reports',
-          url: '',
+          name: 'Periodic Sales',
+          url: 'sales-per-period',
+          icon: 'contact_page',
+          action: false
+        },
+        {
+          name: 'Reporting 2',
+          url: 'app1',
           icon: 'fingerprint',
           action: false
         },

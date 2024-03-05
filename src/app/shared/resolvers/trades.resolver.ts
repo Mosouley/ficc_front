@@ -13,8 +13,9 @@ export class TradesResolver  {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Trade[]> {
       // Get the 'pageSize' parameter from the route or set a default value
-      const pageSize = route.queryParams['pageSize'] || 5;
+      const limit = route.queryParams['limit'];
+      const offset = route.queryParams['limit'];
 
-    return this.trades_service.list(pageSize);
+    return this.trades_service.list(limit, offset);
   }
 }

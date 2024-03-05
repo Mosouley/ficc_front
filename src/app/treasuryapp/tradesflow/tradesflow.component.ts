@@ -1,56 +1,82 @@
 import { WebsocketService } from './../../shared/services/websocket.service';
-import { Trade } from './../../model/trade';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TradeFormComponent } from './trade-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Currency } from 'src/app/model/currency';
-import { Customer } from 'src/app/model/customer';
-import { Product } from 'src/app/model/product';
+import { DataModel } from 'src/app/model/data.model';
+import { API_URLS } from 'src/app/shared/config/app.url.config';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-tradesflow',
   templateUrl: './tradesflow.component.html',
   styleUrls: ['./tradesflow.component.css'],
 })
-export class TradesflowComponent implements OnInit {
-  trades: Trade[] = []; // to hold the list of trades
+export class TradesflowComponent implements OnInit,OnDestroy {
 
-  title = 'app';
-  URL = 'ws://localhost:8000/ws/api/fx/trade_update/';
+  reportingData!: any[]  ;
+  model: DataModel[] = [];
 
-  private customers: Customer[] = [];
-  private currencies: Currency[] = [];
-  private products: Product[] = [];
-  private eventSource!: EventSource;
-  messages: any[] = [];
-  showNumber = 10;
-  selectedPageSize: number = 5; // Default selected page size
+  reportName = 'FX Blotter  from '
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
     private wsService: WebsocketService,
-    private zone: NgZone
-  ) { }
+  ) {
+    this.wsService.connect(API_URLS.WEBSOCKETS_TRADEFLOWS)
+  }
 
   ngOnInit() {
+    const today = new Date();
 
-    this.wsService.connect(this.URL).subscribe({
+    this.reportName = this.reportName +
+
+      `${formatDate(today, 'mediumDate', 'en-US')}` +
+      ' To ' +
+      `${formatDate(today, 'mediumDate', 'en-US')}`;
+
+    this.model = [
+      new DataModel('customer', 'Customer', 'Array', false, 'name', 'uppercase'),
+      new DataModel('product', 'Product', 'Array', false, 'name', 'uppercase'),
+      new DataModel('id', 'TradeId', 'string', false, [], 'uppercase'),
+      new DataModel('val_date', 'ValDate', 'date', false, [],'date:shortDate'),
+      new DataModel('tx_date', 'TxDate', 'date', false, [],'date:shortDate'),
+      new DataModel('ccy1', 'Ccy1', 'Array', false, 'code', 'uppercase'),
+      new DataModel('ccy2', 'Ccy2', 'Array', false, 'code', 'uppercase'),
+      new DataModel('buy_sell', 'Buy/Sell', 'string', false, []),
+      new DataModel('amount1', 'Ccy1_Amount', 'number', true, [],'`number:`1.2-2`'),
+      new DataModel('amount2', 'Ccy2_Amount', 'number', false, [],'`number:`1.2-2`'),
+      new DataModel('deal_rate', 'DealRate', 'number', false, [],'`number:`1.2-2`'),
+      new DataModel('system_rate', 'ReevalRate', 'number', false, [],'`number:`1.2-2`'),
+      new DataModel('fees_rate', 'Other Fees', 'number', false, [],'`number:`1.2-2`'),
+      new DataModel('deal_pnl', 'PnL000', 'number', false, []),
+      new DataModel('trader', 'Dealer', 'Array', false, 'name', 'uppercase'),
+      new DataModel('status', 'Status', 'string', false, [],'uppercase'),
+      new DataModel('last_updated', 'Last. Up', 'time', false, [],'date:`h:mm a`'),
+    ];
+
+    this.wsService.connect(API_URLS.WEBSOCKETS_TRADEFLOWS).subscribe({
       next: (data: any) => {
-        if(data['trade_list']){
-          this.trades = [...data['trade_list']].reverse()
-        }else if (data['trade_updated']) {
-          this.trades.push(data['trade_updated'])
-          this.trades.reverse()
-        } else {
-          console.log('Other data', data);
+        if(data.type==='trade_list'){
+          this.reportingData =[...data.data].reverse()
+          this.reportingData = this.reportingData.filter((model: any ) => {
+            return (
+              new Date(model['tx_date']).setHours(0, 0, 0, 0) >=
+                new Date(today).setHours(0, 0, 0, 0) &&
+              new Date(model['tx_date']).setHours(0, 0, 0, 0) <=
+                new Date(today).setHours(0, 0, 0, 0)
+            );
+          });
+
         }
        },
 
       error: (e) => console.error(e),
       complete:() => console.info('completed')
     })
+
+
   }
 
   tradeCapture() {
@@ -71,5 +97,10 @@ export class TradesflowComponent implements OnInit {
       this.router.navigate(['.'], { relativeTo: this.route });
     });
   }
+
+  ngOnDestroy(): void {
+      this.wsService.disconnect()
+  }
+
 
 }

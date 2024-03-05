@@ -7,23 +7,24 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReportComponent } from './report.component';
 import { MaterialModule } from '../material/material.module';
+import { FilterComponent } from './filter/filter.component';
 
 
 
 @NgModule({
-  declarations: [ReportHtmlComponent, ReportComponent],
+  declarations: [ReportHtmlComponent,  ],
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    FilterComponent,
+    ReportComponent
   ],
   exports: [
     ReportComponent,
     ReportHtmlComponent,
     ReactiveFormsModule
-
    ],
   providers: []
 })

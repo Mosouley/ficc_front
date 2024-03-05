@@ -14,6 +14,7 @@ import { CustomerResolver } from '../shared/resolvers/customers.resolver';
 import { SettingsComponent } from './config/settings/settings.component';
 import { TradesflowComponent } from './tradesflow/tradesflow.component';
 import { TradesResolver } from '../shared/resolvers/trades.resolver';
+import { SalesByPeriodComponent } from './sales-by-period/sales-by-period.component';
 
 const routes: Routes = [
 
@@ -43,6 +44,7 @@ const routes: Routes = [
   },
      { path: 'walletsizing', component: WalletsizingComponent },
      { path: 'settings', component: SettingsComponent },
+     { path: 'sales-per-period', component: SalesByPeriodComponent },
      {path: 'not-found', component: PageNotFoundComponent}
   ]
 },

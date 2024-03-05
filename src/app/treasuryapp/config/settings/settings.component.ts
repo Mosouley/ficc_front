@@ -1,46 +1,53 @@
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
 import * as XLSX from 'xlsx';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ImportFileComponent } from '../import-file.component';
-import { DailyRate } from 'src/app/model/daily_rate';
 import { DataModel } from 'src/app/model/data.model';
+import { CommonModule } from '@angular/common';
+import { LayoutRoutingModule } from 'src/app/layout/layout-routing.module';
+import { NavbarComponent } from 'src/app/layout/navbar/navbar.component';
+import { SidenavComponent } from 'src/app/layout/sidenav/sidenav.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { ReportComponent } from 'src/app/report/report.component';
 
 type AOA = any[][];
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    LayoutRoutingModule,
+    MaterialModule,
+    SidenavComponent,
+    NavbarComponent,
+    ReportComponent
+  ],
 })
 export class SettingsComponent implements OnInit {
-  reportingData: any[] = [];
+  reportingData!: any[];
   newRates: any[] =[];
   model: DataModel[] = [];
   modelArrayEntity!: DataModel[];
   data!: AOA;
+  totalPages = 0;
 
   constructor(
-    private http: HttpClient,
     public dialog: MatDialog,
-    private route: ActivatedRoute,
-    private router: Router,
     private daily: DailyRateService
   ) {}
   ngOnInit(): void {
     this.model = [
       // new DataModel('id', 'ID', 'number', true, []),
       new DataModel('date', 'Date', 'date', false, [], 'date'),
-      new DataModel('ccy_code', 'Currency', 'string', false, []),
+      new DataModel('ccy_code', 'Currency', 'Array', false, 'string'),
       new DataModel('rateLcy', 'Rate', 'number', false, []),
       new DataModel('last_updated', 'Last. Up', 'date', false, []),
     ];
 
-    this.modelArrayEntity = [
-      new DataModel('Currency', 'code', 'string', false, [])
-
-    ];
     this.retrievRates();
   }
 
@@ -90,9 +97,7 @@ export class SettingsComponent implements OnInit {
 
   retrievRates() {
     this.daily.listAll().subscribe((rates: any) => {
-      this.reportingData = rates['results'];
-      
-
+      this.reportingData = rates.results;
 
     });
   }
