@@ -12,25 +12,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    UserLoginComponent,
-    LogoutComponent,
-
-  ],
-
-  imports: [
-    CommonModule,
-    LayoutRoutingModule,
-    MaterialModule,
-    PnlSummaryComponent,
-    ReactiveFormsModule,
-    SharedModule
-  ],
-  exports: [
-
-    RouterModule,
-    PnlSummaryComponent
-
-  ]
+    imports: [
+        CommonModule,
+        LayoutRoutingModule,
+        MaterialModule,
+        PnlSummaryComponent,
+        ReactiveFormsModule,
+        SharedModule,
+        UserLoginComponent,
+        LogoutComponent
+    ],
+    exports: [
+        RouterModule,
+        PnlSummaryComponent
+    ]
 })
 export class LayoutModule { }

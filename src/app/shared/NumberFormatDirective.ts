@@ -3,7 +3,8 @@ import { NgControl } from '@angular/forms';
 
 
 @Directive({
-  selector: '[appNumberFormat]'
+    selector: '[appNumberFormat]',
+    standalone: true
 })
 export class NumberFormatDirective {
 

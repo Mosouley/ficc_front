@@ -1,22 +1,13 @@
 
 const BASE = 'http://localhost:' ; //  'http://localhost';
-const PORT = '8000' ; //  8089;
+const WS_BASE = 'ws://localhost:' ; //  'http://localhost';
+const PORT = '8080' ; //  8089;
 // admin/
 // api/contacts/
 // api/fx/ ^customers/$ [name='customer-list']
 // api/fx/ ^customers/(?P<pk>[^/.]+)/$ [name='customer-detail']
 // api/fx/ ^segments/$ [name='segment-list']
-// api/fx/ ^segments/(?P<pk>[^/.]+)/$ [name='segment-detail']
-// api/fx/ ^currencies/$ [name='segment-list']
-// api/fx/ ^currencies/(?P<pk>[^/.]+)/$ [name='segment-detail']
-// api/fx/ ^products/$ [name='product-list']
-// api/fx/ ^products/(?P<pk>[^/.]+)/$ [name='product-detail']
-// api/fx/ ^daily-rates/$ [name='systemdailyrates-list']
-// api/fx/ ^daily-rates/(?P<pk>[^/.]+)/$ [name='systemdailyrates-detail']
-// api/fx/ ^trades/$ [name='trade-list']
-// api/fx/ ^trades/(?P<pk>[^/.]+)/$ [name='trade-detail']
-// api/fx/ ^dealers/$ [name='dealer-list']
-// api/fx/ ^dealers/(?P<pk>[^/.]+)/$ [name='dealer-detail']
+
 const PATH = BASE + PORT + '/api/fx';
 
 export const API_URLS = {
@@ -40,7 +31,7 @@ export const API_URLS = {
     FILE_UPLOAD_URL: PATH + '/storage/upload',
     FILE_LOADING_URL: PATH + '/storage/files',
     FILE_LOADING_ALL: PATH + '/storage/getallfiles',
-    WEBSOCKETS_TRADEFLOWS : 'ws://localhost:8000/ws/api/fx/trade_update/'
+    WEBSOCKETS_TRADEFLOWS : WS_BASE + PORT +'/ws/api/fx/trade_update/'
 };
 
 export const url_api ="https://api.apilayer.com/exchangerates_data/timeseries?start_date={2022-03-01}&end_date={2023-03-01}"

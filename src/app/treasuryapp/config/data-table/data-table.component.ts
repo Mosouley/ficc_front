@@ -1,9 +1,13 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
-  selector: 'app-data-table',
-  templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.css']
+    selector: 'app-data-table',
+    templateUrl: './data-table.component.html',
+    styleUrls: ['./data-table.component.css'],
+    standalone: true,
+    imports: [MatTableModule, NgFor]
 })
 export class DataTableComponent implements  OnChanges{
 

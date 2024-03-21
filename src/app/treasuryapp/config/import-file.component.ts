@@ -8,9 +8,10 @@ import * as XLSX from 'xlsx';
 type AOA = any[][];
 
 @Component({
-  selector: 'app-import-file',
-  templateUrl: './import-file.component.html',
-  styles: [],
+    selector: 'app-import-file',
+    templateUrl: './import-file.component.html',
+    styles: [],
+    standalone: true,
 })
 export class ImportFileComponent {
   title = 'Bulk Import: Rates';
@@ -46,7 +47,7 @@ export class ImportFileComponent {
         this.disabled = false
 
       };
-     // console.log(target.files[0]); //done l'objet File
+     console.log(target.files[0]); //done l'objet File
       reader.readAsBinaryString(target.files[0]);
     } catch (error) {
       console.error('Error importing file:', error);

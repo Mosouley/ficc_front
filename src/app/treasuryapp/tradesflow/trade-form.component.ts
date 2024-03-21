@@ -6,25 +6,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Currency } from 'src/app/model/currency';
 import { Customer } from 'src/app/model/customer';
 import { Product } from 'src/app/model/product';
 import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
 import { TradeComponent } from '../fxblotter/trade.component';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
-import { DailyRate } from 'src/app/model/daily_rate';
-import { CurrenciesService } from 'src/app/shared/services/currencies.service';
-import { NgxCurrencyDirective } from 'ngx-currency';
-import { Pnl_Calculation } from 'src/app/shared/custom/trade-functions';
-import { TradeService } from 'src/app/shared/services/trade.service';
-import { Status, Trade, TradeStatus } from 'src/app/model/trade';
+import { TradeStatus } from 'src/app/model/trade';
 import { DealerService } from 'src/app/shared/services/dealer.service';
 import { Dealer } from 'src/app/model/dealer';
-import { LogoutComponent } from 'src/app/layout/logout/logout.component';
 import { WebsocketService } from 'src/app/shared/services/websocket.service';
 
 @Component({
@@ -34,7 +26,7 @@ import { WebsocketService } from 'src/app/shared/services/websocket.service';
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    NgxCurrencyDirective,
+
   ],
   templateUrl: './trade-form.component.html',
   styleUrl: './trade-form.component.css',
@@ -97,7 +89,7 @@ export class TradeFormComponent implements OnInit {
     // Subscribe to value changes for both currency inputs
 
     this.tradeForm.controls['ccy1'].valueChanges.subscribe({
-      next:(ccy) => {
+      next:(ccy: Currency) => {
         this.updateCurrenciesList(ccy);
       this.retrieve_Ccy_Rate(ccy)
         .then((rate) => {
@@ -105,10 +97,10 @@ export class TradeFormComponent implements OnInit {
         this.tradeForm.controls['ccy1_rate'].patchValue(Number(rate).toFixed(4));
 
       })},
-      error: (e)  => console.error(e),
+      error: (e: any)  => console.error(e),
       complete: () => console.info('Done', this.ccy1_rate )})
       this.tradeForm.controls['ccy2'].valueChanges.subscribe({
-      next:(ccy) => {
+      next:(ccy: Currency) => {
 
       this.retrieve_Ccy_Rate(ccy)
         .then((rate) => {
@@ -116,7 +108,7 @@ export class TradeFormComponent implements OnInit {
           this.tradeForm.controls['ccy2_rate'].patchValue(Number(rate).toFixed(4));
 
       })},
-      error: (e)  => console.error(e),
+      error: (e: any)  => console.error(e),
       complete: () => console.info('Done', this.ccy2_rate)})
 
 
@@ -125,17 +117,17 @@ export class TradeFormComponent implements OnInit {
     );
 
     // calculate amount2 based on value in amount1
-    this.tradeForm.controls['amount1'].valueChanges.subscribe((amount) => {
+    this.tradeForm.controls['amount1'].valueChanges.subscribe((amount: string) => {
       this.tradeForm.controls['amount2'].setValue(
         parseFloat(amount) * this.tradeForm.controls['deal_rate'].value
       );
     });
-    this.tradeForm.controls['customer'].valueChanges.subscribe((customer) => {
+    this.tradeForm.controls['customer'].valueChanges.subscribe((customer: { name: string | undefined; }) => {
       this.selectedCustomer = this.customers.find(
         (elm) => elm.name === customer.name
       ) as Customer;
     });
-    this.tradeForm.controls['product'].valueChanges.subscribe((product) => {
+    this.tradeForm.controls['product'].valueChanges.subscribe((product: { name: string | undefined; }) => {
       if (product) {
         this.selectedProduct = this.products.find(
           (elm) => elm.name === product.name
@@ -144,7 +136,7 @@ export class TradeFormComponent implements OnInit {
     });
 
     // calculate amount2 based on value in amount1
-    this.tradeForm.controls['deal_rate'].valueChanges.subscribe((rate) => {
+    this.tradeForm.controls['deal_rate'].valueChanges.subscribe((rate: number) => {
 
       const amount1Value =this.tradeForm.controls['amount1'].value
       const amount2 = rate * amount1Value;   //isBuy ? rate * amount1Value: -
@@ -164,7 +156,7 @@ export class TradeFormComponent implements OnInit {
       );
     });
 
-    this.dealerServ.get(1).subscribe((dealer) => {
+    this.dealerServ.get(1).subscribe((dealer: Dealer) => {
       this.dealer = dealer;
     });
   }
@@ -195,7 +187,7 @@ export class TradeFormComponent implements OnInit {
   }
 
   get_Ccy_Rate(ccy: Currency): number {
-    this.rate_service.get(ccy).subscribe((rate) => {
+    this.rate_service.get(ccy).subscribe((rate: number) => {
       this.ccy_rate = rate;
     });
     return this.ccy_rate;
@@ -204,10 +196,10 @@ export class TradeFormComponent implements OnInit {
   retrieve_Ccy_Rate(ccy: Currency): Promise<number> {
     return new Promise<number>((resolve, reject) => {
       this.rate_service.get(ccy.code).subscribe(
-        (rate) => {
+        (rate: { rateLcy: number | PromiseLike<number>; }) => {
           resolve(rate.rateLcy);
         },
-        (error) => {
+        (error: any) => {
           console.error('API call error:', error);
           reject(error);
         }

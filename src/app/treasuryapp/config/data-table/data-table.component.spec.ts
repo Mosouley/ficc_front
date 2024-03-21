@@ -8,8 +8,8 @@ describe('DataTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DataTableComponent ]
-    })
+    imports: [DataTableComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(DataTableComponent);

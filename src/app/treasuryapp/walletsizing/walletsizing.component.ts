@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 interface Element {
@@ -18,9 +19,11 @@ const ELEMENT_DATA: Element[] = [
   // ...
 ];
 @Component({
-  selector: 'app-walletsizing',
-  templateUrl: './walletsizing.component.html',
-  styleUrls: ['./walletsizing.component.css']
+    selector: 'app-walletsizing',
+    templateUrl: './walletsizing.component.html',
+    styleUrls: ['./walletsizing.component.css'],
+    standalone: true,
+    imports: [MatTableModule, MatSortModule]
 })
 export class WalletsizingComponent {
 

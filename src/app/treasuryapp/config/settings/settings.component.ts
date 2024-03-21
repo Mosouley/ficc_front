@@ -10,7 +10,7 @@ import { LayoutRoutingModule } from 'src/app/layout/layout-routing.module';
 import { NavbarComponent } from 'src/app/layout/navbar/navbar.component';
 import { SidenavComponent } from 'src/app/layout/sidenav/sidenav.component';
 import { MaterialModule } from 'src/app/material/material.module';
-import { ReportComponent } from 'src/app/report/report.component';
+import { ReportComponent } from 'src/app/report/report-template/report.component';
 
 type AOA = any[][];
 
@@ -34,6 +34,7 @@ export class SettingsComponent implements OnInit {
   modelArrayEntity!: DataModel[];
   data!: AOA;
   totalPages = 0;
+  offset = 50
 
   constructor(
     public dialog: MatDialog,
@@ -87,8 +88,8 @@ export class SettingsComponent implements OnInit {
     document!.getElementById('fileInput')!.click();
   }
   saveData() {
-
-    this.daily.addMany(this.newRates.slice(1)).subscribe((resp) => {
+    console.info(this.newRates.slice(1))
+    this.daily.addMany(this.newRates).subscribe((resp) => {
       this.newRates = []
 
     });
@@ -96,8 +97,8 @@ export class SettingsComponent implements OnInit {
   }
 
   retrievRates() {
-    this.daily.listAll().subscribe((rates: any) => {
-      this.reportingData = rates.results;
+    this.daily.list(this.totalPages,this.offset).subscribe((rates: any) => {
+      this.reportingData = rates.results.reverse();
 
     });
   }

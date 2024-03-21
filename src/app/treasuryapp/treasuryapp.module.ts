@@ -20,26 +20,21 @@ import { WebsocketService } from '../shared/services/websocket.service';
 
 
 @NgModule({
-  declarations: [
-    FxblotterComponent,
-    FxflowsComponent,
-    WalletsizingComponent,
-    TradeComponent,
-    DataTableComponent,
-    ImportFileComponent,
-    NumberFormatDirective,
-    TradesflowComponent
-
-
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TreasuryappRoutingModule,
-    MaterialModule,
-
-    SharedModule,
-  ],
-  providers: [DecimalPipe, FormatNumberPipe,CurrencyPipe, TradeService, WebsocketService]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TreasuryappRoutingModule,
+        MaterialModule,
+        SharedModule,
+        FxblotterComponent,
+        FxflowsComponent,
+        WalletsizingComponent,
+        TradeComponent,
+        DataTableComponent,
+        ImportFileComponent,
+        NumberFormatDirective,
+        TradesflowComponent,
+    ],
+    providers: [DecimalPipe, FormatNumberPipe, CurrencyPipe, TradeService, WebsocketService]
 })
 export class TreasuryappModule { }

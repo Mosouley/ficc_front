@@ -8,8 +8,8 @@ describe('FxflowsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FxflowsComponent ]
-    })
+    imports: [FxflowsComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(FxflowsComponent);

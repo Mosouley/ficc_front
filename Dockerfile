@@ -1,26 +1,26 @@
 # Dockerfile
 
 # pull official base image
-FROM alpine:3.18 as  builder
+FROM node:alpine as  builder
 
 # set work directory
-RUN mkdir  /app
 WORKDIR /app
 
 #Copy app dependencies
-COPY ficc_front/package.json ficc_front/package-lock.json /app/
+COPY package*.json ./
+
+# Install Node.js and npm
+RUN apk add --update npm
+# RUN npm install -g @angular/cli
 # install dependencies
-RUN npm install --prefix ficc_front
+RUN npm install
 
-# Copy app files.
-COPY . /src/app
+COPY . .
+
+
+CMD ["ng", "serve", "--host 0.0.0.0"]
+# CMD ["npm", "start"]
 # Build app
-RUN npm run build --prefix ficc_front --output-path=./dist/out
+# RUN npm run build --prefix ficc_front --output-path=./dist/out
 
-# run entrypoint.sh
-# ENTRYPOINT ["/treasurysystem/entrypoint.sh"]
-# EXPOSE 8000
-
-# runs the production server
-# ENTRYPOINT ["python", "treasurysystem/manage.py"]
 # CMD ["runserver", "0.0.0.0:8000"]

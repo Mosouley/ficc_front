@@ -8,8 +8,9 @@ import { Customer } from 'src/app/model/customer';
 import { Product } from 'src/app/model/product';
 
 @Component({
-  selector: 'app-fxblotter',
-  templateUrl: './fxblotter.component.html'
+    selector: 'app-fxblotter',
+    templateUrl: './fxblotter.component.html',
+    standalone: true
 })
 export class FxblotterComponent{
   private customers: Customer[] = [];

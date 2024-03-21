@@ -3,15 +3,8 @@ import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
 import { Currency } from './../../model/currency';
 import { Component, Inject, OnInit } from '@angular/core';
 
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category';
@@ -19,8 +12,14 @@ import { Product } from 'src/app/model/product';
 import { Trade } from 'src/app/model/trade';
 import { Customer } from 'src/app/model/customer';
 import { thousandsValidator } from 'src/app/shared/custom/validators';
-import { CurrencyPipe, DecimalPipe, formatNumber } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, formatNumber, NgFor, NgIf } from '@angular/common';
 import { Pnl_Calculation } from 'src/app/shared/custom/trade-functions';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 interface Option {
@@ -29,9 +28,25 @@ interface Option {
 }
 
 @Component({
-  selector: 'app-trade',
-  templateUrl: './trade.component.html',
-  styleUrls: ['./trade.component.css'],
+    selector: 'app-trade',
+    templateUrl: './trade.component.html',
+    styleUrls: ['./trade.component.css'],
+    standalone: true,
+    imports: [
+        MatDialogContent,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        NgFor,
+        MatOptionModule,
+        MatInputModule,
+        MatDatepickerModule,
+        NgIf,
+        MatDialogActions,
+        MatButtonModule,
+        MatDialogClose,
+    ],
 })
 export class TradeComponent implements OnInit {
   public tradeForm!: FormGroup;

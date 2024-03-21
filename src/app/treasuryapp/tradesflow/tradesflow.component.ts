@@ -6,11 +6,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataModel } from 'src/app/model/data.model';
 import { API_URLS } from 'src/app/shared/config/app.url.config';
 import { formatDate } from '@angular/common';
+import { ReportComponent } from '../../report/report-template/report.component';
 
 @Component({
-  selector: 'app-tradesflow',
-  templateUrl: './tradesflow.component.html',
-  styleUrls: ['./tradesflow.component.css'],
+    selector: 'app-tradesflow',
+    templateUrl: './tradesflow.component.html',
+    styleUrls: ['./tradesflow.component.css'],
+    standalone: true,
+    imports: [ReportComponent],
 })
 export class TradesflowComponent implements OnInit,OnDestroy {
 

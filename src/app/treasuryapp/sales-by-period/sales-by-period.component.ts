@@ -5,7 +5,7 @@ import { LogoutComponent } from 'src/app/layout/logout/logout.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { DataModel } from 'src/app/model/data.model';
 import { FilterComponent } from 'src/app/report/filter/filter.component';
-import { ReportComponent } from 'src/app/report/report.component';
+import { ReportComponent } from 'src/app/report/report-template/report.component';
 import { API_URLS } from 'src/app/shared/config/app.url.config';
 import { WebsocketService } from 'src/app/shared/services/websocket.service';
 

@@ -22,44 +22,41 @@ import { AnalyticsComponent } from '../report/analytics/analytics.component';
 
 
 @NgModule({
-  declarations: [
-    PageNotFoundComponent,
-    CustomformatterPipe,
-    FormatNumberPipe
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReportModule,
-    ReactiveFormsModule,
-    PnlSummaryComponent,
-    PositionCcyComponent,
-    PnlCcyComponent,
-    RisksMetricsComponent,
-    AnalyticsComponent,
-
-  ],
-  exports: [
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    ReportModule,
-    PnlSummaryComponent,
-    PositionCcyComponent,
-    PnlCcyComponent,
-    RisksMetricsComponent,
-    AnalyticsComponent
-  ],
-  providers: [
-    CurrenciesService,
-    ProductService,
-    SegmentService,
-    DealerService,
-    CustomerService,
-    DailyRateService,
-    BannerService
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReportModule,
+        ReactiveFormsModule,
+        PnlSummaryComponent,
+        PositionCcyComponent,
+        PnlCcyComponent,
+        RisksMetricsComponent,
+        AnalyticsComponent,
+        PageNotFoundComponent,
+        CustomformatterPipe,
+        FormatNumberPipe,
+    ],
+    exports: [
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        ReportModule,
+        PnlSummaryComponent,
+        PositionCcyComponent,
+        PnlCcyComponent,
+        RisksMetricsComponent,
+        AnalyticsComponent
+    ],
+    providers: [
+        CurrenciesService,
+        ProductService,
+        SegmentService,
+        DealerService,
+        CustomerService,
+        DailyRateService,
+        BannerService
+    ]
 })
 export class SharedModule { }
