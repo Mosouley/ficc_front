@@ -1,7 +1,7 @@
 
 const BASE = 'http://localhost:' ; //  'http://localhost';
 const WS_BASE = 'ws://localhost:' ; //  'http://localhost';
-const PORT = '8080' ; //  8089;
+const PORT = '8000' ; //  8089;
 // admin/
 // api/contacts/
 // api/fx/ ^customers/$ [name='customer-list']
@@ -19,8 +19,6 @@ export const API_URLS = {
     DAILY_RATES_LOAD_URL:  PATH + '/daily-rates-loading/',
     DEALERS_URL:   PATH + '/dealers/',
     TRADES_URL:  PATH + '/trades/',
-    INVOICE_URL:  PATH + '/invoice/',
-    TRANSALINE_URL:  PATH + '/transactionLine/',
     USER_URL:  PATH + '/auth/all',
     SPENDINGS_URL:  PATH + '/spending',
     COMPANY_URL:  PATH + '/company',

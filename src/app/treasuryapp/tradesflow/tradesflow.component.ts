@@ -1,5 +1,5 @@
 import { WebsocketService } from './../../shared/services/websocket.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnDestroy, OnInit, inject } from '@angular/core';
 import { TradeFormComponent } from './trade-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class TradesflowComponent implements OnInit,OnDestroy {
 
   reportName = 'FX Blotter  from '
   constructor(
-    public dialog: MatDialog,
+     public  dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
     private wsService: WebsocketService,

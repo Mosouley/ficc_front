@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DailyRateService } from 'src/app/shared/services/dailyrates.service';
 import * as XLSX from 'xlsx';
@@ -33,18 +33,19 @@ export class SettingsComponent implements OnInit {
   model: DataModel[] = [];
   modelArrayEntity!: DataModel[];
   data!: AOA;
+  totalCount: number = 0;
+  nextUrl: string | null = null;
   totalPages = 0;
   offset = 50
 
   constructor(
-    public dialog: MatDialog,
+    @Inject(MatDialog) private dialog: MatDialog,
     private daily: DailyRateService
   ) {}
   ngOnInit(): void {
     this.model = [
-      // new DataModel('id', 'ID', 'number', true, []),
       new DataModel('date', 'Date', 'date', false, [], 'date'),
-      new DataModel('ccy_code', 'Currency', 'Array', false, 'string'),
+      new DataModel('ccy_code', 'Currency', 'string', false, 'code','uppercase'),
       new DataModel('rateLcy', 'Rate', 'number', false, []),
       new DataModel('last_updated', 'Last. Up', 'date', false, []),
     ];
@@ -54,6 +55,7 @@ export class SettingsComponent implements OnInit {
 
   onFileChange(evt: any) {
     /* wire up file reader */
+
     const target: DataTransfer = <DataTransfer>evt.target;
 
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
@@ -85,10 +87,10 @@ export class SettingsComponent implements OnInit {
   }
 
   importFile() {
-    document!.getElementById('fileInput')!.click();
+    document.getElementById('fileInput')!.click();
   }
   saveData() {
-    console.info(this.newRates.slice(1))
+    // console.info(this.newRates.slice(1))
     this.daily.addMany(this.newRates).subscribe((resp) => {
       this.newRates = []
 
@@ -97,26 +99,32 @@ export class SettingsComponent implements OnInit {
   }
 
   retrievRates() {
-    this.daily.list(this.totalPages,this.offset).subscribe((rates: any) => {
-      this.reportingData = rates.results.reverse();
-
+    this.daily.listAll().subscribe((response: any) => {
+      this.totalCount = response.count
+      this.nextUrl = response.next
+      this.reportingData = response.results;
     });
+
+  }
+
+  getNextPage(){
+    if(this.nextUrl){
+      this.retrievRates()
+    }
   }
 
   importingFile() {
-    let dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = false;
-    dialogConfig = {
-      height: '300px',
-      width: '500px'
-    };
-    //  dialogConfig.autoFocus = true;
-    let dialogRef = this.dialog.open(ImportFileComponent, dialogConfig);
-    // dialogRef.beforeClosed.
+    // dialogConfig.autoFocus = true;
+    dialogConfig.height = '300px'; // Modify properties directly
+    dialogConfig.width = '500px'; // Modify properties directly
+
+    const dialogRef = this.dialog.open(ImportFileComponent, dialogConfig);
+
     dialogRef.afterClosed().subscribe((result) => {
       this.newRates = result;
       // this.router.navigate(['.'], { relativeTo: this.route });
     });
-
   }
 }

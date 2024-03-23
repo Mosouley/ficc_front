@@ -15,11 +15,13 @@ import { SettingsComponent } from './config/settings/settings.component';
 import { TradesflowComponent } from './tradesflow/tradesflow.component';
 import { TradesResolver } from '../shared/resolvers/trades.resolver';
 import { SalesByPeriodComponent } from './sales-by-period/sales-by-period.component';
+import { DashboardComponent } from '../layout/dashboard/dashboard.component';
 
 const routes: Routes = [
 
   { path: '', component: DashComponent ,
   children: [
+    { path: 'dashboard', component: DashboardComponent },
      { path: 'fxflows', component: FxflowsComponent },
      { path: 'tradesflow',
      component: TradesflowComponent,
@@ -43,6 +45,7 @@ const routes: Routes = [
     }
   },
      { path: 'walletsizing', component: WalletsizingComponent },
+
      { path: 'settings', component: SettingsComponent },
      { path: 'sales-per-period', component: SalesByPeriodComponent },
      {path: 'not-found', component: PageNotFoundComponent}

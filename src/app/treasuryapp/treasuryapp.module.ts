@@ -11,8 +11,6 @@ import { TradeComponent } from './fxblotter/trade.component';
 import { SettingsComponent } from './config/settings/settings.component';
 import { DataTableComponent } from './config/data-table/data-table.component';
 import { ImportFileComponent } from './config/import-file.component';
-import { FormatNumberPipe } from '../shared/format-number.pipe';
-import { NumberFormatDirective } from '../shared/NumberFormatDirective';
 import { TradesflowComponent } from './tradesflow/tradesflow.component';
 import { TradeService } from '../shared/services/trade.service';
 import { WebsocketService } from '../shared/services/websocket.service';
@@ -32,9 +30,8 @@ import { WebsocketService } from '../shared/services/websocket.service';
         TradeComponent,
         DataTableComponent,
         ImportFileComponent,
-        NumberFormatDirective,
         TradesflowComponent,
     ],
-    providers: [DecimalPipe, FormatNumberPipe, CurrencyPipe, TradeService, WebsocketService]
+    providers: [DecimalPipe, CurrencyPipe, TradeService, WebsocketService]
 })
 export class TreasuryappModule { }

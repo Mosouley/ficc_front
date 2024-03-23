@@ -12,7 +12,6 @@ import { CustomformatterPipe } from './custom/customformatter.pipe';
 // import { MatInputCommifiedDirective } from './custom/mat-input-commified.directive';
 import { DailyRateService } from './services/dailyrates.service';
 import { ReportModule } from '../report/report.module';
-import { FormatNumberPipe } from './format-number.pipe';
 import { BannerService } from './services/banner.service';
 import { PnlSummaryComponent } from '../report/pnl-summary/pnl-summary.component';
 import { PositionCcyComponent } from '../report/position-ccy/position-ccy.component';
@@ -35,7 +34,7 @@ import { AnalyticsComponent } from '../report/analytics/analytics.component';
         AnalyticsComponent,
         PageNotFoundComponent,
         CustomformatterPipe,
-        FormatNumberPipe,
+
     ],
     exports: [
         RouterModule,

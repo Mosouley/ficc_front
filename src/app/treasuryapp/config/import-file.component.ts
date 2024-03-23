@@ -21,9 +21,7 @@ export class ImportFileComponent {
   file: any;
   target!: DataTransfer;
   constructor(
-    public dialogRef: MatDialogRef<ImportFileComponent>,
-    private daily: DailyRateService
-  ) {}
+    public dialogRef: MatDialogRef<ImportFileComponent>  ) {}
 
   onFileChange(evt: any) {
     /* wire up file reader */
@@ -43,11 +41,11 @@ export class ImportFileComponent {
         const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
         /* save data */
-        this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
+        this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1, range: 1  });
         this.disabled = false
 
       };
-     console.log(target.files[0]); //done l'objet File
+    //  console.log(target.files[0]); //done l'objet File
       reader.readAsBinaryString(target.files[0]);
     } catch (error) {
       console.error('Error importing file:', error);
@@ -55,12 +53,11 @@ export class ImportFileComponent {
     }
   }
 
-  importFile() {
-    const mondoc = document!.getElementById('fileInput')!.click();
-  }
   project_data() {
     // this.daily.addMany(this.data.slice(1)).subscribe((resp) => {
     // });
+    // console.log(this.data);
+
     this.dialogRef.close(this.data);
   }
 }

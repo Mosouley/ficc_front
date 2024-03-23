@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
 
@@ -25,7 +25,7 @@ export class FilterComponent implements OnInit{
   setRange = false;
   isEnable = false;
 
-  constructor(private fb: FormBuilder){}
+  constructor(@Inject(FormBuilder) private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.dateForm = this.fb.group({

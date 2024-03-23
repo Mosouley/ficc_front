@@ -14,9 +14,6 @@ import { WebsocketService } from 'src/app/shared/services/websocket.service';
   standalone: true,
   imports: [
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
     ReportComponent,
     FilterComponent,
      ],

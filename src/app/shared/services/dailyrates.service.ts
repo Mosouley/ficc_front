@@ -1,6 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import { DataService } from './data.service';
 import { API_URLS } from '../config/app.url.config';
 
@@ -8,7 +7,7 @@ import { API_URLS } from '../config/app.url.config';
 @Injectable()
 export class DailyRateService extends DataService {
 
-  constructor( _http: HttpClient) {
+  constructor(@Inject(HttpClient) _http: HttpClient) {
     super(API_URLS.DAILY_RATES_URL, _http);
   }
 }

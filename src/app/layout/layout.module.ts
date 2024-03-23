@@ -18,7 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
         MaterialModule,
         PnlSummaryComponent,
         ReactiveFormsModule,
-        SharedModule,
         UserLoginComponent,
         LogoutComponent
     ],

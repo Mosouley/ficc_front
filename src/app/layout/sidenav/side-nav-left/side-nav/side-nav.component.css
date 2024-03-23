@@ -1,0 +1,13 @@
+.active-link {
+  font-weight: bold !important;
+}
+
+.mat-nav-list {
+width: 100%;
+a {
+    .mat-icon {
+        margin-right: 10px;
+    }
+    display: block;
+}
+}
